@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boka tid — Noura Skin Secrets</title>
+<meta name="description" content="Boka din behandling hos Noura Skin Secrets i Uppsala. Fyll i formuläret så bekräftar vi din tid via e-post." />
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">N</span>
+      Noura Skin Secrets
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Hem</a></li>
+        <li><a href="behandlingar.html">Behandlingar</a></li>
+        <li><a href="index.html#om-oss">Om oss</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="boka.html" class="btn btn-primary">Boka tid</a>
+      <button class="nav-toggle" aria-label="Meny">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding: 60px 0 40px;">
+  <div class="container" style="grid-template-columns: 1fr; text-align:center;">
+    <div class="hero-copy" style="margin: 0 auto;">
+      <span class="eyebrow">Bokningsförfrågan</span>
+      <h1>Boka din tid</h1>
+      <p class="hero-lede" style="margin: 0 auto;">Fyll i formuläret nedan så återkommer vi via e-post inom 24 timmar för att bekräfta din tid.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="booking-layout">
+      <form class="booking-form" id="booking-form">
+        <input type="hidden" name="_subject" value="Ny bokningsförfrågan — Noura Skin Secrets" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <div class="form-row">
+          <label for="name">Namn *</label>
+          <input type="text" id="name" name="name" required placeholder="För- och efternamn" />
+        </div>
+
+        <div class="form-row two-col">
+          <div class="form-row">
+            <label for="email">E-post *</label>
+            <input type="email" id="email" name="email" required placeholder="din@epost.se" />
+          </div>
+          <div class="form-row">
+            <label for="phone">Telefon *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="07X-XXX XX XX" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="treatment">Behandling *</label>
+          <select id="treatment" name="treatment" required>
+            <option value="" disabled selected>Välj en behandling</option>
+          </select>
+        </div>
+
+        <div class="form-row two-col">
+          <div class="form-row">
+            <label for="date">Önskat datum *</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="form-row">
+            <label for="time">Önskad tid</label>
+            <input type="time" id="time" name="time" min="10:00" max="20:00" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Meddelande (valfritt)</label>
+          <textarea id="message" name="message" placeholder="Berätta gärna om eventuella hudbesvär, önskemål eller tidigare behandlingar."></textarea>
+        </div>
+
+        <p class="form-note">* Obligatoriska fält. Din förfrågan skickas direkt till nouraskinsecrets@gmail.com — vi bekräftar din tid så snart vi kan.</p>
+
+        <button type="submit" class="btn btn-primary btn-block">Skicka bokningsförfrågan</button>
+
+        <div class="confirm-box" id="confirm-box"></div>
+      </form>
+
+      <div>
+        <div class="info-card">
+          <h3>Kontakt & besöksadress</h3>
+          <div class="info-row"><span class="icon">📍</span><span>Kungsängsgatan 5B, 753 22 Uppsala</span></div>
+          <div class="info-row"><span class="icon">✉️</span><span><a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a></span></div>
+          <div class="info-row"><span class="icon">📞</span><span><a href="tel:+46793333476">079-333 34 76</a></span></div>
+          <div class="info-row"><span class="icon">🕐</span><span>Alla dagar 10:00–20:00, endast efter bokning</span></div>
+          <div class="info-row"><span class="icon">📸</span><span><a href="https://instagram.com/noura_skin_secrets" target="_blank" rel="noopener">@noura_skin_secrets</a></span></div>
+          <div class="info-row"><span class="icon">⭐</span><span>4.9/5 — 71 recensioner på Bokadirekt</span></div>
+          <iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=Kungs%C3%A4ngsgatan%205B%2C%20753%2022%20Uppsala&t=&z=15&ie=UTF8&iwloc=&output=embed">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <span class="logo-mark">N</span>
+          Noura Skin Secrets
+        </div>
+        <p>Avancerad hud- och kroppsvård i Uppsala, i en trygg miljö skapad enbart för kvinnor.</p>
+      </div>
+      <div>
+        <h4>Genvägar</h4>
+        <ul>
+          <li><a href="behandlingar.html">Alla behandlingar</a></li>
+          <li><a href="boka.html">Boka tid</a></li>
+          <li><a href="index.html#om-oss">Om oss</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>Kungsängsgatan 5B, 753 22 Uppsala</li>
+          <li><a href="tel:+46793333476">079-333 34 76</a></li>
+          <li><a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a></li>
+          <li><a href="https://instagram.com/noura_skin_secrets" target="_blank" rel="noopener">@noura_skin_secrets</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noura Skin Secrets. Alla rättigheter förbehållna.</span>
+      <span>Uppsala, Sverige</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/treatments.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const select = document.getElementById("treatment");
+  TREATMENT_CATEGORIES.forEach((cat) => {
+    const group = document.createElement("optgroup");
+    group.label = `${cat.icon} ${cat.name}`;
+    cat.treatments.forEach((t) => {
+      const opt = document.createElement("option");
+      opt.value = `${t.name} (${t.price})`;
+      opt.textContent = `${t.name} — ${t.price}`;
+      group.appendChild(opt);
+    });
+    select.appendChild(group);
+  });
+
+  // Preselect treatment from ?treatment= query param
+  const params = new URLSearchParams(location.search);
+  const preselect = params.get("treatment");
+  if (preselect) {
+    const match = [...select.options].find((o) => o.value.startsWith(preselect));
+    if (match) match.selected = true;
+  }
+
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xwvdrrby";
+
+  const form = document.getElementById("booking-form");
+  const confirmBox = document.getElementById("confirm-box");
+  const submitBtn = form.querySelector("button[type=submit]");
+
+  function buildMailto(data) {
+    const subject = `Bokningsförfrågan — ${data.treatment}`;
+    const body = [
+      `Namn: ${data.name}`,
+      `E-post: ${data.email}`,
+      `Telefon: ${data.phone}`,
+      `Behandling: ${data.treatment}`,
+      `Önskat datum: ${data.date}`,
+      `Önskad tid: ${data.time || "Ingen preferens"}`,
+      "",
+      `Meddelande:`,
+      data.message || "-",
+    ].join("\n");
+    return `mailto:nouraskinsecrets@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Skickar...";
+    confirmBox.classList.remove("show", "confirm-error");
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+
+      if (!res.ok) throw new Error("Formspree request failed");
+
+      confirmBox.innerHTML = "Tack! Din bokningsförfrågan har skickats. Vi kontaktar dig via e-post eller telefon inom 24 timmar för att bekräfta din tid.";
+      confirmBox.classList.add("show");
+      form.reset();
+    } catch (err) {
+      confirmBox.innerHTML = `Något gick fel med den automatiska sändningen. Din e-postklient öppnas istället — skicka gärna det förifyllda meddelandet manuellt, eller maila oss direkt på <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>.`;
+      confirmBox.classList.add("show");
+      window.location.href = buildMailto(data);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Skicka bokningsförfrågan";
+    }
+  });
+</script>
+</body>
+</html>
