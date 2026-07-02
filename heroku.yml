@@ -1,8 +1,0 @@
-build:
-  languages:
-    - node
-  buildpacks:
-    - https://github.com/heroku/heroku-buildpack-nodejs
-
-run:
-  web: npm start

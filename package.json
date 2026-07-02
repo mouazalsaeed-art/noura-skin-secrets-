@@ -1,19 +1,16 @@
 {
-  "name": "noura-skin-secrets",
+  "name": "noura-skin-secrets-api",
   "version": "1.0.0",
-  "description": "Noura Skin Secrets - Full Stack Application",
+  "description": "Noura Skin Secrets - Backend API Server",
   "main": "server/dist/server.js",
   "engines": {
-    "node": "20.x"
+    "node": "20.x",
+    "npm": "11.x"
   },
   "scripts": {
     "build": "cd server && npm install && npm run build",
     "start": "cd server && npm start",
     "dev": "cd server && npm run dev",
     "test": "cd server && npm run test"
-  },
-  "workspaces": [
-    "server",
-    "admin"
-  ]
+  }
 }
