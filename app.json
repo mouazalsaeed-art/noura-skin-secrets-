@@ -4,11 +4,9 @@
     "slug": "noura-skin-secrets",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F9F7F4"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,18 +15,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTabletMode": true,
+      "supportsTablet": true,
       "bundleIdentifier": "com.nouraskin.app"
     },
     "android": {
       "package": "com.nouraskin.app",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#F9F7F4"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "bundler": "metro",
+      "output": "single"
+    },
+    "experiments": {
+      "baseUrl": "/app"
     }
   }
 }

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { Service, Appointment, ClientProfile, Review, PaymentMethod } from '@/types';
+import { demoProfile } from '@/api/demoData';
 
 interface AppState {
   // User
@@ -38,9 +39,9 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
-  // User
-  currentUser: null,
-  isLoggedIn: false,
+  // User — starts as a guest session so all tabs are usable right away
+  currentUser: demoProfile,
+  isLoggedIn: true,
   setCurrentUser: (user) => set({ currentUser: user, isLoggedIn: true }),
   logout: () => set({ currentUser: null, isLoggedIn: false }),
 
