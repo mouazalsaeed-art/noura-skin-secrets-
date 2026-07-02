@@ -20,6 +20,13 @@
       "@/*": ["src/*"]
     }
   },
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs",
+      "moduleResolution": "node"
+    }
+  },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
