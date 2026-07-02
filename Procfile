@@ -1,1 +1,1 @@
-web: cd server && node -r tsconfig-paths/register dist/server.js
+web: cd server && node dist/index.js
