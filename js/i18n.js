@@ -252,6 +252,7 @@
     document.querySelectorAll(".lang-switch button").forEach((b) => {
       b.classList.toggle("active", b.dataset.lang === lang);
     });
+    window.dispatchEvent(new CustomEvent("nss-lang-change", { detail: lang }));
   }
 
   function buildSwitcher() {
