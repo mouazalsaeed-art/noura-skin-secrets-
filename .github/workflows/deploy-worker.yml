@@ -11,6 +11,7 @@ jobs:
         working-directory: worker
     steps:
       - name: Check secrets
+        working-directory: .
         run: |
           if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
             echo "::error::CLOUDFLARE_API_TOKEN secret is missing."
