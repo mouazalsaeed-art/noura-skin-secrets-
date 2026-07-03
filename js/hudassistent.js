@@ -146,7 +146,7 @@
   /* ---------- AI photo analysis ---------- */
 
   // Set after the analysis worker is deployed. Leave as-is to hide the feature.
-  const HA_API = "__HA_API_URL__";
+  const HA_API = "https://noura-hudanalys.nouraskin.workers.dev";
   const PHOTO_ENABLED = HA_API.startsWith("https://");
 
   const PUI = {
