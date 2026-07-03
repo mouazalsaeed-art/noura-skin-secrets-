@@ -4,9 +4,67 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Noura Skin Secrets — Hudvård & Skönhetsbehandlingar i Uppsala</title>
-<meta name="description" content="Noura Skin Secrets i Uppsala erbjuder avancerad hudvård: HydraFacial, HIFU, microneedling, laser och massage. Boka din tid idag." />
+<meta name="description" content="Noura Skin Secrets i Uppsala erbjuder avancerad hudvård: HydraFacial, HIFU, microneedling, laser och massage. Endast för kvinnor. Boka din tid idag." />
+<link rel="canonical" href="https://nouraskinsecrets.se/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Noura Skin Secrets — Hudvård & Skönhetsbehandlingar i Uppsala" />
+<meta property="og:description" content="Avancerad hudvård i Uppsala: HydraFacial, HIFU, microneedling, laser och massage. Endast för kvinnor. 4.9★ på Bokadirekt." />
+<meta property="og:url" content="https://nouraskinsecrets.se/" />
+<meta property="og:image" content="https://nouraskinsecrets.se/images/logo.jpg" />
+<meta property="og:locale" content="sv_SE" />
+<meta name="twitter:card" content="summary" />
 <link rel="icon" href="images/logo.jpg">
+<link rel="apple-touch-icon" href="app/apple-touch-icon.png">
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/hudassistent.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Noura Skin Secrets",
+  "image": "https://nouraskinsecrets.se/images/logo.jpg",
+  "url": "https://nouraskinsecrets.se/",
+  "telephone": "+46793333476",
+  "email": "nouraskinsecrets@gmail.com",
+  "priceRange": "450–3500 SEK",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kungsängsgatan 5B",
+    "postalCode": "753 22",
+    "addressLocality": "Uppsala",
+    "addressCountry": "SE"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 59.8556, "longitude": 17.6431 },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "10:00",
+    "closes": "20:00"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "71"
+  },
+  "sameAs": [
+    "https://instagram.com/noura_skin_secrets",
+    "https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Hur bokar jag en tid hos Noura Skin Secrets?", "acceptedAnswer": { "@type": "Answer", "text": "Boka via bokningsformuläret på nouraskinsecrets.se/boka.html, ring 079-333 34 76 eller mejla nouraskinsecrets@gmail.com. Tiden bekräftas inom 24 timmar." } },
+    { "@type": "Question", "name": "Var ligger salongen?", "acceptedAnswer": { "@type": "Answer", "text": "Kungsängsgatan 5B, 753 22 Uppsala — mitt i centrala Uppsala." } },
+    { "@type": "Question", "name": "Vilka öppettider har Noura Skin Secrets?", "acceptedAnswer": { "@type": "Answer", "text": "Öppet alla dagar 10:00–20:00, endast efter bokning." } },
+    { "@type": "Question", "name": "Är salongen endast för kvinnor?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, salongen är en trygg miljö skapad enbart för kvinnor." } },
+    { "@type": "Question", "name": "Hur vet jag vilken behandling som passar min hud?", "acceptedAnswer": { "@type": "Answer", "text": "Använd hudassistenten på webbplatsen eller boka en hudvårdskonsultation (20 min, 450 kr) för en personlig hudanalys." } }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -18,14 +76,14 @@
     </a>
     <nav>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Hem</a></li>
-        <li><a href="behandlingar.html">Behandlingar</a></li>
-        <li><a href="index.html#om-oss">Om oss</a></li>
-        <li><a href="index.html#kontakt">Kontakt</a></li>
+        <li><a href="index.html" class="active" data-i18n="nav.home">Hem</a></li>
+        <li><a href="behandlingar.html" data-i18n="nav.treatments">Behandlingar</a></li>
+        <li><a href="index.html#om-oss" data-i18n="nav.about">Om oss</a></li>
+        <li><a href="index.html#kontakt" data-i18n="nav.contact">Kontakt</a></li>
       </ul>
     </nav>
     <div class="nav-cta">
-      <a href="boka.html" class="btn btn-primary">Boka tid</a>
+      <a href="boka.html" class="btn btn-primary" data-i18n="nav.book">Boka tid</a>
       <button class="nav-toggle" aria-label="Meny">☰</button>
     </div>
   </div>
@@ -51,25 +109,25 @@
 
   <div class="container hero-content">
     <div class="hero-copy">
-      <span class="eyebrow">Uppsala · Endast för kvinnor</span>
-      <h1>Där expertis och <em>trygghet</em> möts</h1>
-      <p class="hero-lede">Avancerad hud- och kroppsvård i en varm, personlig miljö. Från HydraFacial och HIFU till microneedling och massage — skräddarsytt för din hud.</p>
+      <span class="eyebrow" data-i18n="hero.eyebrow">Uppsala · Endast för kvinnor</span>
+      <h1 data-i18n="hero.title">Där expertis och <em>trygghet</em> möts</h1>
+      <p class="hero-lede" data-i18n="hero.lede">Avancerad hud- och kroppsvård i en varm, personlig miljö. Från HydraFacial och HIFU till microneedling och massage — skräddarsytt för din hud.</p>
       <div class="hero-actions">
-        <a href="boka.html" class="btn btn-primary">Boka tid</a>
-        <a href="behandlingar.html" class="btn btn-outline">Se alla behandlingar</a>
+        <a href="boka.html" class="btn btn-primary" data-i18n="hero.cta1">Boka tid</a>
+        <a href="behandlingar.html" class="btn btn-outline" data-i18n="hero.cta2">Se alla behandlingar</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
           <strong>4.9 ★</strong>
-          <span>71 recensioner på Bokadirekt</span>
+          <span data-i18n="hero.stat1">71 recensioner på Bokadirekt</span>
         </div>
         <div class="hero-stat">
           <strong data-total-treatments>87</strong>
-          <span>behandlingar att välja bland</span>
+          <span data-i18n="hero.stat2">behandlingar att välja bland</span>
         </div>
         <div class="hero-stat">
           <strong>10–20</strong>
-          <span>Öppet dagligen, efter bokning</span>
+          <span data-i18n="hero.stat3">Öppet dagligen, efter bokning</span>
         </div>
       </div>
     </div>
@@ -77,7 +135,7 @@
 
   <div class="hero-badge">
     <strong>Nour</strong>
-    <span>Certifierad hudterapeut & grundare</span>
+    <span data-i18n="hero.badge">Certifierad hudterapeut & grundare</span>
   </div>
 </section>
 
@@ -86,23 +144,23 @@
     <div class="usp-row">
       <div class="usp-card">
         <span class="icon">🌸</span>
-        <h4>Endast för kvinnor</h4>
-        <p>En trygg, avslappnad miljö skapad enbart för dig.</p>
+        <h4 data-i18n="usp1.title">Endast för kvinnor</h4>
+        <p data-i18n="usp1.text">En trygg, avslappnad miljö skapad enbart för dig.</p>
       </div>
       <div class="usp-card">
         <span class="icon">🧖‍♀️</span>
-        <h4>Avancerad utrustning</h4>
-        <p>HIFU, laser, plasma och microneedling i toppklass.</p>
+        <h4 data-i18n="usp2.title">Avancerad utrustning</h4>
+        <p data-i18n="usp2.text">HIFU, laser, plasma och microneedling i toppklass.</p>
       </div>
       <div class="usp-card">
         <span class="icon">⭐</span>
-        <h4>4.9 i betyg</h4>
-        <p>Baserat på 71 recensioner från nöjda kunder.</p>
+        <h4 data-i18n="usp3.title">4.9 i betyg</h4>
+        <p data-i18n="usp3.text">Baserat på 71 recensioner från nöjda kunder.</p>
       </div>
       <div class="usp-card">
         <span class="icon">📍</span>
-        <h4>Centrala Uppsala</h4>
-        <p>Kungsängsgatan 5B — lätt att nå, öppet varje dag.</p>
+        <h4 data-i18n="usp4.title">Centrala Uppsala</h4>
+        <p data-i18n="usp4.text">Kungsängsgatan 5B — lätt att nå, öppet varje dag.</p>
       </div>
     </div>
   </div>
@@ -111,11 +169,23 @@
 <section class="section section--rose" id="behandlingskategorier">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Vårt utbud</span>
-      <h2>Behandlingar för ansikte, kropp & hår</h2>
-      <p>Bläddra bland våra <span data-total-categories>14</span> kategorier och <span data-total-treatments>87</span> behandlingar — eller se hela katalogen på en gång.</p>
+      <span class="eyebrow" data-i18n="cats.eyebrow">Vårt utbud</span>
+      <h2 data-i18n="cats.title">Behandlingar för ansikte, kropp & hår</h2>
+      <p data-i18n="cats.lede">Bläddra bland våra <span data-total-categories>14</span> kategorier och <span data-total-treatments>87</span> behandlingar — eller se hela katalogen på en gång.</p>
     </div>
     <div class="category-grid" id="category-grid"></div>
+  </div>
+</section>
+
+<section class="section" id="erbjudanden">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="offers.eyebrow">Just nu</span>
+      <h2 data-i18n="offers.title">Erbjudanden & paket</h2>
+      <p data-i18n="offers.lede">Utvalda behandlingar och kurpaket till extra bra pris.</p>
+    </div>
+    <div class="offers-grid" id="offers-grid"></div>
+    <p class="offers-more" data-i18n="offers.more">Fler aktuella erbjudanden hittar du alltid på <a href="https://instagram.com/noura_skin_secrets" target="_blank" rel="noopener">@noura_skin_secrets</a>.</p>
   </div>
 </section>
 
@@ -124,17 +194,17 @@
     <div class="about-grid">
       <div class="about-portrait">💆‍♀️</div>
       <div class="about-copy">
-        <span class="eyebrow">Om Noura Skin Secrets</span>
-        <h2>Personlig hudvård, grundad på expertis</h2>
-        <p>Noura Skin Secrets drivs av Nour, certifierad hudterapeut i Uppsala. Salongen är skapad som en trygg plats enbart för kvinnor, där varje behandling anpassas efter din hud och dina mål — från klassisk ansiktsrengöring till avancerad HIFU- och laserbehandling.</p>
+        <span class="eyebrow" data-i18n="about.eyebrow">Om Noura Skin Secrets</span>
+        <h2 data-i18n="about.title">Personlig hudvård, grundad på expertis</h2>
+        <p data-i18n="about.text">Noura Skin Secrets drivs av Nour, certifierad hudterapeut i Uppsala. Salongen är skapad som en trygg plats enbart för kvinnor, där varje behandling anpassas efter din hud och dina mål — från klassisk ansiktsrengöring till avancerad HIFU- och laserbehandling.</p>
         <ul class="about-list">
-          <li>Skräddarsydda behandlingsplaner efter hudanalys</li>
-          <li>Modern utrustning: HIFU, laser, plasma, microneedling</li>
-          <li>Lugn, exklusiv miljö — endast för kvinnor</li>
-          <li>Öppet alla dagar 10:00–20:00, efter bokning</li>
+          <li data-i18n="about.li1">Skräddarsydda behandlingsplaner efter hudanalys</li>
+          <li data-i18n="about.li2">Modern utrustning: HIFU, laser, plasma, microneedling</li>
+          <li data-i18n="about.li3">Lugn, exklusiv miljö — endast för kvinnor</li>
+          <li data-i18n="about.li4">Öppet alla dagar 10:00–20:00, efter bokning</li>
         </ul>
         <div class="hero-actions">
-          <a href="boka.html" class="btn btn-primary">Boka en tid</a>
+          <a href="boka.html" class="btn btn-primary" data-i18n="about.cta">Boka en tid</a>
         </div>
       </div>
     </div>
@@ -147,11 +217,67 @@
       <div class="rating-score">4.9</div>
       <div>
         <div class="rating-stars">★★★★★</div>
-        <div class="rating-meta">71 recensioner via Bokadirekt</div>
+        <div class="rating-meta" data-i18n="rating.meta">71 recensioner via Bokadirekt</div>
       </div>
       <div style="margin-left:auto;">
-        <a href="https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600" target="_blank" rel="noopener" class="btn btn-outline">Läs recensionerna</a>
+        <a href="https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="rating.cta">Läs recensionerna</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="resultat">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="results.eyebrow">Resultat</span>
+      <h2 data-i18n="results.title">Se våra resultat</h2>
+      <p data-i18n="results.lede">Vi delar löpande bilder och resultat från salongen på Instagram — följ oss för före/efter, erbjudanden och hudvårdstips.</p>
+    </div>
+    <div style="text-align:center;">
+      <a href="https://instagram.com/noura_skin_secrets" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="results.cta">📸 Följ @noura_skin_secrets</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="faq.eyebrow">Bra att veta</span>
+      <h2 data-i18n="faq.title">Vanliga frågor</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary data-i18n="faq.q1">Hur bokar jag en tid?</summary>
+        <p data-i18n="faq.a1">Enklast bokar du via vårt <a href="boka.html">bokningsformulär</a> — vi bekräftar din tid via e-post eller telefon inom 24 timmar. Du kan också ringa <a href="tel:+46793333476">079-333 34 76</a> eller mejla <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q2">Var ligger salongen?</summary>
+        <p data-i18n="faq.a2">Mitt i centrala Uppsala på Kungsängsgatan 5B, 753 22 Uppsala — nära bussar, tåg och parkering.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q3">Vilka öppettider har ni?</summary>
+        <p data-i18n="faq.a3">Vi har öppet alla dagar 10:00–20:00, endast efter bokning.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q4">Är salongen verkligen endast för kvinnor?</summary>
+        <p data-i18n="faq.a4">Ja. Salongen är skapad som en trygg och avslappnad miljö enbart för kvinnor.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q5">Hur vet jag vilken behandling som passar mig?</summary>
+        <p data-i18n="faq.a5">Prova vår hudassistent (chattknappen nere till vänster) som guidar dig utifrån din hudtyp och dina behov. Vill du ha en personlig bedömning rekommenderar vi en hudvårdskonsultation (20 min, 450 kr).</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q6">Hur förbereder jag mig inför en behandling?</summary>
+        <p data-i18n="faq.a6">Kom gärna utan smink och undvik solning samt starka syror/retinol några dagar före de flesta behandlingar. Vår hudassistent har detaljerade råd före och efter varje behandlingstyp — och du får alltid personliga instruktioner vid bokning.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q7">Kan jag avboka eller omboka min tid?</summary>
+        <p data-i18n="faq.a7">Ja, kontakta oss så snart som möjligt via telefon eller e-post så hjälper vi dig att hitta en ny tid.</p>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q8">Gör behandlingarna ont?</summary>
+        <p data-i18n="faq.a8">De flesta av våra behandlingar är skonsamma och smärtfria. Vid intensivare behandlingar som microneedling används bedövningskräm för din komfort. Berätta gärna om du är känslig så anpassar vi behandlingen.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -159,34 +285,34 @@
 <section class="section section--rose" id="kontakt">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Hitta hit</span>
-      <h2>Besök oss i Uppsala</h2>
-      <p>Boka enkelt online eller kontakta oss direkt via telefon, e-post eller Instagram.</p>
+      <span class="eyebrow" data-i18n="contact.eyebrow">Hitta hit</span>
+      <h2 data-i18n="contact.title">Besök oss i Uppsala</h2>
+      <p data-i18n="contact.lede">Boka enkelt online eller kontakta oss direkt via telefon, e-post eller Instagram.</p>
     </div>
     <div class="contact-grid">
       <div class="contact-card">
         <div class="icon">📍</div>
-        <h4>Adress</h4>
+        <h4 data-i18n="contact.address">Adress</h4>
         <p>Kungsängsgatan 5B<br />753 22 Uppsala</p>
       </div>
       <div class="contact-card">
         <div class="icon">📞</div>
-        <h4>Telefon</h4>
+        <h4 data-i18n="contact.phone">Telefon</h4>
         <p><a href="tel:+46793333476">079-333 34 76</a></p>
       </div>
       <div class="contact-card">
         <div class="icon">✉️</div>
-        <h4>E-post</h4>
+        <h4 data-i18n="contact.email">E-post</h4>
         <p><a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a></p>
       </div>
       <div class="contact-card">
         <div class="icon">🕐</div>
-        <h4>Öppettider</h4>
-        <p>Alla dagar 10:00–20:00<br />Endast efter bokning</p>
+        <h4 data-i18n="contact.hours">Öppettider</h4>
+        <p data-i18n="contact.hoursText">Alla dagar 10:00–20:00<br />Endast efter bokning</p>
       </div>
     </div>
     <div style="text-align:center; margin-top:36px;">
-      <a href="boka.html" class="btn btn-primary">Boka din tid nu</a>
+      <a href="boka.html" class="btn btn-primary" data-i18n="contact.cta">Boka din tid nu</a>
     </div>
   </div>
 </section>
@@ -199,18 +325,18 @@
           <img src="images/logo.jpg" alt="Noura Skin Secrets" class="logo-mark" />
           Noura Skin Secrets
         </div>
-        <p>Avancerad hud- och kroppsvård i Uppsala, i en trygg miljö skapad enbart för kvinnor.</p>
+        <p data-i18n="footer.desc">Avancerad hud- och kroppsvård i Uppsala, i en trygg miljö skapad enbart för kvinnor.</p>
       </div>
       <div>
-        <h4>Genvägar</h4>
+        <h4 data-i18n="footer.shortcuts">Genvägar</h4>
         <ul>
-          <li><a href="behandlingar.html">Alla behandlingar</a></li>
-          <li><a href="boka.html">Boka tid</a></li>
-          <li><a href="index.html#om-oss">Om oss</a></li>
+          <li><a href="behandlingar.html" data-i18n="footer.allTreatments">Alla behandlingar</a></li>
+          <li><a href="boka.html" data-i18n="footer.book">Boka tid</a></li>
+          <li><a href="index.html#om-oss" data-i18n="footer.about">Om oss</a></li>
         </ul>
       </div>
       <div>
-        <h4>Kontakt</h4>
+        <h4 data-i18n="footer.contact">Kontakt</h4>
         <ul>
           <li>Kungsängsgatan 5B, 753 22 Uppsala</li>
           <li><a href="tel:+46793333476">079-333 34 76</a></li>
@@ -220,17 +346,35 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Noura Skin Secrets. Alla rättigheter förbehållna.</span>
+      <span data-i18n="footer.rights">© 2026 Noura Skin Secrets. Alla rättigheter förbehållna.</span>
       <span>Uppsala, Sverige</span>
     </div>
   </div>
 </footer>
 
-<a href="boka.html" class="btn btn-primary float-cta">Boka tid</a>
+<a href="boka.html" class="btn btn-primary float-cta" data-i18n="float.book">Boka tid</a>
 
 <script src="js/treatments.js"></script>
+<script src="js/offers.js"></script>
 <script src="js/main.js"></script>
+<script src="js/hudassistent.js"></script>
+<script src="js/i18n.js"></script>
 <script>
+  // Offers
+  const offersGrid = document.getElementById("offers-grid");
+  OFFERS.filter((o) => o.active).forEach((o) => {
+    const card = document.createElement("div");
+    card.className = "offer-card";
+    card.innerHTML = `
+      <span class="offer-badge">${o.badge}</span>
+      <h3>${o.title}</h3>
+      <div class="offer-price">${o.price}${o.oldPrice ? ` <s>${o.oldPrice}</s>` : ""}</div>
+      <p>${o.desc}</p>
+      <a class="btn btn-primary" href="boka.html?treatment=${encodeURIComponent(o.treatment)}">Boka</a>
+    `;
+    offersGrid.appendChild(card);
+  });
+
   const grid = document.getElementById("category-grid");
   TREATMENT_CATEGORIES.forEach((cat) => {
     const card = document.createElement("a");
