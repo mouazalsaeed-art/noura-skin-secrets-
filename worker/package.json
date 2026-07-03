@@ -1,0 +1,13 @@
+{
+  "name": "noura-hudanalys-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI skin analysis proxy for nouraskinsecrets.se",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

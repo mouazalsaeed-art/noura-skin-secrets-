@@ -142,6 +142,46 @@
     },
   };
 
+
+  /* ---------- AI photo analysis ---------- */
+
+  // Set after the analysis worker is deployed. Leave as-is to hide the feature.
+  const HA_API = "__HA_API_URL__";
+  const PHOTO_ENABLED = HA_API.startsWith("https://");
+
+  const PUI = {
+    optPhoto: { sv: "📷 AI-fotoanalys av din hud", en: "📷 AI photo analysis of your skin", ar: "📷 تحليل بشرتك بالذكاء الاصطناعي من صورة" },
+    consent: {
+      sv: "<strong>Så funkar det & din integritet 🔒</strong><br>Ta en bild i dagsljus utan smink. Bilden skickas krypterat till vår AI-tjänst för analys och <strong>sparas aldrig av oss</strong>. Den används inte för att träna AI och raderas hos AI-leverantören enligt deras policy. Analysen är kosmetisk vägledning — ingen medicinsk diagnos. Fotografera bara dig själv (18+). Läs mer i vår <a href=\"integritet.html\" target=\"_blank\">integritetspolicy</a>.",
+      en: "<strong>How it works & your privacy 🔒</strong><br>Take a photo in daylight without makeup. The photo is sent encrypted to our AI service for analysis and is <strong>never stored by us</strong>. It is not used to train AI and is deleted by the AI provider according to their policy. The analysis is cosmetic guidance — not a medical diagnosis. Only photograph yourself (18+). Read more in our <a href=\"integritet.html\" target=\"_blank\">privacy policy</a>.",
+      ar: "<strong>كيف تعمل الخدمة وخصوصيتك 🔒</strong><br>التقطي صورة في ضوء النهار بدون مكياج. تُرسل الصورة مشفرة لخدمة الذكاء الاصطناعي للتحليل و<strong>لا نخزنها أبداً</strong>. لا تُستخدم لتدريب الذكاء الاصطناعي وتُحذف لدى المزود حسب سياستهم. التحليل إرشاد تجميلي — وليس تشخيصاً طبياً. صوّري نفسك فقط (+18). اقرئي المزيد في <a href=\"integritet.html\" target=\"_blank\">سياسة الخصوصية</a>.",
+    },
+    consentYes: { sv: "✅ Jag godkänner — välj bild", en: "✅ I agree — choose photo", ar: "✅ أوافق — اختيار صورة" },
+    consentNo: { sv: "↩️ Avbryt", en: "↩️ Cancel", ar: "↩️ إلغاء" },
+    analyzing: { sv: "Analyserar din hud… det tar ca 20–30 sekunder ✨", en: "Analysing your skin… this takes about 20–30 seconds ✨", ar: "جارٍ تحليل بشرتك… يستغرق حوالي 20–30 ثانية ✨" },
+    resultIntro: { sv: "Här är min analys av din hud:", en: "Here is my analysis of your skin:", ar: "هذا تحليلي لبشرتك:" },
+    obsH: { sv: "🔎 Vad jag ser", en: "🔎 What I can see", ar: "🔎 ما ألاحظه" },
+    concernsH: { sv: "🎯 Fokusområden", en: "🎯 Focus areas", ar: "🎯 نقاط التركيز" },
+    recsH: { sv: "💆‍♀️ Rekommenderade behandlingar", en: "💆‍♀️ Recommended treatments", ar: "💆‍♀️ العلاجات المقترحة" },
+    warnH: { sv: "⚠️ Observera", en: "⚠️ Please note", ar: "⚠️ ملاحظة مهمة" },
+    photoFail: {
+      sv: "Analysen gick tyvärr inte att genomföra just nu. Prova igen om en stund — eller använd frågorna här i chatten så länge.",
+      en: "The analysis could not be completed right now. Please try again in a moment — or use the questions in the chat meanwhile.",
+      ar: "تعذر إتمام التحليل حالياً. حاولي مرة أخرى بعد قليل — أو استخدمي الأسئلة في الدردشة الآن.",
+    },
+    imgTooBig: { sv: "Bilden är för stor. Prova en mindre bild.", en: "The image is too large. Please try a smaller one.", ar: "الصورة كبيرة جداً. جربي صورة أصغر." },
+    skinTypeH: { sv: "Hudtyp", en: "Skin type", ar: "نوع البشرة" },
+  };
+
+  const SKIN_TYPE_LABELS = {
+    torr: { sv: "Torr", en: "Dry", ar: "جافة" },
+    fet: { sv: "Fet", en: "Oily", ar: "دهنية" },
+    kombinerad: { sv: "Kombinerad", en: "Combination", ar: "مختلطة" },
+    kanslig: { sv: "Känslig", en: "Sensitive", ar: "حساسة" },
+    normal: { sv: "Normal", en: "Normal", ar: "عادية" },
+    oklar: { sv: "Svår att avgöra från fotot", en: "Hard to tell from the photo", ar: "يصعب تحديده من الصورة" },
+  };
+
   /* ---------- Catalog helpers ---------- */
 
   function findTreatment(namePart) {
@@ -542,7 +582,7 @@
     { keys: ["telefon", "phone", "ring", "kontakt", "contact", "email", "mejl", "هاتف", "رقم", "تواصل", "اتصال", "ايميل", "إيميل"], run: () => answer(tr(UI.contactA)) },
     { keys: ["pris", "kostar", "price", "cost", "kostnad", "سعر", "بكم", "كم يكلف", "التكلفة", "اسعار", "أسعار"], run: handlePriceQuery },
     { keys: ["alla behandlingar", "all treatments", "katalog", "menu", "كل العلاجات", "قائمة"], run: () => answer(tr(UI.allTreatments)) },
-    { keys: ["bild", "foto", "photo", "picture", "صورة", "صوره"], run: () => { addMsg(tr(UI.photoA) + consultNote()); setOptions([[tr(UI.optFind), flowFind], homeOption()]); } },
+    { keys: ["bild", "foto", "photo", "picture", "صورة", "صوره", "تحليل"], run: () => { if (PHOTO_ENABLED) { flowPhoto(); } else { addMsg(tr(UI.photoA) + consultNote()); setOptions([[tr(UI.optFind), flowFind], homeOption()]); } } },
     { keys: ["tack", "thanks", "thank you", "شكرا", "شكراً", "يعطيك العافية"], run: () => answer(tr(UI.thanksA)) },
     { keys: ["hej", "hallå", "hello", "hi", "hey", "مرحبا", "مرحبًا", "هلا", "اهلا", "أهلا", "سلام", "السلام"], run: () => { addMsg(tr(UI.greetA)); mainOptions(); } },
   ];
@@ -625,11 +665,10 @@
   }
 
   function mainOptions() {
-    setOptions([
-      [tr(UI.optFind), flowFind],
-      [tr(UI.optRoutine), flowRoutine],
-      [tr(UI.optCare), flowCare],
-    ]);
+    const opts = [];
+    if (PHOTO_ENABLED) opts.push([tr(PUI.optPhoto), flowPhoto]);
+    opts.push([tr(UI.optFind), flowFind], [tr(UI.optRoutine), flowRoutine], [tr(UI.optCare), flowCare]);
+    setOptions(opts);
   }
 
   function start() {
@@ -736,6 +775,126 @@
   function showCare(key) {
     addMsg(`<p class="ha-p"><strong>${tr(CARE[key].label)}</strong></p>` + careHTML(key) + `<div class="ha-note">${tr(UI.careQuestions)}</div>`);
     setOptions([[tr(UI.optOtherTreat), flowCare], homeOption()]);
+  }
+
+
+  /* ---------- Photo analysis flow ---------- */
+
+  let photoInput = null;
+
+  function flowPhoto() {
+    addMsg(tr(PUI.consent));
+    setOptions([
+      [tr(PUI.consentYes), pickPhoto],
+      [tr(PUI.consentNo), start],
+    ]);
+  }
+
+  function pickPhoto() {
+    if (!photoInput) {
+      photoInput = document.createElement("input");
+      photoInput.type = "file";
+      photoInput.accept = "image/*";
+      photoInput.style.display = "none";
+      document.body.appendChild(photoInput);
+      photoInput.addEventListener("change", () => {
+        if (photoInput.files && photoInput.files[0]) {
+          handlePhoto(photoInput.files[0]);
+          photoInput.value = "";
+        }
+      });
+    }
+    photoInput.click();
+    setOptions([[tr(PUI.consentNo), start]]);
+  }
+
+  // Downscale + re-encode in the browser: smaller upload AND strips EXIF/GPS metadata.
+  function compressImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const MAX = 1024;
+        let { width, height } = img;
+        if (width > MAX || height > MAX) {
+          const scale = MAX / Math.max(width, height);
+          width = Math.round(width * scale);
+          height = Math.round(height * scale);
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+        resolve(dataUrl.split(",")[1]);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("decode")); };
+      img.src = url;
+    });
+  }
+
+  async function handlePhoto(file) {
+    addMsg("📷 " + file.name.replace(/</g, "&lt;"), "user");
+    addMsg(tr(PUI.analyzing));
+    setOptions([]);
+    try {
+      const image = await compressImage(file);
+      if (image.length > 5000000) {
+        addMsg(tr(PUI.imgTooBig));
+        setOptions([[tr(PUI.optPhoto), flowPhoto], homeOption()]);
+        return;
+      }
+      const res = await fetch(HA_API + "/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image, mediaType: "image/jpeg", lang: lang() }),
+      });
+      if (!res.ok) throw new Error("http " + res.status);
+      const data = await res.json();
+      renderAnalysis(data.analysis);
+    } catch (e) {
+      addMsg(tr(PUI.photoFail));
+      setOptions([[tr(PUI.optPhoto), flowPhoto], homeOption()]);
+    }
+  }
+
+  function renderAnalysis(a) {
+    if (!a) { addMsg(tr(PUI.photoFail)); mainOptions(); return; }
+    if (a.valid === false) {
+      addMsg(a.message ? String(a.message).replace(/</g, "&lt;") : tr(PUI.photoFail));
+      setOptions([[tr(PUI.optPhoto), flowPhoto], homeOption()]);
+      return;
+    }
+    const esc = (s) => String(s).replace(/</g, "&lt;");
+    let html = `<p class="ha-p"><strong>${tr(PUI.resultIntro)}</strong></p>`;
+    const st = SKIN_TYPE_LABELS[a.skin_type];
+    if (st) html += `<div class="ha-note"><strong>${tr(PUI.skinTypeH)}:</strong> ${tr(st)}</div>`;
+    if (a.observations && a.observations.length) {
+      html += `<div class="ha-care-col"><h5>${tr(PUI.obsH)}</h5><ul>${a.observations.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+    }
+    if (a.concerns && a.concerns.length) {
+      html += `<div class="ha-care-col" style="margin-top:8px;"><h5>${tr(PUI.concernsH)}</h5><ul>${a.concerns.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+    }
+    if (a.recommended_treatments && a.recommended_treatments.length) {
+      html += `<p class="ha-p" style="margin-top:8px;"><strong>${tr(PUI.recsH)}</strong></p>`;
+      for (const rec of a.recommended_treatments) {
+        const card = treatmentCard(String(rec.name), esc(rec.why));
+        html += card || `<div class="ha-treatment"><div class="ha-treatment-name">${esc(rec.name)}</div><div class="ha-treatment-why">${esc(rec.why)}</div></div>`;
+      }
+    }
+    if ((a.routine_morning && a.routine_morning.length) || (a.routine_evening && a.routine_evening.length)) {
+      html += `<div class="ha-care">`;
+      if (a.routine_morning && a.routine_morning.length) html += `<div class="ha-care-col"><h5>${tr(UI.morning)}</h5><ul>${a.routine_morning.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+      if (a.routine_evening && a.routine_evening.length) html += `<div class="ha-care-col"><h5>${tr(UI.evening)}</h5><ul>${a.routine_evening.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+      html += `</div>`;
+    }
+    if (a.warnings && a.warnings.length) {
+      html += `<div class="ha-note"><strong>${tr(PUI.warnH)}:</strong><ul style="margin:4px 0 0;padding-${lang() === "ar" ? "right" : "left"}:18px;">${a.warnings.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+    }
+    html += consultNote() + disclaimer();
+    addMsg(html);
+    setOptions([[tr(PUI.optPhoto), flowPhoto], [tr(UI.optCare), flowCare], homeOption()]);
   }
 
   /* ---------- Widget UI ---------- */
