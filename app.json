@@ -2,6 +2,12 @@
   "expo": {
     "name": "Noura Skin Secrets",
     "slug": "noura-skin-secrets",
+    "owner": "mouazsds-team",
+    "extra": {
+      "eas": {
+        "projectId": "e49aa55d-7ee0-436a-93dd-ace96c1c73e8"
+      }
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
