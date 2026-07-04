@@ -42,6 +42,9 @@
       "offers.title": "Offers & packages",
       "offers.lede": "Selected treatments and packages at a great price.",
       "offers.more": "You'll always find current offers on <a href=\"https://instagram.com/noura_skin_secrets\" target=\"_blank\" rel=\"noopener\">@noura_skin_secrets</a>.",
+      "klipp.eyebrow": "Save more",
+      "klipp.title": "Packages (Klippkort)",
+      "klipp.lede": "Buy several sessions of your favourite treatment at a lower price. All packages are valid for 12 months.",
 
       "about.eyebrow": "About Noura Skin Secrets",
       "about.title": "Personal skin care, built on expertise",
@@ -149,6 +152,9 @@
       "offers.title": "العروض والباقات",
       "offers.lede": "علاجات وباقات مختارة بأسعار مميزة.",
       "offers.more": "تجدين أحدث العروض دائماً على <a href=\"https://instagram.com/noura_skin_secrets\" target=\"_blank\" rel=\"noopener\">@noura_skin_secrets</a>.",
+      "klipp.eyebrow": "وفّري أكثر",
+      "klipp.title": "باقات الجلسات (Klippkort)",
+      "klipp.lede": "اشترِي عدة جلسات من علاجك المفضّل بسعر أقل. كل الباقات صالحة لمدة 12 شهراً.",
 
       "about.eyebrow": "عن نورا سكين سيكرتس",
       "about.title": "عناية شخصية بالبشرة مبنية على الخبرة",

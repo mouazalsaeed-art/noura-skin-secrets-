@@ -192,6 +192,17 @@
   </div>
 </section>
 
+<section class="section section--rose" id="klippkort">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="klipp.eyebrow">Spara mer</span>
+      <h2 data-i18n="klipp.title">Klippkort</h2>
+      <p data-i18n="klipp.lede">Köp flera tillfällen av din favoritbehandling till ett lägre pris. Alla klippkort gäller i 12 månader.</p>
+    </div>
+    <div class="klipp-grid" id="klipp-grid"></div>
+  </div>
+</section>
+
 <section class="section" id="om-oss">
   <div class="container">
     <div class="about-grid reveal">
@@ -365,6 +376,7 @@
 <script src="js/treatments.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/offers.js"></script>
+<script src="js/klippkort.js"></script>
 <script src="js/main.js"></script>
 <script src="js/gallery.js"></script>
 <script src="js/hudassistent.js"></script>
@@ -384,6 +396,41 @@
     `;
     offersGrid.appendChild(card);
   });
+
+  // Klippkort (multi-session packages)
+  const klippGrid = document.getElementById("klipp-grid");
+  const kLang = () => localStorage.getItem("nss-lang") || "sv";
+  const kT = {
+    sessions: { sv: "tillfällen", en: "sessions", ar: "جلسات" },
+    save: { sv: "Spara", en: "Save", ar: "وفّري" },
+    buy: { sv: "Köp klippkort", en: "Buy package", ar: "اشترِ الباقة" },
+    ord: { sv: "Ord.", en: "Reg.", ar: "بدل" },
+  };
+  const kNum = (s) => parseInt(String(s).replace(/[^\d]/g, ""), 10) || 0;
+  if (klippGrid && typeof KLIPPKORT !== "undefined") {
+    KLIPPKORT.filter((k) => k.active).forEach((k) => {
+      const save = kNum(k.oldPrice) - kNum(k.price);
+      const tr = (o) => o[kLang()] || o.sv;
+      const card = document.createElement("div");
+      card.className = "klipp-card";
+      const paket = `${k.title} – ${k.sessions} (klippkort)`;
+      card.innerHTML = `
+        ${save > 0 ? `<span class="klipp-save">${tr(kT.save)} ${save.toLocaleString("sv-SE")} kr</span>` : ""}
+        <h3>${k.title}</h3>
+        <ul class="klipp-facts">
+          <li>${k.duration}</li>
+          <li><strong>${k.sessions}</strong></li>
+          <li>${k.validity}</li>
+        </ul>
+        <div class="klipp-price">
+          ${k.oldPrice ? `<s>${k.oldPrice}</s>` : ""}
+          <strong>${k.price}</strong>
+        </div>
+        <a class="btn btn-primary btn-block" href="boka.html?paket=${encodeURIComponent(paket)}">${tr(kT.buy)}</a>
+      `;
+      klippGrid.appendChild(card);
+    });
+  }
 
   const grid = document.getElementById("category-grid");
   TREATMENT_CATEGORIES.forEach((cat) => {

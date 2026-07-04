@@ -183,6 +183,21 @@
     if (match) match.selected = true;
   }
 
+  // Klippkort purchase from ?paket= query param — add it as a selectable option
+  const paket = params.get("paket");
+  if (paket) {
+    const group = document.createElement("optgroup");
+    group.label = "🎟️ Klippkort";
+    const opt = document.createElement("option");
+    opt.value = "Klippkort: " + paket;
+    opt.textContent = "Klippkort: " + paket;
+    opt.selected = true;
+    group.appendChild(opt);
+    select.insertBefore(group, select.children[1] || null);
+    const msg = document.getElementById("message");
+    if (msg && !msg.value) msg.value = "Jag vill köpa detta klippkort: " + paket + ".";
+  }
+
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xwvdrrby";
 
   const form = document.getElementById("booking-form");

@@ -1148,3 +1148,54 @@ input, select, textarea { border-radius: 12px; }
 .gr-top strong { font-family: var(--font-serif); font-size: 2rem; color: var(--rose-dark); line-height: 1; }
 .gr-stars { color: #fbbc05; font-size: 1.1rem; letter-spacing: 2px; }
 .gr-meta { color: var(--text-muted); font-size: 0.9rem; }
+
+/* ---------- Klippkort (packages) ---------- */
+.klipp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+.klipp-card {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid rgba(123, 46, 82, 0.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.klipp-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lift); }
+.klipp-card h3 { font-size: 1.15rem; margin: 4px 0 0; }
+.klipp-save {
+  align-self: flex-start;
+  background: var(--grad);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.klipp-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.klipp-facts li {
+  font-size: 0.9rem; color: var(--text-muted);
+  padding-left: 22px; position: relative;
+}
+.klipp-facts li::before {
+  content: "✓"; position: absolute; left: 0; top: 0;
+  color: var(--rose); font-weight: 700; font-size: 0.8rem;
+}
+.klipp-facts li strong { color: var(--rose-dark); }
+.klipp-price {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-top: auto; padding-top: 6px;
+}
+.klipp-price s { color: var(--text-muted); font-size: 0.95rem; }
+.klipp-price strong {
+  font-family: var(--font-serif); font-size: 1.7rem;
+  color: var(--rose-dark); font-weight: 700;
+}
