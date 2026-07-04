@@ -25,9 +25,9 @@
   const lang = () => localStorage.getItem("nss-lang") || "sv";
   const T = {
     title: { sv: "Betalning", en: "Payment", ar: "الدفع" },
-    paySalon: { sv: "💵 Betala i salongen", en: "💵 Pay at the salon", ar: "💵 الدفع في الصالون" },
-    paySwish: { sv: "📱 Betala nu med Swish", en: "📱 Pay now with Swish", ar: "📱 الدفع الآن عبر Swish" },
-    payCard: { sv: "💳 Betala nu med kort", en: "💳 Pay now by card", ar: "💳 الدفع الآن بالبطاقة" },
+    paySalon: { sv: "Betala i salongen", en: "Pay at the salon", ar: "الدفع في الصالون" },
+    paySwish: { sv: "Betala nu med Swish", en: "Pay now with Swish", ar: "الدفع الآن عبر Swish" },
+    payCard: { sv: "Betala nu med kort", en: "Pay now by card", ar: "الدفع الآن بالبطاقة" },
     amount: { sv: "Belopp (kr)", en: "Amount (kr)", ar: "المبلغ (كرون)" },
     swishTo: { sv: "Swisha till", en: "Swish to", ar: "أرسلي عبر Swish إلى" },
     swishMsg: {
@@ -77,10 +77,11 @@
   function render() {
     const amount = treatmentPrice();
     let html = `<label class="pay-title">${tr(T.title)}</label><div class="pay-options">`;
+    const icon = (v) => (typeof window.payIcon === "function" ? `<span class="pay-ic">${window.payIcon(v)}</span>` : "");
     methods.forEach(([val, key, emailValue]) => {
       html += `<label class="pay-opt${chosen === val ? " pay-opt--on" : ""}">
         <input type="radio" name="betalning" value="${emailValue}" data-val="${val}" ${chosen === val ? "checked" : ""} />
-        <span>${tr(T[key])}</span></label>`;
+        ${icon(val)}<span>${tr(T[key])}</span></label>`;
     });
     html += `</div><div class="pay-panel">`;
 

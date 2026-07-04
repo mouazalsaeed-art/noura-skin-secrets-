@@ -50,10 +50,12 @@
 
 <section class="section section--tight">
   <div class="container">
-    <div class="filter-bar">
+    <div class="catalog-controls" id="catalog-controls">
       <input type="search" id="search" class="search-input" placeholder="Sök behandling, t.ex. HydraFacial, HIFU, massage…" />
+      <div class="group-tabs" id="group-tabs"></div>
+      <div class="chip-row" id="chip-row"></div>
     </div>
-    <div class="chip-row" id="chip-row" style="margin-bottom: 40px;"></div>
+    <div class="catalog-count" id="catalog-count"></div>
 
     <div id="catalog"></div>
     <div class="empty-state" id="empty-state" style="display:none;">
@@ -109,50 +111,86 @@
 <a href="boka.html" class="btn btn-primary float-cta">Boka tid</a>
 
 <script src="js/treatments.js"></script>
+<script src="js/icons.js"></script>
 <script src="js/main.js"></script>
 <script>
   const catalogEl = document.getElementById("catalog");
   const chipRow = document.getElementById("chip-row");
+  const groupTabs = document.getElementById("group-tabs");
   const searchInput = document.getElementById("search");
   const emptyState = document.getElementById("empty-state");
+  const countEl = document.getElementById("catalog-count");
 
-  let activeCategory = "all";
+  // Super-groups make 14 categories easy to browse: 5 simple tabs.
+  const GROUPS = [
+    { id: "all", label: "Alla behandlingar", cats: null },
+    { id: "ansikte", label: "Ansikte & hud", cats: ["ansikte", "hifu-ansikte", "ogon-lappar", "plasma", "laser", "arrbehandling", "ovrigt"] },
+    { id: "kropp", label: "Kropp & figur", cats: ["kroppsbehandlingar", "slim-firm", "bristningar", "hifu-kropp"] },
+    { id: "massage", label: "Massage", cats: ["massage-ansikte", "massage-kropp"] },
+    { id: "har", label: "Hår", cats: ["harvard"] },
+  ];
 
-  function makeChip(label, id) {
-    const chip = document.createElement("button");
-    chip.className = "chip" + (id === "all" ? " active" : "");
-    chip.textContent = label;
-    chip.dataset.id = id;
-    chip.addEventListener("click", () => {
-      activeCategory = id;
-      document.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-      chip.classList.add("active");
-      render();
-    });
-    return chip;
+  let activeGroup = "all";   // super-group
+  let activeCategory = "all"; // single category chip
+
+  function catsInGroup() {
+    const g = GROUPS.find((x) => x.id === activeGroup);
+    if (!g || !g.cats) return TREATMENT_CATEGORIES;
+    return TREATMENT_CATEGORIES.filter((c) => g.cats.includes(c.id));
   }
 
-  chipRow.appendChild(makeChip("Alla", "all"));
-  TREATMENT_CATEGORIES.forEach((cat) => {
-    chipRow.appendChild(makeChip(`${cat.icon} ${cat.name}`, cat.id));
-  });
+  function buildTabs() {
+    groupTabs.innerHTML = "";
+    GROUPS.forEach((g) => {
+      const b = document.createElement("button");
+      b.className = "group-tab" + (g.id === activeGroup ? " active" : "");
+      b.textContent = g.label;
+      b.addEventListener("click", () => {
+        activeGroup = g.id;
+        activeCategory = "all";
+        buildTabs();
+        buildChips();
+        render();
+      });
+      groupTabs.appendChild(b);
+    });
+  }
+
+  function buildChips() {
+    chipRow.innerHTML = "";
+    const all = document.createElement("button");
+    all.className = "chip" + (activeCategory === "all" ? " active" : "");
+    all.textContent = "Alla";
+    all.addEventListener("click", () => { activeCategory = "all"; buildChips(); render(); });
+    chipRow.appendChild(all);
+
+    catsInGroup().forEach((cat) => {
+      const chip = document.createElement("button");
+      chip.className = "chip" + (activeCategory === cat.id ? " active" : "");
+      chip.innerHTML = `${catIcon(cat.id)}<span>${cat.name}</span>`;
+      chip.addEventListener("click", () => {
+        activeCategory = cat.id;
+        buildChips();
+        render();
+        const t = document.getElementById(cat.id);
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      chipRow.appendChild(chip);
+    });
+  }
 
   function render() {
     const query = searchInput.value.trim().toLowerCase();
     catalogEl.innerHTML = "";
     let totalShown = 0;
 
-    TREATMENT_CATEGORIES.forEach((cat) => {
+    catsInGroup().forEach((cat) => {
       if (activeCategory !== "all" && activeCategory !== cat.id) return;
 
       const filtered = cat.treatments.filter((t) => {
         if (!query) return true;
-        return (
-          t.name.toLowerCase().includes(query) ||
-          t.desc.toLowerCase().includes(query)
-        );
+        return t.name.toLowerCase().includes(query) || t.desc.toLowerCase().includes(query);
       });
-
       if (filtered.length === 0) return;
       totalShown += filtered.length;
 
@@ -161,7 +199,7 @@
       block.id = cat.id;
 
       const heading = document.createElement("h2");
-      heading.innerHTML = `<span>${cat.icon}</span> ${cat.name}`;
+      heading.innerHTML = `<span class="cat-ic">${catIcon(cat.id)}</span> ${cat.name} <span class="cat-count">${filtered.length}</span>`;
       block.appendChild(heading);
 
       if (cat.note) {
@@ -173,7 +211,6 @@
 
       const grid = document.createElement("div");
       grid.className = "treatment-grid";
-
       filtered.forEach((t) => {
         const card = document.createElement("div");
         card.className = "treatment-card";
@@ -191,23 +228,28 @@
         `;
         grid.appendChild(card);
       });
-
       block.appendChild(grid);
       catalogEl.appendChild(block);
     });
 
+    countEl.textContent = totalShown === 1 ? "1 behandling" : `${totalShown} behandlingar`;
     emptyState.style.display = totalShown === 0 ? "block" : "none";
   }
 
+  buildTabs();
+  buildChips();
   searchInput.addEventListener("input", render);
   render();
 
-  // Jump to category if hash present
+  // Jump to category if hash present (e.g. from homepage category cards)
   if (location.hash) {
+    const hid = location.hash.slice(1);
+    const g = GROUPS.find((x) => x.cats && x.cats.includes(hid));
+    if (g) { activeGroup = g.id; buildTabs(); buildChips(); render(); }
     setTimeout(() => {
-      const target = document.getElementById(location.hash.slice(1));
+      const target = document.getElementById(hid);
       if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
+    }, 120);
   }
 </script>
 <script src="js/hudassistent.js"></script>
