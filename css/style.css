@@ -939,7 +939,7 @@ html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
 }
 .pay-opt:hover { border-color: var(--rose-mid); }
 .pay-opt--on { border-color: var(--rose); background: var(--rose-light); font-weight: 600; box-shadow: 0 4px 14px rgba(194,68,126,0.12); }
-.pay-opt input { accent-color: var(--rose); flex-shrink: 0; }
+.pay-opt input { accent-color: var(--rose); flex: 0 0 auto; width: 18px; height: 18px; margin: 0; }
 .pay-opt > span:last-child { line-height: 1.25; }
 .pay-panel { margin-top: 14px; }
 .pay-note { font-size: 0.88rem; color: var(--text-muted); margin: 6px 0; }
