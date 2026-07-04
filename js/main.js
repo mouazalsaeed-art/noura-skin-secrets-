@@ -19,6 +19,26 @@ document.addEventListener("DOMContentLoaded", () => {
       el.textContent = TREATMENT_CATEGORIES.length;
     });
   }
+
+  // Gentle scroll-reveal for sections (respects reduced-motion; no-JS = fully visible)
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const targets = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-in"));
+  } else {
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+    targets.forEach((el) => io.observe(el));
+  }
 });
 
 // Hero background video: deferred, connection-aware, pauses off-screen
