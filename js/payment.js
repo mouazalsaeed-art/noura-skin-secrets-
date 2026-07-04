@@ -11,7 +11,7 @@
 
 (function () {
   const SWISH_NUMBER = "123-540 83 98";
-  const STRIPE_PAYMENT_LINK = "";
+  const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/8x2eV6e836u0dlzb8Y18c00";
 
   const swishOn = /\d/.test(SWISH_NUMBER);
   const stripeOn = STRIPE_PAYMENT_LINK.indexOf("https://") === 0;
