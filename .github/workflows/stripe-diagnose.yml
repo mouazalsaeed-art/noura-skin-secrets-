@@ -1,0 +1,43 @@
+name: Stripe diagnose
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check account and payment link status
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+        run: |
+          echo "--- account ---"
+          curl -s https://api.stripe.com/v1/account -u "$STRIPE_API_KEY:" \
+            | python3 -c "
+          import sys, json
+          d = json.load(sys.stdin)
+          if d.get('error'):
+              print('account read error:', d['error'].get('message', '')[:200])
+          else:
+              print('charges_enabled:', d.get('charges_enabled'))
+              print('payouts_enabled:', d.get('payouts_enabled'))
+              print('country:', d.get('country'), '| default_currency:', d.get('default_currency'))
+              caps = d.get('capabilities') or {}
+              for k, v in sorted(caps.items()):
+                  print('capability', k, '=', v)
+              req = (d.get('requirements') or {}).get('currently_due') or []
+              print('requirements_currently_due:', req[:10])
+          "
+          echo "--- payment links ---"
+          curl -s "https://api.stripe.com/v1/payment_links?limit=10" -u "$STRIPE_API_KEY:" \
+            | python3 -c "
+          import sys, json
+          d = json.load(sys.stdin)
+          if d.get('error'):
+              print('links read error:', d['error'].get('message', '')[:200])
+          else:
+              for l in d.get('data', []):
+                  print(l['id'], '| active:', l.get('active'), '| url:', l.get('url'))
+                  print('   payment_method_types:', l.get('payment_method_types'))
+                  print('   currency:', (l.get('currency') or ''))
+          "
