@@ -138,7 +138,7 @@ export default {
     try {
       const response = await client.messages.create({
         model: "claude-opus-4-8",
-        max_tokens: 2000,
+        max_tokens: 3500,
         system: [
           {
             type: "text",
@@ -164,16 +164,22 @@ export default {
 
       const textBlock = response.content.find((b) => b.type === "text");
       if (!textBlock) {
-        return json({ error: "empty" }, 502, allowedOrigin);
+        return json({ error: "empty", detail: "no text block, stop=" + response.stop_reason }, 502, allowedOrigin);
       }
 
-      const analysis = JSON.parse(textBlock.text);
+      let analysis;
+      try {
+        analysis = JSON.parse(textBlock.text);
+      } catch {
+        return json({ error: "parse_failed", detail: "stop=" + response.stop_reason }, 502, allowedOrigin);
+      }
       return json({ analysis }, 200, allowedOrigin);
     } catch (err) {
       const status = err && err.status ? err.status : 500;
-      if (status === 429) return json({ error: "busy" }, 429, allowedOrigin);
-      if (status === 401) return json({ error: "not_configured" }, 503, allowedOrigin);
-      return json({ error: "analysis_failed" }, 502, allowedOrigin);
+      const detail = String((err && err.message) || err).slice(0, 300);
+      if (status === 429) return json({ error: "busy", detail }, 429, allowedOrigin);
+      if (status === 401) return json({ error: "not_configured", detail }, 503, allowedOrigin);
+      return json({ error: "analysis_failed", detail }, 502, allowedOrigin);
     }
   },
 };

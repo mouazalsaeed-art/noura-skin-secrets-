@@ -815,7 +815,7 @@
       const url = URL.createObjectURL(file);
       img.onload = () => {
         URL.revokeObjectURL(url);
-        const MAX = 1024;
+        const MAX = 800;
         let { width, height } = img;
         if (width > MAX || height > MAX) {
           const scale = MAX / Math.max(width, height);
@@ -826,7 +826,7 @@
         canvas.width = width;
         canvas.height = height;
         canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-        const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
         resolve(dataUrl.split(",")[1]);
       };
       img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("decode")); };
@@ -850,11 +850,16 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image, mediaType: "image/jpeg", lang: lang() }),
       });
-      if (!res.ok) throw new Error("http " + res.status);
-      const data = await res.json();
-      renderAnalysis(data.analysis);
+      let data = null;
+      try { data = await res.json(); } catch {}
+      if (!res.ok) {
+        const code = (data && data.error) || "http_" + res.status;
+        throw new Error(code);
+      }
+      renderAnalysis(data && data.analysis);
     } catch (e) {
-      addMsg(tr(PUI.photoFail));
+      const code = e && e.message ? String(e.message).slice(0, 60) : "";
+      addMsg(tr(PUI.photoFail) + (code ? ` <span style="opacity:.55;font-size:.72em;">(${code})</span>` : ""));
       setOptions([[tr(PUI.optPhoto), flowPhoto], homeOption()]);
     }
   }

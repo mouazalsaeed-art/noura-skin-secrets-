@@ -68,17 +68,22 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
-      - name: End-to-end test with real photo
+      - name: End-to-end tests (small sv + large ar photo)
         working-directory: .
         run: |
           sleep 5
-          img=$(base64 -w0 images/hero-poster.jpg)
-          echo "{\"image\":\"$img\",\"mediaType\":\"image/jpeg\",\"lang\":\"sv\"}" > /tmp/payload.json
-          status=$(curl -s -o /tmp/resp.json -w "%{http_code}" --max-time 120 \
-            -X POST "https://noura-hudanalys.nouraskin.workers.dev/analyze" \
-            -H "Content-Type: application/json" \
-            -H "Origin: https://nouraskinsecrets.se" \
-            --data @/tmp/payload.json)
-          echo "HTTP status: $status"
-          head -c 2000 /tmp/resp.json; echo
-          [ "$status" = "200" ] || { echo "::error::Analysis test failed"; exit 1; }
+          run_test() {
+            img=$(base64 -w0 "$1")
+            echo "{\"image\":\"$img\",\"mediaType\":\"image/jpeg\",\"lang\":\"$2\"}" > /tmp/payload.json
+            echo "--- test: $1 lang=$2 payload=$(wc -c < /tmp/payload.json) bytes ---"
+            status=$(curl -s -o /tmp/resp.json -w "%{http_code}" --max-time 180 \
+              -X POST "https://noura-hudanalys.nouraskin.workers.dev/analyze" \
+              -H "Content-Type: application/json" \
+              -H "Origin: https://nouraskinsecrets.se" \
+              --data @/tmp/payload.json)
+            echo "HTTP status: $status"
+            head -c 3000 /tmp/resp.json; echo
+            [ "$status" = "200" ] || { echo "::error::Analysis test failed ($1 $2)"; exit 1; }
+          }
+          run_test images/hero-poster.jpg sv
+          run_test worker/test-assets/test-photo-large.jpg ar
