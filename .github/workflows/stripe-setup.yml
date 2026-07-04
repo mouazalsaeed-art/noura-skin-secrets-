@@ -1,0 +1,48 @@
+name: Stripe setup (create payment link)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create customer-chooses-amount payment link
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+        run: |
+          if [ -z "$STRIPE_API_KEY" ]; then
+            echo "::error::STRIPE_API_KEY secret is missing."
+            exit 1
+          fi
+
+          # Reuse an existing active payment link if one is already there
+          existing=$(curl -s "https://api.stripe.com/v1/payment_links?limit=100" -u "$STRIPE_API_KEY:")
+          url=$(echo "$existing" | python3 -c "import sys,json;d=json.load(sys.stdin);ls=[l for l in d.get('data',[]) if l.get('active')];print(ls[0]['url'] if ls else '')" 2>/dev/null || true)
+          if [ -n "$url" ]; then
+            echo "PAYMENT_LINK=$url"
+            exit 0
+          fi
+
+          price=$(curl -s https://api.stripe.com/v1/prices -u "$STRIPE_API_KEY:" \
+            -d currency=sek \
+            -d "custom_unit_amount[enabled]=true" \
+            -d "custom_unit_amount[minimum]=5000" \
+            --data-urlencode "product_data[name]=Noura Skin Secrets — Betalning")
+          pid=$(echo "$price" | python3 -c "import sys,json;print(json.load(sys.stdin).get('id',''))")
+          if [ -z "$pid" ]; then
+            echo "$price" | head -c 800; echo
+            echo "::error::Could not create the price"
+            exit 1
+          fi
+
+          link=$(curl -s https://api.stripe.com/v1/payment_links -u "$STRIPE_API_KEY:" \
+            -d "line_items[0][price]=$pid" \
+            -d "line_items[0][quantity]=1")
+          url=$(echo "$link" | python3 -c "import sys,json;print(json.load(sys.stdin).get('url',''))")
+          if [ -z "$url" ]; then
+            echo "$link" | head -c 800; echo
+            echo "::error::Could not create the payment link"
+            exit 1
+          fi
+          echo "PAYMENT_LINK=$url"
