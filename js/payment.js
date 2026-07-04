@@ -10,7 +10,7 @@
    ══════════════════════════════════════════════════════════ */
 
 (function () {
-  const SWISH_NUMBER = "";
+  const SWISH_NUMBER = "123-540 83 98";
   const STRIPE_PAYMENT_LINK = "";
 
   const swishOn = /\d/.test(SWISH_NUMBER);
