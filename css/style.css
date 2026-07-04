@@ -864,3 +864,17 @@ textarea { resize: vertical; min-height: 100px; }
   color: var(--white);
 }
 html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
+
+/* ---------- Payment at booking ---------- */
+.pay-section { border: 1px solid var(--border, #e8ddd4); border-radius: 12px; padding: 16px; background: #fdfaf7; }
+.pay-title { font-weight: 600; display: block; margin-bottom: 10px; }
+.pay-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.pay-opt { display: flex; align-items: center; gap: 6px; padding: 9px 14px; border: 1.5px solid #e0d5c9; border-radius: 999px; cursor: pointer; font-size: 0.93rem; background: #fff; transition: border-color .15s, background .15s; }
+.pay-opt--on { border-color: var(--accent, #b98d67); background: #f6ede4; font-weight: 600; }
+.pay-opt input { accent-color: var(--accent, #b98d67); }
+.pay-panel { margin-top: 12px; }
+.pay-note { font-size: 0.88rem; color: #6d5f52; margin: 6px 0; }
+.pay-line { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.pay-number { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.5px; }
+.pay-copy { border: 1px solid #d9cbbc; background: #fff; border-radius: 8px; padding: 4px 12px; cursor: pointer; font-size: 0.82rem; }
+.pay-qr svg { border: 1px solid #eee2d6; border-radius: 10px; background: #fff; }
