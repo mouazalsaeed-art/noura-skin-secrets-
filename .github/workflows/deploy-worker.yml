@@ -86,3 +86,15 @@ jobs:
           }
           run_test images/hero-poster.jpg sv
           run_test worker/test-assets/test-photo-large.jpg ar
+
+      - name: End-to-end test (free-text chat)
+        working-directory: .
+        run: |
+          status=$(curl -s -o /tmp/chat.json -w "%{http_code}" --max-time 120 \
+            -X POST "https://noura-hudanalys.nouraskin.workers.dev/chat" \
+            -H "Content-Type: application/json" \
+            -H "Origin: https://nouraskinsecrets.se" \
+            -d '{"messages":[{"role":"user","content":"Do you recommend any serum for dry skin?"}],"lang":"en"}')
+          echo "HTTP status: $status"
+          head -c 2000 /tmp/chat.json; echo
+          [ "$status" = "200" ] || { echo "::error::Chat test failed"; exit 1; }

@@ -75,6 +75,33 @@ const USER_TEXT = {
   ar: "حللي بشرتي في الصورة واقترحي العلاجات المناسبة.",
 };
 
+const MAX_CHAT_MESSAGES = 16;
+const MAX_CHAT_CHARS = 1500;
+
+function chatSystemPrompt(lang) {
+  const langName = { sv: "Swedish", en: "English", ar: "Arabic" }[lang];
+  return `You are the friendly AI assistant on the website of "Noura Skin Secrets", a women-only beauty salon in Uppsala, Sweden, run by a certified skin therapist.
+
+Salon facts:
+- Address: Kungsängsgatan 5B, 753 22 Uppsala (city centre).
+- Phone / WhatsApp: +46 79 333 34 76.
+- Open every day 10:00-20:00.
+- Booking: the "Boka tid" page on the website, or by phone/WhatsApp.
+- Women only. Instagram: @noura_skin_secrets.
+- The chatbot also offers an AI photo skin analysis — suggest it when someone wonders what treatment suits her skin.
+
+Rules:
+- Reply in ${langName} unless the customer clearly writes in another language — then answer in her language.
+- Only discuss: the salon, its treatments, prices, durations, booking, opening hours, skincare advice, home routines (product TYPES like cleanser/vitamin C serum/SPF — never brand names), and pre/post-treatment care.
+- Recommend treatments ONLY from the catalog below, with their exact names and prices. Never invent treatments, prices or discounts.
+- Never give medical diagnoses. For anything that sounds medical (infections, suspicious moles, severe reactions), warmly advise seeing a doctor or dermatologist.
+- If asked about something unrelated (politics, tech, homework...), politely say you can only help with the salon and skincare, and steer back.
+- Keep answers short and warm: 2-5 sentences, plain text only (no markdown, no headers), at most one emoji.
+
+TREATMENT CATALOG (name | duration | price | description):
+${CATALOG}`;
+}
+
 function corsHeaders(origin) {
   return {
     "Access-Control-Allow-Origin": origin,
@@ -92,6 +119,69 @@ function json(body, status, origin) {
   });
 }
 
+/* Free-text chat: the website sends the recent conversation and gets a
+   short answer grounded in the salon's real catalog. Messages are processed
+   in memory only — never stored or logged. */
+async function handleChat(payload, env, allowedOrigin) {
+  const { messages, lang } = payload || {};
+  if (
+    !Array.isArray(messages) ||
+    messages.length === 0 ||
+    messages.length > MAX_CHAT_MESSAGES ||
+    !LANGS.includes(lang) ||
+    messages.some(
+      (m) =>
+        !m ||
+        (m.role !== "user" && m.role !== "assistant") ||
+        typeof m.content !== "string" ||
+        m.content.length === 0 ||
+        m.content.length > MAX_CHAT_CHARS
+    )
+  ) {
+    return json({ error: "bad_request" }, 400, allowedOrigin);
+  }
+
+  // The API requires the first message to be from the user
+  const firstUser = messages.findIndex((m) => m.role === "user");
+  if (firstUser === -1) {
+    return json({ error: "bad_request" }, 400, allowedOrigin);
+  }
+  const turns = messages.slice(firstUser).map((m) => ({ role: m.role, content: m.content }));
+
+  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+
+  try {
+    const response = await client.messages.create({
+      model: "claude-opus-4-8",
+      max_tokens: 600,
+      system: [
+        {
+          type: "text",
+          text: chatSystemPrompt(lang),
+          cache_control: { type: "ephemeral" },
+        },
+      ],
+      messages: turns,
+    });
+
+    if (response.stop_reason === "refusal") {
+      return json({ error: "refused" }, 422, allowedOrigin);
+    }
+
+    const textBlock = response.content.find((b) => b.type === "text");
+    if (!textBlock || !textBlock.text) {
+      return json({ error: "empty", detail: "stop=" + response.stop_reason }, 502, allowedOrigin);
+    }
+    return json({ reply: textBlock.text }, 200, allowedOrigin);
+  } catch (err) {
+    const status = err && err.status ? err.status : 500;
+    const detail = String((err && err.message) || err).slice(0, 300);
+    if (status === 429) return json({ error: "busy", detail }, 429, allowedOrigin);
+    if (status === 401) return json({ error: "not_configured", detail }, 503, allowedOrigin);
+    return json({ error: "chat_failed", detail }, 502, allowedOrigin);
+  }
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get("Origin") || "";
@@ -102,7 +192,7 @@ export default {
     }
 
     const url = new URL(request.url);
-    if (request.method !== "POST" || url.pathname !== "/analyze") {
+    if (request.method !== "POST" || (url.pathname !== "/analyze" && url.pathname !== "/chat")) {
       return json({ error: "not_found" }, 404, allowedOrigin);
     }
 
@@ -120,6 +210,10 @@ export default {
       payload = await request.json();
     } catch {
       return json({ error: "bad_request" }, 400, allowedOrigin);
+    }
+
+    if (url.pathname === "/chat") {
+      return handleChat(payload, env, allowedOrigin);
     }
 
     const { image, mediaType, lang } = payload || {};

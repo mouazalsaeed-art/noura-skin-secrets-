@@ -140,6 +140,16 @@
       en: "Hmm, I'm not sure I understood. 🤔 Try typing e.g. <em>\"acne\"</em>, <em>\"pigmentation\"</em>, <em>\"HydraFacial\"</em>, <em>\"opening hours\"</em> — or choose below:",
       ar: "همم، لم أفهم تماماً. 🤔 جربي كتابة مثلاً <em>\"حبوب\"</em>، <em>\"تصبغات\"</em>، <em>\"هيدرافيشل\"</em>، <em>\"الدوام\"</em> — أو اختاري من الأسفل:",
     },
+    aiThinking: {
+      sv: "Skriver …",
+      en: "Typing …",
+      ar: "أكتب لك …",
+    },
+    aiFail: {
+      sv: "Oj, jag kunde inte svara just nu — försök igen om en stund, eller välj nedan: 🙏",
+      en: "Oops, I couldn't answer right now — please try again in a moment, or choose below: 🙏",
+      ar: "عذراً، لم أستطع الرد الآن — جربي بعد لحظات أو اختاري من الأسفل: 🙏",
+    },
   };
 
 
@@ -598,29 +608,80 @@
 
   function handleFreeText(text) {
     const q = normalize(text);
+    const qWords = new Set(q.split(/[^\p{L}\p{N}]+/u).filter(Boolean));
 
-    // 1) intent keywords
+    // Short keys must match a whole word ("hi" must not match inside "which");
+    // longer keys and phrases may match as substrings.
+    const keyMatches = (k) => {
+      const nk = normalize(k);
+      if (nk.includes(" ") || nk.length >= 5) return q.includes(nk);
+      return qWords.has(nk);
+    };
+
+    // 1) intent keywords (instant answers for the most common questions)
     for (const intent of INTENTS) {
-      if (intent.keys.some((k) => q.includes(normalize(k)))) {
+      if (intent.keys.some(keyMatches)) {
         intent.run();
         return;
       }
     }
 
-    // 2) treatment catalog search (e.g. "hydrafacial", "hifu", "plasma")
-    const words = q.split(/\s+/).filter((w) => w.length >= 4);
-    for (const w of [q, ...words]) {
-      const hits = searchTreatments(w);
-      if (hits.length) {
-        addMsg(`<p class="ha-p">${tr(UI.priceIntro)}</p>` + hits.map((t) => treatmentCard(t)).join("") + disclaimer());
-        setOptions([[tr(UI.optFind), flowFind], homeOption()]);
-        return;
+    // 2) short lookups → treatment catalog search (e.g. "hydrafacial", "hifu")
+    if (qWords.size <= 2) {
+      const words = q.split(/\s+/).filter((w) => w.length >= 4);
+      for (const w of [q, ...words]) {
+        const hits = searchTreatments(w);
+        if (hits.length) {
+          addMsg(`<p class="ha-p">${tr(UI.priceIntro)}</p>` + hits.map((t) => treatmentCard(t)).join("") + disclaimer());
+          setOptions([[tr(UI.optFind), flowFind], homeOption()]);
+          return;
+        }
       }
     }
 
-    // 3) fallback
+    // 3) everything else → the AI assistant
+    if (AI_ENABLED) {
+      aiChat(text);
+      return;
+    }
     addMsg(tr(UI.fallbackA));
     mainOptions();
+  }
+
+  /* ---------- AI free-text chat ---------- */
+
+  const AI_ENABLED = PHOTO_ENABLED;
+  let chatHistory = [];
+
+  async function aiChat(text) {
+    chatHistory.push({ role: "user", content: String(text).slice(0, 1400) });
+    if (chatHistory.length > 12) chatHistory = chatHistory.slice(-12);
+
+    setOptions([]);
+    const typing = document.createElement("div");
+    typing.className = "ha-msg ha-msg--bot";
+    typing.textContent = tr(UI.aiThinking);
+    msgsEl.appendChild(typing);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+
+    try {
+      const res = await fetch(HA_API + "/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: chatHistory, lang: lang() }),
+      });
+      const data = await res.json().catch(() => null);
+      typing.remove();
+      if (!res.ok || !data || !data.reply) throw new Error("chat_failed");
+      chatHistory.push({ role: "assistant", content: data.reply });
+      addMsg(String(data.reply).replace(/</g, "&lt;").replace(/\n/g, "<br>"));
+      mainOptions();
+    } catch {
+      typing.remove();
+      chatHistory.pop();
+      addMsg(tr(UI.aiFail));
+      mainOptions();
+    }
   }
 
   function handlePriceQuery() {
