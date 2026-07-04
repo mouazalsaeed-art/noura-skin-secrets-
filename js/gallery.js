@@ -9,7 +9,9 @@
   const IG = "https://instagram.com/noura_skin_secrets";
 
   const GALLERY = [
-    // { img: "images/gallery/1.jpg", alt: "Behandling hos Noura Skin Secrets" },
+    { video: "videos/gallery-1.mp4", alt: "Behandling hos Noura Skin Secrets" },
+    // Lägg till dina bilder så här (dra in filerna i images/gallery/):
+    // { img: "images/gallery/1.jpg", alt: "HydraFacial hos oss" },
   ];
 
   // Branded placeholder tiles shown until real photos are added.
@@ -31,30 +33,31 @@
   const track = document.createElement("div");
   track.className = "ig-track";
 
-  if (GALLERY.length) {
-    GALLERY.forEach((it) => {
-      const a = document.createElement("a");
-      a.className = "ig-slide";
-      a.href = IG;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.innerHTML =
-        `<img src="${it.img}" alt="${it.alt || "Noura Skin Secrets"}" loading="lazy" />` +
-        `<span class="ig-badge">${igGlyph}</span>`;
-      track.appendChild(a);
-    });
-  } else {
-    PLACEHOLDERS.forEach((p) => {
-      const a = document.createElement("a");
-      a.className = "ig-slide ig-slide--ph";
-      a.href = IG;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.style.background = p.g;
-      a.innerHTML =
-        `<span class="ig-ph-ic">${igGlyph}</span><span class="ig-ph-t">${p.t}</span>`;
-      track.appendChild(a);
-    });
+  GALLERY.forEach((it) => {
+    const a = document.createElement("a");
+    a.className = "ig-slide";
+    a.href = IG;
+    a.target = "_blank";
+    a.rel = "noopener";
+    const media = it.video
+      ? `<video src="${it.video}" muted loop playsinline autoplay preload="metadata" aria-label="${it.alt || "Noura Skin Secrets"}"></video>`
+      : `<img src="${it.img}" alt="${it.alt || "Noura Skin Secrets"}" loading="lazy" />`;
+    a.innerHTML = media + `<span class="ig-badge">${igGlyph}</span>`;
+    track.appendChild(a);
+  });
+
+  // Fill the strip with branded teaser tiles so it always looks full.
+  const fill = GALLERY.length ? Math.max(0, 5 - GALLERY.length) : PLACEHOLDERS.length;
+  for (let i = 0; i < fill; i++) {
+    const p = PLACEHOLDERS[i % PLACEHOLDERS.length];
+    const a = document.createElement("a");
+    a.className = "ig-slide ig-slide--ph";
+    a.href = IG;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.style.background = p.g;
+    a.innerHTML = `<span class="ig-ph-ic">${igGlyph}</span><span class="ig-ph-t">${p.t}</span>`;
+    track.appendChild(a);
   }
 
   const prev = document.createElement("button");

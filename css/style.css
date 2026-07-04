@@ -1096,9 +1096,10 @@ input, select, textarea { border-radius: 12px; }
   scroll-snap-align: start;
   box-shadow: var(--shadow);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: linear-gradient(150deg, var(--rose), var(--rose-dark));
 }
 .ig-slide:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
-.ig-slide img { width: 100%; height: 100%; object-fit: cover; }
+.ig-slide img, .ig-slide video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ig-badge {
   position: absolute; top: 12px; right: 12px; color: #fff;
   background: rgba(0,0,0,0.35); border-radius: 50%; width: 34px; height: 34px;
