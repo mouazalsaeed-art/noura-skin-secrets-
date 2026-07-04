@@ -93,7 +93,6 @@ const TREATMENT_CATEGORIES = [
       { name: "Klassisk svensk massage", duration: "30 min", price: "1 000 kr", desc: "Traditionell svensk massageteknik mot spänningar i kroppen." },
       { name: "Rygg & Nacke", duration: "30 min", price: "999 kr", desc: "Fokuserad massage på rygg och nacke." },
       { name: "Ryggmassage med radiofrekvens (NBE 3000)", duration: "30 min", price: "999 kr", desc: "20 min med NBE 3000-maskin som löser upp spända vävnader och myoser, följt av 10 min handmassage." },
-      { name: "Fotmassage", duration: "30 min", price: "850 kr", desc: "Avslappnande massage för trötta fötter." },
       { name: "Dekolletémassage", duration: "20 min", price: "700 kr", desc: "Riktad massage för dekolletageområdet." },
       { name: "Lätt lymfmassage", duration: "30 min", price: "1 100 kr", desc: "Skonsam lymfdränerande massage som minskar svullnad och stimulerar cirkulationen." },
       { name: "Helkroppsmassage", duration: "45 min", price: "1 800 kr", desc: "Komplett massage för hela kroppen." },
