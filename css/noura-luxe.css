@@ -112,7 +112,7 @@ p,li,span,a,input,select,textarea,button{font-family:var(--nl-sans)}
 
 .about-grid{gap:70px!important}
 .about-portrait{border-radius:3px!important;overflow:hidden;border:1px solid var(--nl-line)!important;box-shadow:var(--nl-shadow)!important;aspect-ratio:4/5;
-background:url('../images/hero-poster.jpg') center 20% / cover no-repeat!important;font-size:0!important;color:transparent!important}
+background:url('https://d8j0ntlcm91z4.cloudfront.net/user_3G3VDWffa9TaSKYmVTmpCBYbEyo/hf_20260707_234755_2d39e40e-7df0-41d2-9f07-e8adbe8dfd41.png') center 28% / cover no-repeat!important;font-size:0!important;color:transparent!important}
 .about-portrait img{opacity:0!important}
 .about-copy h2{color:var(--nl-plum)!important}
 .about-copy p{color:var(--nl-taupe)!important;font-weight:400!important;max-width:62ch}
