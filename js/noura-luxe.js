@@ -15,7 +15,7 @@ var VIDEO = "videos/before-after.mp4";
 var POSTER = "images/before-after-poster.jpg";
 var SKINCLIP = "videos/skin-resultat.mp4";
 var SKINPOSTER = "images/skin-resultat-poster.jpg";
-var RESULTS = ["images/resultat-1.jpg", "images/resultat-2.jpg", "images/resultat-3.jpg"];
+var RESULTS = ["images/resultat-1.jpg", "images/resultat-2.jpg"];
 
 function styles() {
   if (document.getElementById("nl-ba-style")) return;
