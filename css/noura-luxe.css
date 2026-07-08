@@ -180,3 +180,12 @@ form label{color:var(--nl-plum)!important;letter-spacing:.04em}
   *{scroll-behavior:auto!important}
   .btn,.category-card,.offer-card,.google-review,#catalog .treatment-card{transition:none!important}
 }
+
+
+/* ==== Compact catalog search & filter panel (behandlingar) ==== */
+#catalog-controls{padding:10px 12px;}
+#catalog-controls .search-input{padding:8px 14px;font-size:.9rem;}
+#catalog-controls .group-tabs{margin-top:8px;gap:6px;}
+#catalog-controls .group-tab{padding:5px 12px;font-size:.85rem;}
+#catalog-controls .chip-row{margin-top:8px;gap:6px;padding-bottom:2px;}
+#catalog-controls .chip{padding:5px 12px;font-size:.8rem;}
