@@ -116,9 +116,9 @@
       ar: "هذه العلاجات المطابقة لبحثك:",
     },
     allTreatments: {
-      sv: "Du hittar alla våra <span></span>87 behandlingar med priser på <a href=\"behandlingar.html\"><strong>behandlingssidan</strong></a>. 📋",
-      en: "You'll find all 87 treatments with prices on the <a href=\"behandlingar.html\"><strong>treatments page</strong></a>. 📋",
-      ar: "تجدين كل علاجاتنا الـ87 مع الأسعار في <a href=\"behandlingar.html\"><strong>صفحة العلاجات</strong></a>. 📋",
+      sv: "Du hittar alla våra <span></span>86 behandlingar med priser på <a href=\"behandlingar.html\"><strong>behandlingssidan</strong></a>. 📋",
+      en: "You'll find all 86 treatments with prices on the <a href=\"behandlingar.html\"><strong>treatments page</strong></a>. 📋",
+      ar: "تجدين كل علاجاتنا الـ86 مع الأسعار في <a href=\"behandlingar.html\"><strong>صفحة العلاجات</strong></a>. 📋",
     },
     photoA: {
       sv: "Just nu analyserar jag huden genom smarta frågor i chatten 💬 — fotoanalys är på väg! För en riktig bedömning av din hud rekommenderar jag en hudvårdskonsultation:",
