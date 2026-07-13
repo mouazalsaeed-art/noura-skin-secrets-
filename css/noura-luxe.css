@@ -114,8 +114,8 @@ p,li,span,a,input,select,textarea,button{font-family:var(--nl-sans)}
 .klipp-price strong{color:var(--nl-rose)!important;font-family:var(--nl-serif)!important}
 
 .about-grid{gap:70px!important}
-.about-portrait{border-radius:3px!important;overflow:hidden;border:1px solid var(--nl-line)!important;box-shadow:var(--nl-shadow)!important;aspect-ratio:4/5;
-background:url('../images/om-oss.jpg') center 28% / cover no-repeat!important;font-size:0!important;color:transparent!important}
+.about-portrait{border-radius:3px!important;overflow:hidden;border:1px solid var(--nl-line)!important;box-shadow:var(--nl-shadow)!important;aspect-ratio:1/1;
+background:url('../images/om-oss.jpg') center / cover no-repeat!important;font-size:0!important;color:transparent!important}
 .about-portrait img{opacity:0!important}
 .about-copy h2{color:var(--nl-plum)!important}
 .about-copy p{color:var(--nl-taupe)!important;font-weight:400!important;max-width:62ch}
