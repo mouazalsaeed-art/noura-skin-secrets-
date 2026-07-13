@@ -34,7 +34,7 @@ function inject() {
   if (!faq || document.getElementById("nl-ba-section")) return;
   styles();
   var media =
-    '<figure class="nl-ba-item"><span class="nl-ba-tag nl-ba-tag--after">Före &amp; efter</span>' +
+    '<figure class="nl-ba-item"><span class="nl-ba-tag nl-ba-tag--after" data-i18n="nlba.tag">Före &amp; efter</span>' +
       '<video src="' + SKINCLIP + '" poster="' + SKINPOSTER + '" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video>' +
     '</figure>' +
     RESULTS.map(function (src, i) {
@@ -47,17 +47,18 @@ function inject() {
   sec.innerHTML =
     '<div class="container">' +
       '<div class="section-head reveal">' +
-        '<span class="eyebrow">Resultat</span>' +
-        '<h2>Före &amp; efter</h2>' +
-        '<p>En glimt av vad avancerad hudvård kan göra för hudens lyster och struktur.</p>' +
+        '<span class="eyebrow" data-i18n="nlba.eyebrow">Resultat</span>' +
+        '<h2 data-i18n="nlba.title">Före &amp; efter</h2>' +
+        '<p data-i18n="nlba.lede">En glimt av vad avancerad hudvård kan göra för hudens lyster och struktur.</p>' +
       '</div>' +
       '<div class="nl-ba-video reveal">' +
         '<video src="' + VIDEO + '" poster="' + POSTER + '" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture></video>' +
       '</div>' +
       '<div class="nl-ba nl-ba--grid reveal">' + media + '</div>' +
-      '<p class="nl-ba-note">Verkliga resultat från salongen.</p>' +
+      '<p class="nl-ba-note" data-i18n="nlba.note">Verkliga resultat från salongen.</p>' +
     '</div>';
   faq.parentNode.insertBefore(sec, faq);
+nlApplyLang(sec);
 
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -70,6 +71,27 @@ function inject() {
     sec.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("is-visible"); });
   }
 }
+/* ---- i18n for the injected results section (SV default in markup) ---- */
+var NL_I18N = {
+en: { "nlba.eyebrow": "Results", "nlba.title": "Before &amp; after", "nlba.lede": "A glimpse of what advanced skin care can do for your skin's glow and texture.", "nlba.note": "Real results from the salon.", "nlba.tag": "Before &amp; after" },
+ar: { "nlba.eyebrow": "النتائج", "nlba.title": "قبل وبعد", "nlba.lede": "لمحة عما يمكن أن تفعله العناية المتقدمة بالبشرة لنضارة بشرتك وملمسها.", "nlba.note": "نتائج حقيقية من الصالون.", "nlba.tag": "قبل وبعد" }
+};
+function nlApplyLang(root) {
+var lang = localStorage.getItem("nss-lang") || "sv";
+var dict = NL_I18N[lang];
+var els = (root || document).querySelectorAll('[data-i18n^="nlba."]');
+for (var k = 0; k < els.length; k++) {
+var el = els[k], key = el.getAttribute("data-i18n");
+if (lang === "sv") {
+if (el.dataset.svHtml !== undefined) el.innerHTML = el.dataset.svHtml;
+} else if (dict && dict[key]) {
+if (el.dataset.svHtml === undefined) el.dataset.svHtml = el.innerHTML;
+el.innerHTML = dict[key];
+}
+}
+}
+window.addEventListener("nss-lang-change", function () { nlApplyLang(document.getElementById("nl-ba-section")); });
+
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
 else inject();
 })();
