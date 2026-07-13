@@ -36,7 +36,7 @@
 
       "cats.eyebrow": "Our services",
       "cats.title": "Treatments for face, body & hair",
-      "cats.lede": "Browse our <span data-total-categories>14</span> categories and <span data-total-treatments>87</span> treatments — or view the full catalogue at once.",
+      "cats.lede": "Browse our <span data-total-categories>14</span> categories and <span data-total-treatments>86</span> treatments — or view the full catalogue at once.",
 
       "offers.eyebrow": "Right now",
       "offers.title": "Offers & packages",
@@ -146,7 +146,7 @@
 
       "cats.eyebrow": "خدماتنا",
       "cats.title": "علاجات للوجه والجسم والشعر",
-      "cats.lede": "تصفحي <span data-total-categories>14</span> فئة و<span data-total-treatments>87</span> علاجاً — أو شاهدي الكتالوج كاملاً.",
+      "cats.lede": "تصفحي <span data-total-categories>14</span> فئة و<span data-total-treatments>86</span> علاجاً — أو شاهدي الكتالوج كاملاً.",
 
       "offers.eyebrow": "حالياً",
       "offers.title": "العروض والباقات",
