@@ -1,43 +1,48 @@
-/* Noura Skin Secrets — erbjudanden & paket
-   Redigera listan nedan för att uppdatera erbjudanden på startsidan.
-   - "oldPrice" är valfritt: visa ett överstruket jämförpris (t.ex. ordinarie pris).
-   - Sätt "active: false" för att dölja ett erbjudande utan att radera det. */
-
+/* Noura Skin Secrets — erbjudanden & paket.
+   Redigera listan för att uppdatera startsidan. active:false döljer utan att radera. */
 const OFFERS = [
   {
     active: true,
-    badge: "Populärast",
+    badge: "Populärast", badgeEn: "Most popular", badgeAr: "الأكثر طلباً",
     title: "VMAX HIFU & RF – Hela ansiktet",
-    price: "1 999 kr",
-    oldPrice: "",
+    titleEn: "VMAX HIFU & RF – full face", titleAr: "VMAX هايفو و RF – الوجه كامل",
+    price: "1 999 kr", oldPrice: "",
     desc: "Senaste generationens hudföryngring: kollagenboost och lyft utan nålar. Resultat som håller 1–2 år.",
+    descEn: "Latest-generation rejuvenation: collagen boost and lift without needles. Results last 1–2 years.",
+    descAr: "أحدث جيل من تجديد البشرة: تعزيز للكولاجين ورفع بدون إبر. نتائج تدوم من سنة إلى سنتين.",
     treatment: "VMAX HIFU & RF – Hela ansiktet",
   },
   {
     active: true,
-    badge: "Kurpaket",
+    badge: "Kurpaket", badgeEn: "Course package", badgeAr: "باقة جلسات",
     title: "Massagekur – 3 behandlingar",
-    price: "1 450 kr",
-    oldPrice: "2 100 kr",
-    desc: "Ansikts-, skalp- & dekolletagemassage som kur om 3 tillfällen (ord. 700 kr/gång). Total avslappning till paketpris.",
+    titleEn: "Massage course – 3 sessions", titleAr: "برنامج مساج – 3 جلسات",
+    price: "1 450 kr", oldPrice: "2 100 kr",
+    desc: "Ansikts-, skalp- & dekolletagemassage som kur om 3 tillfällen (ord. 700 kr/gång).",
+    descEn: "Face, scalp & décolletage massage as a course of three (reg. 700 kr per session).",
+    descAr: "مساج للوجه وفروة الرأس والصدر كبرنامج من 3 جلسات (السعر العادي 700 كرون للجلسة).",
     treatment: "Ansikts-, Skalp- & Dekolletagemassage",
   },
   {
     active: true,
-    badge: "Paketpris",
+    badge: "Paketpris", badgeEn: "Package price", badgeAr: "سعر الباقة",
     title: "Massagepaket – 5 behandlingar",
-    price: "1 950 kr",
-    oldPrice: "3 500 kr",
-    desc: "Omsorgsfull massage av ansikte, skalp, nacke och dekolletage — fem tillfällen (ord. 700 kr/gång).",
+    titleEn: "Massage package – 5 sessions", titleAr: "باقة مساج – 5 جلسات",
+    price: "1 950 kr", oldPrice: "3 500 kr",
+    desc: "Omsorgsfull massage av ansikte, skalp, nacke och dekolletage — fem tillfällen.",
+    descEn: "Attentive massage of face, scalp, neck and décolletage — five sessions.",
+    descAr: "مساج عناية للوجه وفروة الرأس والرقبة والصدر — خمس جلسات.",
     treatment: "Ansikts-, Skalp- & Dekolletagemassage – Paket 5 behandlingar",
   },
   {
     active: true,
-    badge: "Prisvärd lyx",
+    badge: "Prisvärd lyx", badgeEn: "Affordable luxury", badgeAr: "فخامة بسعر مميز",
     title: "Lyxig ansiktsbehandling med DNA Salmon",
-    price: "995 kr",
-    oldPrice: "",
-    desc: "Djuprengöring, diamantslipning, lermask, microneedling med DNA Salmon, sheetmask och LED — komplett lyx under tusenlappen.",
+    titleEn: "Luxury DNA Salmon facial", titleAr: "علاج الوجه الفاخر مع DNA Salmon",
+    price: "995 kr", oldPrice: "",
+    desc: "Djuprengöring, diamantslipning, lermask, microneedling med DNA Salmon, sheetmask och LED.",
+    descEn: "Deep cleansing, diamond peeling, clay mask, DNA Salmon microneedling, sheet mask and LED.",
+    descAr: "تنظيف عميق، تقشير ماسي، قناع طيني، ميكرونيدلينغ مع DNA Salmon، شيت ماسك وLED.",
     treatment: "Lyxig ansiktsbehandling med DNA Salmon",
   },
 ];

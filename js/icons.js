@@ -1,10 +1,8 @@
-/* Noura Skin Secrets — modern line-icon set (Lucide, MIT license).
-   Replaces emoji with clean stroke SVGs for treatment categories and payment.
-   Exposes: NSS_ICON(name), catIcon(categoryId), payIcon(name). */
+/* Noura Skin Secrets — tunna linjeikoner (1.3 stroke, lyxigt precisa).
+   Exponerar: NSS_ICON(name,size), catIcon(categoryId,size), payIcon(name,size). */
 (function () {
-  const P = {
-    // treatment categories
-    glow: '<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
+  var P = {
+    glow: '<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/>',
     waves: '<path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/>',
     eye: '<path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/>',
     hair: '<path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/>',
@@ -16,39 +14,31 @@
     sparkle: '<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/>',
     shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
     star: '<path d="M11.52 2.3a.53.53 0 0 1 .96 0l2.3 4.68a2.12 2.12 0 0 0 1.6 1.16l5.17.75a.53.53 0 0 1 .29.9l-3.73 3.64a2.12 2.12 0 0 0-.62 1.88l.88 5.14a.53.53 0 0 1-.77.56l-4.62-2.43a2.12 2.12 0 0 0-1.97 0L6.4 21.98a.53.53 0 0 1-.77-.56l.88-5.14a2.12 2.12 0 0 0-.61-1.88L2.16 10.77a.53.53 0 0 1 .29-.9l5.17-.76a2.12 2.12 0 0 0 1.6-1.16z"/>',
-    // payment
+    arrow: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+    pin: '<path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    phone: '<path d="M6.5 3.5h3L11 7.5 9 9a12 12 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2.1 2A16 16 0 0 1 4.5 5.6a2 2 0 0 1 2-2.1z"/>',
+    mail: '<rect x="3.5" y="5.5" width="17" height="13" rx="1.6"/><path d="M4 6.6l8 5.6 8-5.6"/>',
+    clock: '<circle cx="12" cy="12" r="8.4"/><path d="M12 7.2v5l3.4 2"/>',
+    ig: '<rect width="17" height="17" x="3.5" y="3.5" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.6" cy="7.4" r=".7" fill="currentColor" stroke="none"/>',
     store: '<path d="M15 21v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7"/><path d="M4 7V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3"/><path d="M2 7h20"/>',
-    phone: '<rect width="14" height="20" x="5" y="2" rx="2.5"/><path d="M12 18h.01"/>',
+    mobile: '<rect width="14" height="20" x="5" y="2" rx="2.5"/><path d="M12 18h.01"/>',
     card: '<rect width="20" height="14" x="2" y="5" rx="2.5"/><line x1="2" x2="22" y1="10" y2="10"/>',
+    check: '<path d="M20 6 9 17l-5-5"/>',
+    cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M8 3v4M16 3v4M3.5 10h17"/>'
   };
-
   function svg(name, size) {
-    const d = P[name];
-    if (!d) return "";
-    const s = size || 24;
-    return `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+    var d = P[name]; if (!d) return "";
+    var s = size || 24;
+    return '<svg viewBox="0 0 24 24" width="' + s + '" height="' + s + '" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
   }
-
-  const CAT = {
-    ansikte: "glow",
-    "hifu-ansikte": "waves",
-    "ogon-lappar": "eye",
-    harvard: "hair",
-    "massage-ansikte": "flower",
-    "massage-kropp": "flower",
-    kroppsbehandlingar: "droplet",
-    "slim-firm": "flame",
-    bristningar: "leaf",
-    "hifu-kropp": "waves",
-    laser: "bolt",
-    plasma: "sparkle",
-    arrbehandling: "shield",
-    ovrigt: "star",
+  var CAT = {
+    ansikte: "glow", "hifu-ansikte": "waves", "ogon-lappar": "eye", harvard: "hair",
+    "massage-ansikte": "flower", "massage-kropp": "flower", kroppsbehandlingar: "droplet",
+    "slim-firm": "flame", bristningar: "leaf", "hifu-kropp": "waves", laser: "bolt",
+    plasma: "sparkle", arrbehandling: "shield", ovrigt: "star",
   };
-
-  const PAY = { salon: "store", swish: "phone", kort: "card" };
-
+  var PAY = { salon: "store", swish: "mobile", kort: "card" };
   window.NSS_ICON = svg;
-  window.catIcon = (id, size) => svg(CAT[id] || "sparkle", size);
-  window.payIcon = (name, size) => svg(PAY[name] || "store", size);
+  window.catIcon = function (id, size) { return svg(CAT[id] || "sparkle", size); };
+  window.payIcon = function (name, size) { return svg(PAY[name] || "store", size); };
 })();
