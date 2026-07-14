@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Noura Skin Secrets">
+  <circle cx="24" cy="24" r="22.6" fill="#F7F1E8"/>
+  <circle cx="24" cy="24" r="22.1" fill="none" stroke="#392430" stroke-width="1"/>
+  <circle cx="24" cy="24" r="19.2" fill="none" stroke="#B98A44" stroke-width=".7"/>
+  <path d="M16.8 31.5V16.5M16.8 16.5L31.2 31.5M31.2 31.5V16.5" fill="none" stroke="#392430" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14.6 16.5h4.4M14.6 31.5h4.4M29 16.5h4.4M29 31.5h4.4" fill="none" stroke="#392430" stroke-width="1.1" stroke-linecap="round"/>
+  <path d="M36.4 12.2l.5 1.4 1.4.5-1.4.5-.5 1.4-.5-1.4-1.4-.5 1.4-.5z" fill="#B98A44"/>
+</svg>
