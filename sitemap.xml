@@ -1,32 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://nouraskinsecrets.se/</loc>
-    <lastmod>2026-07-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/en/</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://nouraskinsecrets.se/behandlingar.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/behandlingar.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/behandlingar.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/behandlingar.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/en/behandlingar.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/behandlingar.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/behandlingar.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/behandlingar.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/ar/behandlingar.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/behandlingar.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/behandlingar.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/behandlingar.html"/>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nouraskinsecrets.se/boka.html</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/boka.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/boka.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/boka.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/en/boka.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/boka.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/boka.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/boka.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/ar/boka.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/boka.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/boka.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/boka.html"/>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nouraskinsecrets.se/integritet.html</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/integritet.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/integritet.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/integritet.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/en/integritet.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/integritet.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/integritet.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/integritet.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/ar/integritet.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/integritet.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/integritet.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/integritet.html"/>
+    <changefreq>weekly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://nouraskinsecrets.se/app/</loc>
-    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
