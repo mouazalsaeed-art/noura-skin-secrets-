@@ -561,8 +561,12 @@ html[lang="ar"] .site-footer p,html[lang="ar"] .site-footer li{font-weight:400}
   .float-cta.show{opacity:1;transform:none;pointer-events:auto}
   body{padding-bottom:76px}
 }
-/* chattbubblan (hudassistent) — motsatt hörn, harmoniserad */
-.ha-fab{inset-inline-start:20px;bottom:20px;z-index:var(--z-chat)}
+/* chattbubblan (hudassistent) — motsatt hörn, harmoniserad.
+   OBS: basfilen sätter left — nollställ motsatt sida i RTL så knappen inte spänns ut. */
+.ha-fab{inset-inline-start:20px;inset-inline-end:auto;bottom:20px;z-index:var(--z-chat);width:auto}
+html[dir="rtl"] .ha-fab{left:auto;right:20px}
+html[dir="rtl"] .ha-panel{left:auto;right:24px}
+@media (max-width:480px){html[dir="rtl"] .ha-panel{left:8px;right:8px}}
 
 /* ---------------------------------------------------------------- underside-hero */
 .page-hero{
