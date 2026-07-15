@@ -9,7 +9,7 @@ GOOGLE_REVIEW = "https://share.google/mvDQKfjYthddWukLt"
 IG = "https://instagram.com/noura_skin_secrets"
 PHONE_DISP = "079-333 34 76"
 PHONE_TEL = "+46793333476"
-EMAIL = "nouraskinsecrets@gmail.com"
+EMAIL = "info@nouraskinsecrets.se"
 ADDRESS = "Kungsängsgatan 5B, 753 22 Uppsala"
 ORGNR = "559588-8925"
 
@@ -552,7 +552,7 @@ def page_index(lang, root):
   <div class="container about-grid">
     <div class="about-media reveal">
       <div class="frame"><div class="frame-core">
-        <img src="{root}images/IMG_2165.jpg" alt="{t['about_alt']}" loading="lazy" onerror="this.remove()" />
+        <img src="{root}images/om-oss.jpg" alt="{t['about_alt']}" loading="lazy" onerror="this.remove()" />
       </div></div>
     </div>
     <div class="about-copy reveal" data-d="1">
@@ -814,7 +814,7 @@ PRIV = {
 "sv": """
 <div class="lang-block">
 <h2>Personuppgiftsansvarig</h2>
-<p><strong>Noura Skin Secrets AB</strong>, org.nr 559588-8925, Kungsängsgatan 5B, 753 22 Uppsala, är personuppgiftsansvarig för behandlingen av dina personuppgifter. Kontakt: <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>, 079-333 34 76.</p>
+<p><strong>Noura Skin Secrets AB</strong>, org.nr 559588-8925, Kungsängsgatan 5B, 753 22 Uppsala, är personuppgiftsansvarig för behandlingen av dina personuppgifter. Kontakt: <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>, 079-333 34 76.</p>
 <h2>Bokningsförfrågningar</h2>
 <p>Uppgifterna du anger i bokningsformuläret (namn, e-post, telefon, önskad behandling, datum och eventuellt meddelande) skickas till oss via formulärtjänsten Formspree och används enbart för att hantera din bokning. Rättslig grund: fullgörande av avtal. Uppgifterna sparas så länge det behövs för bokningen och vår bokföringsskyldighet.</p>
 <h2>AI-hudanalys (foto)</h2>
@@ -831,12 +831,12 @@ PRIV = {
 <h2>Cookies och lokal lagring</h2>
 <p>Webbplatsen använder inga spårnings- eller marknadsföringscookies. Vi sparar endast ditt språkval lokalt i din webbläsare (localStorage) — det är nödvändigt för funktionen och delas inte med någon. Typsnitt laddas från Google Fonts, varvid din IP-adress överförs till Google när filerna hämtas.</p>
 <h2>Dina rättigheter (GDPR)</h2>
-<p>Du har rätt att begära tillgång till, rättelse av eller radering av dina personuppgifter, samt att invända mot eller begränsa behandlingen. Kontakta oss på <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>. Du har även rätt att lämna klagomål till Integritetsskyddsmyndigheten (IMY), <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
+<p>Du har rätt att begära tillgång till, rättelse av eller radering av dina personuppgifter, samt att invända mot eller begränsa behandlingen. Kontakta oss på <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>. Du har även rätt att lämna klagomål till Integritetsskyddsmyndigheten (IMY), <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
 """,
 "en": """
 <div class="lang-block">
 <h2>Data controller</h2>
-<p><strong>Noura Skin Secrets AB</strong>, reg. no. 559588-8925, Kungsängsgatan 5B, 753 22 Uppsala, Sweden, is the controller for the processing of your personal data. Contact: <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>, +46 79-333 34 76.</p>
+<p><strong>Noura Skin Secrets AB</strong>, reg. no. 559588-8925, Kungsängsgatan 5B, 753 22 Uppsala, Sweden, is the controller for the processing of your personal data. Contact: <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>, +46 79-333 34 76.</p>
 <h2>Booking requests</h2>
 <p>The details you enter in the booking form (name, email, phone, requested treatment, date and any message) are sent to us via the form service Formspree and are used only to handle your booking. Legal basis: performance of a contract. Data is kept as long as needed for the booking and our bookkeeping obligations.</p>
 <h2>AI skin analysis (photo)</h2>
@@ -853,12 +853,12 @@ PRIV = {
 <h2>Cookies and local storage</h2>
 <p>This website uses no tracking or marketing cookies. We only store your language choice locally in your browser (localStorage) — this is necessary for the site to function and is not shared with anyone. Fonts are loaded from Google Fonts, which means your IP address is transferred to Google when the files are fetched.</p>
 <h2>Your rights (GDPR)</h2>
-<p>You may request access to, correction of, or deletion of your personal data, and object to or restrict processing, at <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>. You also have the right to lodge a complaint with the Swedish Authority for Privacy Protection (IMY), <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
+<p>You may request access to, correction of, or deletion of your personal data, and object to or restrict processing, at <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>. You also have the right to lodge a complaint with the Swedish Authority for Privacy Protection (IMY), <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
 """,
 "ar": """
 <div class="lang-block">
 <h2>المسؤول عن البيانات</h2>
-<p><strong>Noura Skin Secrets AB</strong>، رقم المنظمة <span dir="ltr">559588-8925</span>، Kungsängsgatan 5B, 753 22 Uppsala، السويد، هي الجهة المسؤولة عن معالجة بياناتك الشخصية. للتواصل: <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>، <span dir="ltr">079-333 34 76</span>.</p>
+<p><strong>Noura Skin Secrets AB</strong>، رقم المنظمة <span dir="ltr">559588-8925</span>، Kungsängsgatan 5B, 753 22 Uppsala، السويد، هي الجهة المسؤولة عن معالجة بياناتك الشخصية. للتواصل: <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>، <span dir="ltr">079-333 34 76</span>.</p>
 <h2>طلبات الحجز</h2>
 <p>البيانات التي تدخلينها في نموذج الحجز (الاسم، الإيميل، الهاتف، العلاج المطلوب، التاريخ وأي رسالة) تُرسل إلينا عبر خدمة النماذج Formspree وتُستخدم فقط لإدارة حجزك. الأساس القانوني: تنفيذ العقد. تُحفظ البيانات ما دامت لازمة للحجز ولالتزاماتنا المحاسبية.</p>
 <h2>تحليل البشرة بالذكاء الاصطناعي (الصورة)</h2>
@@ -875,7 +875,7 @@ PRIV = {
 <h2>الكوكيز والتخزين المحلي</h2>
 <p>لا يستخدم الموقع أي كوكيز تتبع أو تسويق. نحفظ فقط اختيارك للغة محلياً في متصفحك (localStorage) — وهذا ضروري لعمل الموقع ولا يُشارك مع أحد. تُحمَّل الخطوط من Google Fonts، ما يعني نقل عنوان IP الخاص بك إلى Google عند جلب الملفات.</p>
 <h2>حقوقك (GDPR)</h2>
-<p>يحق لك طلب الاطلاع على بياناتك الشخصية أو تصحيحها أو حذفها، والاعتراض على المعالجة أو تقييدها، عبر <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>. كما يحق لك تقديم شكوى إلى هيئة حماية الخصوصية السويدية (IMY): <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
+<p>يحق لك طلب الاطلاع على بياناتك الشخصية أو تصحيحها أو حذفها، والاعتراض على المعالجة أو تقييدها، عبر <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>. كما يحق لك تقديم شكوى إلى هيئة حماية الخصوصية السويدية (IMY): <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
 """,
 }
 

@@ -16,9 +16,9 @@
       ar: "شكراً لك! تم إرسال طلب الحجز. سنتواصل معك عبر الإيميل أو الهاتف خلال 24 ساعة لتأكيد موعدك.",
     },
     failed: {
-      sv: 'Något gick fel med den automatiska sändningen. Din e-postklient öppnas istället — skicka det förifyllda meddelandet, eller maila oss direkt på <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>.',
-      en: 'The automatic sending failed. Your email app will open instead — please send the pre-filled message, or email us directly at <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>.',
-      ar: 'حدث خطأ في الإرسال التلقائي. سيُفتح تطبيق البريد لديك بدلاً من ذلك — أرسلي الرسالة المعبأة مسبقاً، أو راسلينا مباشرة على <a href="mailto:nouraskinsecrets@gmail.com">nouraskinsecrets@gmail.com</a>.',
+      sv: 'Något gick fel med den automatiska sändningen. Din e-postklient öppnas istället — skicka det förifyllda meddelandet, eller maila oss direkt på <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>.',
+      en: 'The automatic sending failed. Your email app will open instead — please send the pre-filled message, or email us directly at <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>.',
+      ar: 'حدث خطأ في الإرسال التلقائي. سيُفتح تطبيق البريد لديك بدلاً من ذلك — أرسلي الرسالة المعبأة مسبقاً، أو راسلينا مباشرة على <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>.',
     },
     submit: { sv: "Skicka bokningsförfrågan", en: "Send booking request", ar: "أرسلي طلب الحجز" },
     reqName: { sv: "Fyll i ditt namn.", en: "Please enter your name.", ar: "يرجى إدخال اسمك." },
@@ -104,7 +104,7 @@
       "Behandling: " + data.treatment, "Önskat datum: " + data.date,
       "Önskad tid: " + (data.time || t("noPref")), "", "Meddelande:", data.message || "-",
     ].join("\n");
-    return "mailto:nouraskinsecrets@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    return "mailto:info@nouraskinsecrets.se?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
 
   var confirmBox = document.getElementById("confirm-box");

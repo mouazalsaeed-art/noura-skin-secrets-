@@ -103,7 +103,7 @@
     { img: "images/publer-1757699814482.JPG", alt: "Lyster och glow efter ansiktsbehandling" },
     { img: "images/publer-1768170262397.JPG", alt: "Hårbottenbehandling — före och efter" },
     { img: "images/publer-1771717340180.JPG", alt: "Jämnare hudton efter behandling" },
-    { img: "images/resultat-3.jpg", alt: "Strålande resultat efter hudvårdsbehandling" },
+    { img: "images/publer-1771717258362.JPG", alt: "Glow och lyster efter behandling" },
     // Lägg till fler: { img: "images/filnamn.jpg", alt: "beskrivning" },
   ];
   var PLACEHOLDERS = {
