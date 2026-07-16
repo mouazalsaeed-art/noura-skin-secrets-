@@ -433,7 +433,10 @@ def scripts(root, extra=""):
         f'<script src="{root}js/icons.js"></script>\n'
         f'<script src="{root}js/site.js"></script>\n'
     )
-    return base + extra + f'<script src="{root}js/hudassistent.js" defer></script>\n</body>\n</html>'
+    return base + extra + (
+        f'<script src="{root}js/livechat.js" defer></script>\n'
+        f'<script src="{root}js/hudassistent.js" defer></script>\n</body>\n</html>'
+    )
 
 def salon_schema(lang):
     return {
@@ -804,6 +807,7 @@ def page_booking(lang, root):
     extra = (
         f'<script src="{root}js/vendor-qrcode.js"></script>\n'
         f'<script src="{root}js/booking.js"></script>\n'
+        f'<script src="{root}js/availability.js" defer></script>\n'
         f'<script src="{root}js/payment.js" defer></script>\n'
     )
     html += scripts(root, extra)
@@ -828,6 +832,10 @@ PRIV = {
 </ul>
 <h2>AI-chatt</h2>
 <p>Fritextfrågor du skriver i hudassistenten skickas krypterat via vår server till AI-leverantören Anthropic för att generera ett svar. Meddelandena sparas aldrig av oss, används inte för att träna AI och raderas hos leverantören enligt deras policy. Skriv inte in känsliga personuppgifter i chatten.</p>
+<h2>Livechatt & WhatsApp</h2>
+<p>Vill du prata med en riktig person kan du använda vår livechatt eller WhatsApp. Livechatten drivs av tjänsten Tawk.to och laddas <strong>först när du själv klickar</strong> på chattknappen — innan dess sätts inga cookies från tjänsten. När chatten är öppen behandlar Tawk.to det du skriver samt tekniska uppgifter (t.ex. IP-adress) och sätter funktionscookies som krävs för chatten, enligt <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener">Tawk.tos integritetspolicy</a>. Väljer du WhatsApp öppnas WhatsApp (Meta) och deras villkor gäller.</p>
+<h2>Kontroll av lediga tider</h2>
+<p>När du väljer ett datum i bokningsformuläret kan en förfrågan skickas till Google Kalender för att visa lediga och upptagna tider. Förfrågan innehåller endast det valda datumet — inga personuppgifter — men din IP-adress överförs till Google när anropet görs.</p>
 <h2>Cookies och lokal lagring</h2>
 <p>Webbplatsen använder inga spårnings- eller marknadsföringscookies. Vi sparar endast ditt språkval lokalt i din webbläsare (localStorage) — det är nödvändigt för funktionen och delas inte med någon. Typsnitt laddas från Google Fonts, varvid din IP-adress överförs till Google när filerna hämtas.</p>
 <h2>Dina rättigheter (GDPR)</h2>
@@ -850,6 +858,10 @@ PRIV = {
 </ul>
 <h2>AI chat</h2>
 <p>Free-text questions you type in the skin assistant are sent encrypted via our server to the AI provider Anthropic to generate an answer. The messages are never stored by us, are not used to train AI, and are deleted by the provider according to their policy. Please don't enter sensitive personal data in the chat.</p>
+<h2>Live chat & WhatsApp</h2>
+<p>If you want to talk to a real person you can use our live chat or WhatsApp. The live chat is provided by Tawk.to and is loaded <strong>only when you click</strong> the chat button — no cookies from the service are set before that. Once open, Tawk.to processes what you write and technical data (e.g. IP address) and sets functional cookies required for the chat, according to the <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener">Tawk.to privacy policy</a>. If you choose WhatsApp, WhatsApp (Meta) opens and their terms apply.</p>
+<h2>Availability check</h2>
+<p>When you pick a date in the booking form, a request may be sent to Google Calendar to show free and busy times. The request contains only the selected date — no personal data — but your IP address is transferred to Google when the call is made.</p>
 <h2>Cookies and local storage</h2>
 <p>This website uses no tracking or marketing cookies. We only store your language choice locally in your browser (localStorage) — this is necessary for the site to function and is not shared with anyone. Fonts are loaded from Google Fonts, which means your IP address is transferred to Google when the files are fetched.</p>
 <h2>Your rights (GDPR)</h2>
@@ -872,6 +884,10 @@ PRIV = {
 </ul>
 <h2>الدردشة بالذكاء الاصطناعي</h2>
 <p>الأسئلة النصية التي تكتبينها في مساعدة البشرة تُرسل مشفرة عبر سيرفرنا إلى مزود الذكاء الاصطناعي Anthropic لتوليد الرد. لا نخزن الرسائل أبداً، ولا تُستخدم لتدريب الذكاء الاصطناعي، وتُحذف لدى المزود حسب سياستهم. الرجاء عدم كتابة بيانات شخصية حساسة في الدردشة.</p>
+<h2>الدردشة المباشرة وواتساب</h2>
+<p>إذا رغبت بالتحدث مع شخص حقيقي يمكنك استخدام الدردشة المباشرة أو واتساب. الدردشة المباشرة تقدمها خدمة Tawk.to وتُحمَّل <strong>فقط عندما تنقرين</strong> على زر الدردشة — وقبل ذلك لا تُوضع أي كوكيز من الخدمة. عند فتح الدردشة تعالج Tawk.to ما تكتبينه وبيانات تقنية (مثل عنوان IP) وتضع كوكيز وظيفية لازمة للدردشة، وفق <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener">سياسة خصوصية Tawk.to</a>. وإذا اخترت واتساب يُفتح تطبيق واتساب (Meta) وتسري شروطهم.</p>
+<h2>فحص الأوقات المتاحة</h2>
+<p>عند اختيار تاريخ في نموذج الحجز قد يُرسل طلب إلى تقويم Google لعرض الأوقات المتاحة والمشغولة. لا يحتوي الطلب إلا على التاريخ المختار — دون أي بيانات شخصية — لكن عنوان IP الخاص بك يُنقل إلى Google عند إجراء الطلب.</p>
 <h2>الكوكيز والتخزين المحلي</h2>
 <p>لا يستخدم الموقع أي كوكيز تتبع أو تسويق. نحفظ فقط اختيارك للغة محلياً في متصفحك (localStorage) — وهذا ضروري لعمل الموقع ولا يُشارك مع أحد. تُحمَّل الخطوط من Google Fonts، ما يعني نقل عنوان IP الخاص بك إلى Google عند جلب الملفات.</p>
 <h2>حقوقك (GDPR)</h2>
