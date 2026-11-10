@@ -34,7 +34,7 @@
   var CAT = {
     ansikte: "glow", microneedling: "sparkle", "hifu-ansikte": "waves", peeling: "leaf", lappar: "eye",
     harvard: "hair", "massage-ansikte": "flower", "massage-kropp": "flower", kroppsbehandlingar: "droplet",
-    "slim-firm": "flame", "hifu-kropp": "waves", laser: "bolt", "laser-harborttagning": "bolt", ovrigt: "star",
+    "slim-firm": "flame", "hifu-kropp": "waves", laser: "bolt", "laser-harborttagning": "bolt", plasma: "sparkle", ovrigt: "star",
   };
   var PAY = { salon: "store", swish: "mobile", kort: "card" };
   window.NSS_ICON = svg;
