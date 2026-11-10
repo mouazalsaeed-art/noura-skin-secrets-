@@ -336,7 +336,7 @@ def head(lang, page, title, desc, root, extra_schema=None):
 <meta property="og:locale" content="{t['locale']}" />
 <meta name="twitter:card" content="summary" />
 <link rel="icon" href="{root}images/logo.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{root}app/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="{root}assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{fonts}&display=swap" />
@@ -933,11 +933,6 @@ def sitemap():
     <loc>{urlfor(lang, page)}</loc>{alts}
     <changefreq>weekly</changefreq>
     <priority>{prio[page]}</priority>
-  </url>""")
-    urls.append(f"""  <url>
-    <loc>{SITE}/app/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>""")
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
