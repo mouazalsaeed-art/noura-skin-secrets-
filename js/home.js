@@ -88,8 +88,8 @@
       if (i) c.setAttribute("data-d", String(Math.min(i % 3, 3)));
       c.innerHTML =
         '<div class="rv-stars">' + "★★★★★".slice(0, r.stars || 5) + "</div>" +
-        "<blockquote>“" + esc(r.text) + "”</blockquote>" +
-        '<div class="rv-name">' + esc(r.name || "") + (r.source ? " · " + t("via") + " " + esc(r.source) : "") + "</div>";
+        '<blockquote dir="auto">“' + esc(r.text) + "”</blockquote>" +
+        '<div class="rv-name"><bdi>' + esc(r.name || "") + "</bdi>" + (r.source ? " · " + t("via") + " <bdi>" + esc(r.source) + "</bdi>" : "") + "</div>";
       wall.appendChild(c);
     });
   } else if (reviewSection) {
