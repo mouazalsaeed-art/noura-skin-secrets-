@@ -2,7 +2,7 @@
    Redigera listan för att uppdatera startsidan. active:false döljer utan att radera. */
 const OFFERS = [
   {
-    active: true,
+    active: false,
     badge: "Populärast", badgeEn: "Most popular", badgeAr: "الأكثر طلباً",
     title: "VMAX HIFU & RF – Hela ansiktet",
     titleEn: "VMAX HIFU & RF – full face", titleAr: "VMAX هايفو و RF – الوجه كامل",
@@ -13,7 +13,7 @@ const OFFERS = [
     treatment: "VMAX HIFU & RF – Hela ansiktet",
   },
   {
-    active: true,
+    active: false,
     badge: "Kurpaket", badgeEn: "Course package", badgeAr: "باقة جلسات",
     title: "Massagekur – 3 behandlingar",
     titleEn: "Massage course – 3 sessions", titleAr: "برنامج مساج – 3 جلسات",
@@ -24,7 +24,7 @@ const OFFERS = [
     treatment: "Ansikts-, Skalp- & Dekolletagemassage",
   },
   {
-    active: true,
+    active: false,
     badge: "Paketpris", badgeEn: "Package price", badgeAr: "سعر الباقة",
     title: "Massagepaket – 5 behandlingar",
     titleEn: "Massage package – 5 sessions", titleAr: "باقة مساج – 5 جلسات",
@@ -35,7 +35,7 @@ const OFFERS = [
     treatment: "Ansikts-, Skalp- & Dekolletagemassage – Paket 5 behandlingar",
   },
   {
-    active: true,
+    active: false,
     badge: "Prisvärd lyx", badgeEn: "Affordable luxury", badgeAr: "فخامة بسعر مميز",
     title: "Lyxig ansiktsbehandling med DNA Salmon",
     titleEn: "Luxury DNA Salmon facial", titleAr: "علاج الوجه الفاخر مع DNA Salmon",

@@ -31,8 +31,8 @@
 
   var GROUPS = [
     { id: "all", label: t("allT"), cats: null },
-    { id: "ansikte", label: t("face"), cats: ["ansikte", "hifu-ansikte", "ogon-lappar", "plasma", "laser", "arrbehandling", "ovrigt"] },
-    { id: "kropp", label: t("body"), cats: ["kroppsbehandlingar", "slim-firm", "bristningar", "hifu-kropp", "laser-harborttagning"] },
+    { id: "ansikte", label: t("face"), cats: ["ansikte", "microneedling", "hifu-ansikte", "peeling", "lappar", "laser", "ovrigt"] },
+    { id: "kropp", label: t("body"), cats: ["kroppsbehandlingar", "slim-firm", "hifu-kropp", "laser-harborttagning"] },
     { id: "massage", label: t("massage"), cats: ["massage-ansikte", "massage-kropp"] },
     { id: "har", label: t("hair"), cats: ["harvard"] },
   ];
@@ -120,7 +120,7 @@
           '<div class="footer-row"><span class="t-price">' + esc(typeof tPrice === "function" ? tPrice(tr) : tr.price) + "</span>" +
           (tr.bd
             ? '<a class="book-link" href="' + BD_BASE + esc(tr.bd) + '" target="_blank" rel="noopener">'
-            : '<a class="book-link" href="' + BOKA + "?treatment=" + encodeURIComponent(tr.name) + '">') +
+            : '<a class="book-link" href="https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600" target="_blank" rel="noopener">') +
           t("book") + "</a></div>";
         grid.appendChild(card);
       });

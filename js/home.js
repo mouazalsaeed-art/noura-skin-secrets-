@@ -40,8 +40,12 @@
 
   /* ---------- erbjudanden: zig-zag rader ---------- */
   var offersEl = document.getElementById("offer-list");
-  if (offersEl && typeof OFFERS !== "undefined") {
-    OFFERS.filter(function (o) { return o.active; }).forEach(function (o, i) {
+  var activeOffers = typeof OFFERS !== "undefined" ? OFFERS.filter(function (o) { return o.active; }) : [];
+  if (offersEl && !activeOffers.length) {
+    var offersSec = document.getElementById("erbjudanden"); if (offersSec) offersSec.style.display = "none";
+  }
+  if (offersEl && activeOffers.length) {
+    activeOffers.forEach(function (o, i) {
       var row = document.createElement("div");
       row.className = "offer-row reveal";
       if (i) row.setAttribute("data-d", String(Math.min(i, 3)));
@@ -57,8 +61,12 @@
 
   /* ---------- klippkort ---------- */
   var klipp = document.getElementById("klipp-grid");
-  if (klipp && typeof KLIPPKORT !== "undefined") {
-    KLIPPKORT.filter(function (k) { return k.active; }).forEach(function (k, i) {
+  var activeKlipp = typeof KLIPPKORT !== "undefined" ? KLIPPKORT.filter(function (k) { return k.active; }) : [];
+  if (klipp && !activeKlipp.length) {
+    var klippSec = document.getElementById("klippkort"); if (klippSec) klippSec.style.display = "none";
+  }
+  if (klipp && activeKlipp.length) {
+    activeKlipp.forEach(function (k, i) {
       var save = num(k.oldPrice) - num(k.price);
       var card = document.createElement("div");
       card.className = "klipp-card reveal";

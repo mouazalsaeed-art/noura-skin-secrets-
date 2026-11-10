@@ -32,10 +32,9 @@
     return '<svg viewBox="0 0 24 24" width="' + s + '" height="' + s + '" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>";
   }
   var CAT = {
-    ansikte: "glow", "hifu-ansikte": "waves", "ogon-lappar": "eye", harvard: "hair",
-    "massage-ansikte": "flower", "massage-kropp": "flower", kroppsbehandlingar: "droplet",
-    "slim-firm": "flame", bristningar: "leaf", "hifu-kropp": "waves", laser: "bolt",
-    plasma: "sparkle", arrbehandling: "shield", ovrigt: "star",
+    ansikte: "glow", microneedling: "sparkle", "hifu-ansikte": "waves", peeling: "leaf", lappar: "eye",
+    harvard: "hair", "massage-ansikte": "flower", "massage-kropp": "flower", kroppsbehandlingar: "droplet",
+    "slim-firm": "flame", "hifu-kropp": "waves", laser: "bolt", "laser-harborttagning": "bolt", ovrigt: "star",
   };
   var PAY = { salon: "store", swish: "mobile", kort: "card" };
   window.NSS_ICON = svg;
