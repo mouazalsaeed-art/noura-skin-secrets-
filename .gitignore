@@ -45,3 +45,6 @@ Thumbs.db
 # Secrets — never commit real env files
 .env.*
 !.env.example
+
+__pycache__/
+*.pyc

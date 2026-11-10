@@ -483,6 +483,8 @@ def badge_pic(root, lang, w, lazy=True):
             f'<img src="{root}images/basta-val-2026.png" alt="{BADGE_ALT[lang]}" width="{w}" height="{h}"{ld} decoding="async"></picture>')
 
 # ---------------------------------------------------------------- index
+POPULAR_SV = '<p class="tp-pop">Populärt i Uppsala: <a href="microneedling-uppsala.html">Microneedling</a> <a href="hifu-uppsala.html">HIFU</a> <a href="hydrafacial-uppsala.html">HydraFacial</a> <a href="laser-uppsala.html">Laser</a> <a href="peeling-uppsala.html">Peeling</a></p>'
+
 def page_index(lang, root):
     t = T[lang]
     stats = "".join(
@@ -538,6 +540,7 @@ def page_index(lang, root):
       <span class="eyebrow">{t['cats_eyebrow']}</span>
       <h2>{t['cats_h2']}</h2>
       <p>{t['cats_lede']}</p>
+      {POPULAR_SV if lang == 'sv' else ''}
     </div>
     <div class="cat-bento" id="cat-bento"></div>
     <p class="center mt-lg reveal"><a class="text-link" href="behandlingar.html">{t['cats_all']} {IC['arrow']}</a></p>
@@ -703,6 +706,7 @@ def page_catalog(lang, root):
     <span class="eyebrow">{t['cat_eyebrow']}</span>
     <h1>{t['cat_h1']}</h1>
     <p class="lede">{t['cat_lede']}</p>
+    {POPULAR_SV if lang == 'sv' else ''}
   </div>
 </section>
 <section class="section--tight section">
@@ -949,6 +953,12 @@ def sitemap():
     <loc>{urlfor(lang, page)}</loc>{alts}
     <changefreq>weekly</changefreq>
     <priority>{prio[page]}</priority>
+  </url>""")
+    for slug in ["microneedling-uppsala.html", "hifu-uppsala.html", "hydrafacial-uppsala.html", "laser-uppsala.html", "peeling-uppsala.html"]:
+        urls.append(f"""  <url>
+    <loc>{SITE}/{slug}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>""")
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '

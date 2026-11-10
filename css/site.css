@@ -786,3 +786,37 @@ html[dir="rtl"] .media-badge{transform:rotate(-8deg)}
 @media (max-width:900px){.media-badge{display:none}}
 @media (min-width:901px){.hero-proof .stat-badge{display:none}}
 .f-brand.f-brand-img img{width:160px;height:auto;display:block;border-radius:18px;box-shadow:0 10px 28px rgba(60,35,45,.18)}
+/* ---------------------------------------------------------------- behandlingssidor (…-uppsala.html) */
+.tp-crumbs{font-size:.78rem;color:var(--taupe);margin-bottom:18px;letter-spacing:.04em}
+.tp-crumbs a{color:var(--taupe);border-bottom:1px solid var(--line)}
+.tp-crumbs a:hover{color:var(--gold-ink)}
+.tp-hero .hero-actions{margin-top:26px}
+.tp-proof{margin-top:18px;font-size:.85rem}
+.tp-proof a{color:var(--gold-ink)}
+.tp-split{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.tp-split h2{margin-bottom:18px}
+.tp-split p{color:var(--taupe);max-width:62ch}
+.tp-box{background:var(--cream-2);border:1px solid var(--line-soft);border-radius:18px;padding:clamp(22px,3vw,32px)}
+.tp-box h3{font-size:1.25rem;margin-bottom:14px}
+.tp-list{list-style:none;margin:0;padding:0}
+.tp-list li{position:relative;padding:9px 0 9px 26px;border-bottom:1px solid var(--line-soft);color:var(--plum);font-size:.94rem}
+.tp-list li:last-child{border-bottom:none}
+.tp-list li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+html[dir="rtl"] .tp-list li{padding:9px 26px 9px 0}
+html[dir="rtl"] .tp-list li::before{left:auto;right:4px}
+.treatment-card h3{font-size:1.08rem;margin:0}
+.tp-note{margin-top:28px;color:var(--taupe);font-size:.92rem}
+.tp-note a,.tp-related a{color:var(--gold-ink);border-bottom:1px solid var(--gold-soft)}
+.tp-steps{list-style:none;counter-reset:s;margin:0 auto;padding:0;max-width:1080px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tp-steps li{counter-increment:s;background:var(--cream-2);border:1px solid var(--line-soft);border-radius:18px;padding:22px}
+.tp-steps li::before{content:counter(s);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--plum);color:var(--cream);font-family:var(--serif);font-size:1.05rem;margin-bottom:12px}
+.tp-steps strong{display:block;color:var(--plum);font-family:var(--serif);font-size:1.15rem;font-weight:500;margin-bottom:6px}
+.tp-steps span{color:var(--taupe);font-size:.9rem}
+.tp-cta h2{margin-bottom:10px}
+.tp-related{margin-top:30px;font-size:.88rem;color:var(--taupe);line-height:2}
+@media (max-width:900px){.tp-split{grid-template-columns:1fr}.tp-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.tp-steps{grid-template-columns:1fr}}
+.tp-pop{margin-top:18px;font-size:.88rem;color:var(--taupe);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tp-pop a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--plum);font-size:.82rem;transition:background .25s,color .25s}
+.tp-pop a:hover{background:var(--plum);color:var(--cream)}
+.section-head.center .tp-pop{justify-content:center}
