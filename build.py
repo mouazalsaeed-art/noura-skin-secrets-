@@ -495,7 +495,7 @@ def page_index(lang, root):
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <h1><span class="eyebrow">{t['hero_eyebrow']}</span>{t['hero_h1']}</h1>
+      <h1><span class="eyebrow">{t['hero_eyebrow']}</span> {t['hero_h1']}</h1>
       <p class="lede">{t['hero_lede']}</p>
       <div class="hero-actions">
         <a href="boka.html" class="btn btn-gold">{t['hero_cta1']}<span class="btn-ic">{IC['arrow']}</span></a>
