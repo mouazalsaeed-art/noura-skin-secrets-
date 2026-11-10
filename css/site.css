@@ -771,3 +771,4 @@ html[lang="ar"] .bd-or{letter-spacing:.05em;font-size:.8rem}
 
 /* mobil: låt enkolumnsgrid krympa under innehållets min-bredd (hindrar sidled overflow) */
 @media (max-width:900px){ .booking-layout{grid-template-columns:minmax(0,1fr)} .catalog-controls{grid-template-columns:minmax(0,1fr)} }
+.hero h1 .eyebrow{display:flex;line-height:1.4}

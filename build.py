@@ -37,7 +37,7 @@ T = {
   "menu_close": "Stäng",
   "home_title": "Noura Skin Secrets — Hudvård & Skönhetsbehandlingar i Uppsala",
   "home_desc": "Noura Skin Secrets i Uppsala erbjuder avancerad hudvård: HydraFacial, HIFU, microneedling, laser och massage. Endast för kvinnor. Boka din tid idag.",
-  "hero_eyebrow": "Uppsala · Endast för kvinnor",
+  "hero_eyebrow": "Ansiktsbehandling i Uppsala · Endast för kvinnor",
   "hero_h1": 'Där expertis och <em>trygghet</em> möts',
   "hero_lede": "Avancerad hud- och kroppsvård i en varm, personlig miljö. Från HydraFacial och HIFU till microneedling och massage — skräddarsytt för din hud.",
   "hero_cta1": "Boka tid", "hero_cta2": "Se alla behandlingar",
@@ -128,7 +128,7 @@ T = {
   "menu_close": "Close",
   "home_title": "Noura Skin Secrets — Skin Care & Beauty Treatments in Uppsala",
   "home_desc": "Noura Skin Secrets in Uppsala offers advanced skin care: HydraFacial, HIFU, microneedling, laser and massage. Women only. Book your appointment today.",
-  "hero_eyebrow": "Uppsala · Women only",
+  "hero_eyebrow": "Facial treatments in Uppsala · Women only",
   "hero_h1": 'Where expertise and <em>comfort</em> meet',
   "hero_lede": "Advanced skin and body care in a warm, personal setting. From HydraFacial and HIFU to microneedling and massage — tailored to your skin.",
   "hero_cta1": "Book now", "hero_cta2": "See all treatments",
@@ -216,7 +216,7 @@ T = {
   "menu_close": "إغلاق",
   "home_title": "نورا سكين سيكرتس — العناية بالبشرة وعلاجات التجميل في أوبسالا",
   "home_desc": "نورا سكين سيكرتس في أوبسالا: عناية متقدمة بالبشرة — هيدرافيشل، هايفو، ميكرونيدلينغ، ليزر ومساج. للنساء فقط. احجزي موعدك اليوم.",
-  "hero_eyebrow": "أوبسالا · للنساء فقط",
+  "hero_eyebrow": "علاجات الوجه في أوبسالا · للنساء فقط",
   "hero_h1": 'حيث تلتقي الخبرة <em>بالأمان</em>',
   "hero_lede": "عناية متقدمة بالبشرة والجسم في أجواء دافئة وشخصية. من الهيدرافيشل والهايفو إلى الميكرونيدلينغ والمساج — كل شيء مصمم خصيصاً لبشرتك.",
   "hero_cta1": "احجزي موعد", "hero_cta2": "جميع العلاجات",
@@ -495,8 +495,7 @@ def page_index(lang, root):
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">{t['hero_eyebrow']}</span>
-      <h1>{t['hero_h1']}</h1>
+      <h1><span class="eyebrow">{t['hero_eyebrow']}</span>{t['hero_h1']}</h1>
       <p class="lede">{t['hero_lede']}</p>
       <div class="hero-actions">
         <a href="boka.html" class="btn btn-gold">{t['hero_cta1']}<span class="btn-ic">{IC['arrow']}</span></a>
