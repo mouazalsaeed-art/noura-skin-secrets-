@@ -820,3 +820,59 @@ html[dir="rtl"] .tp-list li::before{left:auto;right:4px}
 .tp-pop a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--plum);font-size:.82rem;transition:background .25s,color .25s}
 .tp-pop a:hover{background:var(--plum);color:var(--cream)}
 .section-head.center .tp-pop{justify-content:center}
+
+/* =====================================================================
+   ROSE MARBLE — färger från logotypen (rosé-marmor, roséguld, turkos)
+   ===================================================================== */
+:root{
+  --cream:#F7EFEA;
+  --cream-2:#F0E2DA;
+  --paper:#FDF9F6;
+  --blush:#EEDCD3;
+  --ink:#2B1A1D;
+  --plum:#3D2629;
+  --plum-deep:#2A181B;
+  --taupe:#6E5853;
+  --taupe-soft:#8B7570;
+  --gold:#B97C66;        /* roséguld */
+  --gold-ink:#8C4F3D;    /* roséguld, mörk (text/knappar) */
+  --gold-soft:#E0BCAC;
+  --teal:#5FA9A4;        /* turkos accent från logotypen */
+  --line:rgba(61,38,41,.13);
+  --line-soft:rgba(61,38,41,.07);
+  --marble:url("../images/marble.svg");
+}
+/* marmor bakom heron, mjukt tonad så texten står fritt */
+.hero{
+  background:
+    linear-gradient(180deg,rgba(247,239,234,.62) 0%,rgba(247,239,234,.78) 60%,var(--cream) 100%),
+    var(--marble) center/cover no-repeat,
+    var(--cream);
+}
+.page-hero{
+  background:
+    linear-gradient(180deg,rgba(247,239,234,.66),rgba(247,239,234,.9)),
+    var(--marble) center/cover no-repeat;
+}
+/* tonade sektioner: en aning marmor */
+.section--tone{
+  background:
+    linear-gradient(180deg,rgba(240,226,218,.86),rgba(247,239,234,.94)),
+    var(--marble) center/cover no-repeat;
+}
+/* glasig header (tvättat roséglas) */
+.site-header .bar{background:rgba(253,249,246,.72);-webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1)}
+/* knappar i roséguld */
+.btn-gold{background:linear-gradient(135deg,#A9654F,#8C4F3D 60%,#7A4232);color:#fff;box-shadow:0 14px 30px -16px rgba(140,79,61,.65)}
+.btn-gold:hover{background:linear-gradient(135deg,#9A5945,#7A4232);transform:translateY(-2px)}
+/* turkos detalj: linjen före eyebrow */
+.eyebrow::before{background:var(--teal)}
+/* kort: rent papper ovanpå marmorn */
+.treatment-card,.review-card,.tp-box,.tp-steps li,.info-card{background:rgba(253,249,246,.92)}
+/* footer: mörk rosé med svag marmor */
+.site-footer{
+  background:
+    linear-gradient(180deg,rgba(42,24,27,.95),rgba(42,24,27,.97)),
+    var(--marble) center/cover no-repeat,
+    var(--plum-deep);
+}

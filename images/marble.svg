@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="veins" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.0022 0.0065" numOctaves="6" seed="23"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0 0 0 .9 0 0 0 0 0 0 .55 0 0 0 0 0 .8 0 0 0 0"/>
+      </feComponentTransfer>
+      <feGaussianBlur stdDeviation=".9"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 .62  0 0 0 0 .44  0 0 0 0 .40  0 0 0 1 0"/>
+    </filter>
+    <filter id="clouds" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.0012 0.0028" numOctaves="4" seed="5"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 .87  0 0 0 0 .74  0 0 0 0 .69  .9 0 0 0 -.25"/>
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="#F4E9E3"/>
+  <rect width="100%" height="100%" filter="url(#clouds)" opacity=".7"/>
+  <rect width="100%" height="100%" filter="url(#veins)" opacity=".5"/>
+</svg>
