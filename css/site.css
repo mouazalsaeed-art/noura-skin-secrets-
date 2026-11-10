@@ -772,3 +772,16 @@ html[lang="ar"] .bd-or{letter-spacing:.05em;font-size:.8rem}
 /* mobil: låt enkolumnsgrid krympa under innehållets min-bredd (hindrar sidled overflow) */
 @media (max-width:900px){ .booking-layout{grid-template-columns:minmax(0,1fr)} .catalog-controls{grid-template-columns:minmax(0,1fr)} }
 .hero h1 .eyebrow{display:flex;line-height:1.4}
+/* Bokadirekt "Kundernas Bästa val 2026" badge */
+.hero-proof .stat-badge{display:flex;align-items:center;transition:transform .3s}
+.hero-proof .stat-badge:hover{transform:translateY(-2px) rotate(-2deg)}
+.hero-proof .stat-badge img{width:72px;height:auto;display:block}
+.section-badge{display:inline-block;margin-top:18px}
+.section-badge img{width:96px;height:auto;display:block}
+.info-card .info-row.info-badge img{width:34px;height:auto;display:block;flex:0 0 auto}
+.media-badge{position:absolute;top:-26px;inset-inline-end:-26px;z-index:3;transform:rotate(8deg);transition:transform .35s;filter:drop-shadow(0 10px 22px rgba(60,35,45,.18))}
+html[dir="rtl"] .media-badge{transform:rotate(-8deg)}
+.media-badge:hover{transform:rotate(0) scale(1.04)}
+.hero-media .media-badge img{position:static;inset:auto;width:116px;height:auto;display:block;object-fit:contain}
+@media (max-width:900px){.media-badge{display:none}}
+@media (min-width:901px){.hero-proof .stat-badge{display:none}}
