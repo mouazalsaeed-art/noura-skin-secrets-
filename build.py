@@ -831,6 +831,7 @@ def page_booking(lang, root):
         f'<script src="{root}js/vendor-qrcode.js?v={ASSET_V}"></script>\n'
         f'<script src="{root}js/booking.js?v={ASSET_V}"></script>\n'
         f'<script src="{root}js/availability.js?v={ASSET_V}" defer></script>\n'
+        f'<script src="{root}js/stripe-links.js?v={ASSET_V}" defer></script>\n'
         f'<script src="{root}js/payment.js?v={ASSET_V}" defer></script>\n'
     )
     html += scripts(root, extra)

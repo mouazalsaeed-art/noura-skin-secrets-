@@ -33,6 +33,11 @@
     copy: { sv: "Kopiera", en: "Copy", ar: "نسخ" },
     copied: { sv: "Kopierat ✓", en: "Copied ✓", ar: "تم النسخ ✓" },
     cardBtn: { sv: "Öppna säker betalning (kort/Klarna) →", en: "Open secure payment (card/Klarna) →", ar: "← فتح صفحة الدفع الآمن (بطاقة/Klarna)" },
+    cardMsgFixed: {
+      sv: "Beloppet är redan ifyllt på betalsidan (öppnas i ny flik). Betala med kort – eller med Klarna: direkt, om 30 dagar eller delbetalning. Skicka sedan formuläret.",
+      en: "The amount is already filled in on the payment page (opens in a new tab). Pay by card – or with Klarna: now, in 30 days or in instalments. Then send the form.",
+      ar: "المبلغ مُدخل مسبقاً في صفحة الدفع (تفتح في تبويب جديد). ادفعي بالبطاقة – أو عبر Klarna: فوراً أو بعد 30 يوماً أو بالتقسيط. ثم أرسلي النموذج.",
+    },
     cardMsg: {
       sv: "Ange beloppet och ditt namn på betalsidan (öppnas i ny flik). Betala med kort – eller med Klarna: direkt, om 30 dagar eller delbetalning. Skicka sedan formuläret.",
       en: "Enter the amount and your name on the payment page (opens in a new tab). Pay by card – or with Klarna: now, in 30 days or in instalments. Then send the form.",
@@ -62,6 +67,10 @@
     const m = v.match(/(\d[\d ]*)\s*kr/i);
     return m ? m[1].replace(/\s/g, "") : "";
   }
+  function treatmentName() { return (treatmentSelect.value || "").replace(/\s*\([^()]*\)\s*$/, ""); }
+  function fixedLink() {
+    return (typeof STRIPE_LINKS !== "undefined" && STRIPE_LINKS[treatmentName()]) || "";
+  }
   function swishDigits() { return SWISH_NUMBER.replace(/\D/g, ""); }
 
   function render() {
@@ -86,9 +95,10 @@
         <div class="pay-qr"></div>`;
     }
     if (chosen === "kort") {
-      html += `<p class="pay-note">${tr(T.cardMsg)}</p>
+      const fixed = fixedLink();
+      html += `<p class="pay-note">${tr(fixed ? T.cardMsgFixed : T.cardMsg)}</p>
         <div class="pay-line"><strong>${tr(T.amount)}:</strong> <span class="num">${amount ? amount + " kr" : "—"}</span></div>
-        <a class="btn btn-gold" style="margin-top:8px;display:inline-flex;" href="${STRIPE_PAYMENT_LINK}" target="_blank" rel="noopener">${tr(T.cardBtn)}</a>`;
+        <a class="btn btn-gold" style="margin-top:8px;display:inline-flex;" href="${fixed || STRIPE_PAYMENT_LINK}" target="_blank" rel="noopener">${tr(T.cardBtn)}</a>`;
     }
     html += `</div>`;
     section.innerHTML = html;

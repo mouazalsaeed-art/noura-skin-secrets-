@@ -1,0 +1,44 @@
+name: Stripe payment links (per treatment)
+
+# Creates/updates one fixed-price Stripe Payment Link per treatment and commits
+# js/stripe-links.js. Runs by hand, and automatically whenever prices change.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [js/treatments.js]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stripe-links
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Create / update payment links
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+        run: node scripts/stripe-sync-links.js
+
+      - name: Commit js/stripe-links.js
+        run: |
+          if git diff --quiet -- js/stripe-links.js; then
+            echo "No changes to the payment links."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/stripe-links.js
+          git commit -m "Update Stripe payment links per treatment"
+          git pull --rebase origin main
+          git push origin HEAD:main
