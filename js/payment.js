@@ -21,7 +21,7 @@
     title: { sv: "Betalning", en: "Payment", ar: "الدفع" },
     paySalon: { sv: "Betala i salongen", en: "Pay at the salon", ar: "الدفع في الصالون" },
     paySwish: { sv: "Betala nu med Swish", en: "Pay now with Swish", ar: "الدفع الآن عبر Swish" },
-    payCard: { sv: "Betala nu med kort", en: "Pay now by card", ar: "الدفع الآن بالبطاقة" },
+    payCard: { sv: "Betala nu med kort eller Klarna", en: "Pay now by card or Klarna", ar: "الدفع الآن بالبطاقة أو Klarna" },
     amount: { sv: "Belopp (kr)", en: "Amount (kr)", ar: "المبلغ (كرون)" },
     swishTo: { sv: "Swisha till", en: "Swish to", ar: "أرسلي عبر Swish إلى" },
     swishMsg: {
@@ -32,11 +32,11 @@
     qrHint: { sv: "Eller skanna QR-koden med Swish-appen:", en: "Or scan the QR code with the Swish app:", ar: "أو امسحي رمز QR بتطبيق Swish:" },
     copy: { sv: "Kopiera", en: "Copy", ar: "نسخ" },
     copied: { sv: "Kopierat ✓", en: "Copied ✓", ar: "تم النسخ ✓" },
-    cardBtn: { sv: "Öppna säker kortbetalning →", en: "Open secure card payment →", ar: "← فتح صفحة الدفع الآمن" },
+    cardBtn: { sv: "Öppna säker betalning (kort/Klarna) →", en: "Open secure payment (card/Klarna) →", ar: "← فتح صفحة الدفع الآمن (بطاقة/Klarna)" },
     cardMsg: {
-      sv: "Ange beloppet och ditt namn på betalsidan (öppnas i ny flik), betala, och skicka sedan formuläret.",
-      en: "Enter the amount and your name on the payment page (opens in a new tab), pay, then send the form.",
-      ar: "أدخلي المبلغ واسمك في صفحة الدفع (تفتح في تبويب جديد)، ادفعي، ثم أرسلي النموذج.",
+      sv: "Ange beloppet och ditt namn på betalsidan (öppnas i ny flik). Betala med kort – eller med Klarna: direkt, om 30 dagar eller delbetalning. Skicka sedan formuläret.",
+      en: "Enter the amount and your name on the payment page (opens in a new tab). Pay by card – or with Klarna: now, in 30 days or in instalments. Then send the form.",
+      ar: "أدخلي المبلغ واسمك في صفحة الدفع (تفتح في تبويب جديد). ادفعي بالبطاقة – أو عبر Klarna: فوراً أو بعد 30 يوماً أو بالتقسيط. ثم أرسلي النموذج.",
     },
     salonMsg: {
       sv: "Du betalar smidigt på plats — kort eller Swish går bra.",
@@ -53,7 +53,7 @@
 
   const methods = [["salon", "paySalon", "Betalar i salongen"]];
   if (swishOn) methods.push(["swish", "paySwish", "Swish (betalar online)"]);
-  if (stripeOn) methods.push(["kort", "payCard", "Kort via Stripe (betalar online)"]);
+  if (stripeOn) methods.push(["kort", "payCard", "Kort/Klarna via Stripe (betalar online)"]);
 
   let chosen = "salon";
 
