@@ -785,3 +785,4 @@ html[dir="rtl"] .media-badge{transform:rotate(-8deg)}
 .hero-media .media-badge img{position:static;inset:auto;width:116px;height:auto;display:block;object-fit:contain}
 @media (max-width:900px){.media-badge{display:none}}
 @media (min-width:901px){.hero-proof .stat-badge{display:none}}
+.hero-media .frame-core.hero-square{aspect-ratio:1/1;background:#d9bfb2}

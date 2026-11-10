@@ -470,6 +470,7 @@ def faq_schema(lang):
     }
 
 
+HERO_ALT = {'sv': 'Noura Skin Secrets – Kundernas Bästa val 2026 på Bokadirekt', 'en': 'Noura Skin Secrets – Customers’ Best Choice 2026 on Bokadirekt', 'ar': 'نورا سكين سيكرتس – اختيار العملاء الأفضل 2026 على Bokadirekt'}
 BADGE_ALT = {'sv': 'Kundernas Bästa val 2026 – utmärkelse från Bokadirekt', 'en': 'Customers’ Best Choice 2026 – Bokadirekt award', 'ar': 'جائزة «اختيار العملاء الأفضل 2026» من Bokadirekt'}
 BADGE_TXT = {'sv': 'Kundernas Bästa val 2026 på Bokadirekt', 'en': 'Customers’ Best Choice 2026 on Bokadirekt', 'ar': 'اختيار العملاء الأفضل 2026 على Bokadirekt'}
 
@@ -514,13 +515,11 @@ def page_index(lang, root):
         <a href="boka.html" class="btn btn-gold">{t['hero_cta1']}<span class="btn-ic">{IC['arrow']}</span></a>
         <a href="behandlingar.html" class="btn btn-outline">{t['hero_cta2']}</a>
       </div>
-      <div class="hero-proof"><a class="stat stat-badge" href="{BOKADIREKT}" target="_blank" rel="noopener">{badge_pic(root, lang, 72, lazy=False)}</a>{stats}</div>
+      <div class="hero-proof">{stats}</div>
     </div>
     <div class="hero-media reveal" data-d="1">
-      <a class="media-badge" href="{BOKADIREKT}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><picture><source srcset="{root}images/basta-val-2026.webp" type="image/webp"><img src="{root}images/basta-val-2026.png" alt="" width="116" height="120" decoding="async"></picture></a>
-      <div class="frame"><div class="frame-core">
-        <img src="{root}images/hero-poster.jpg" alt="" onerror="this.remove()" />
-        <video data-src="{root}videos/hero.mp4" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
+      <div class="frame"><div class="frame-core hero-square">
+        <picture><source srcset="{root}images/hero-noura-2026.webp" type="image/webp"><img src="{root}images/hero-noura-2026.jpg" alt="{HERO_ALT[lang]}" width="1024" height="1024" fetchpriority="high" decoding="async"></picture>
         <div class="hero-tag"><strong>{t['hero_tag'][0]}</strong><span>{t['hero_tag'][1]}</span></div>
       </div></div>
     </div>
