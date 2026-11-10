@@ -1,25 +1,30 @@
 name: Fetch Bokadirekt services (temporary)
-
 on:
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify booking URLs
+      - name: Spot check
         run: |
           UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
           B=https://www.bokadirekt.se/boka-tjanst/noura-skin-secrets-kvinnlig-behandling-129600
           : > bd-verify.txt
-          for s in klassisk-ansiktsrengoring-3490649 hifu-4d-runt-ogonen-3490677 harborttagning-helkropp-3490710 bogus-slug-3490649 klassisk-ansiktsrengoring-1111111; do
-            curl -sSL -A "$UA" -o /tmp/p.html -w "$s http=%{http_code} final=%{url_effective}\n" "$B/$s" >> bd-verify.txt || echo "$s curl-failed" >> bd-verify.txt
-            grep -o '<title>[^<]*</title>' /tmp/p.html | head -1 >> bd-verify.txt
-            grep -o 'property="og:title" content="[^"]*"' /tmp/p.html | head -1 >> bd-verify.txt
+          for s in klassisk-ansiktsrengoring-3490649 hifu-4d-dubbelhaka-kaklinje-3490678 mesoterapi-fettreducering-mage-3490692; do
+            curl -sSL -A "$UA" -o /tmp/p.html "$B/$s"
+            python3 - "$s" >> bd-verify.txt <<'PY'
+          import re,json,sys
+          h=open('/tmp/p.html',encoding='utf-8',errors='replace').read()
+          i=h.find('window.__PRELOADED_STATE__'); o,_=json.JSONDecoder().raw_decode(h[i:][h[i:].find('{'):])
+          sid=sys.argv[1].rsplit('-',1)[1]
+          print(sys.argv[1], '->', [(k, v.get('name'), v.get('price'), v.get('duration')) for k,v in o['services']['all'].items() if k==sid] , 'keys', list(o.keys()))
+          for k in o:
+              s=json.dumps(o[k],ensure_ascii=False)
+              if sid in s and k!='services': print('  also in', k)
+          PY
           done
           cat bd-verify.txt
       - name: Commit
@@ -27,6 +32,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add bd-verify.txt
-          git commit -m "tmp: verify result"
+          git commit -m "tmp: spot check"
           git pull --rebase origin main
           git push origin HEAD:main
