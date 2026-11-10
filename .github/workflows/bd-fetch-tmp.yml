@@ -16,14 +16,12 @@ jobs:
           for s in klassisk-ansiktsrengoring-3490649 hifu-4d-dubbelhaka-kaklinje-3490678 mesoterapi-fettreducering-mage-3490692; do
             curl -sSL -A "$UA" -o /tmp/p.html "$B/$s"
             python3 - "$s" >> bd-verify.txt <<'PY'
-          import re,json,sys
+          import re,sys
           h=open('/tmp/p.html',encoding='utf-8',errors='replace').read()
-          i=h.find('window.__PRELOADED_STATE__'); o,_=json.JSONDecoder().raw_decode(h[i:][h[i:].find('{'):])
           sid=sys.argv[1].rsplit('-',1)[1]
-          print(sys.argv[1], '->', [(k, v.get('name'), v.get('price'), v.get('duration')) for k,v in o['services']['all'].items() if k==sid] , 'keys', list(o.keys()))
-          for k in o:
-              s=json.dumps(o[k],ensure_ascii=False)
-              if sid in s and k!='services': print('  also in', k)
+          print('==',sys.argv[1],'len',len(h),'has_state','__PRELOADED_STATE__' in h)
+          for m in list(re.finditer(sid,h))[:3]:
+              print('  ctx:',h[max(0,m.start()-200):m.start()+250].replace('\n',' '))
           PY
           done
           cat bd-verify.txt
