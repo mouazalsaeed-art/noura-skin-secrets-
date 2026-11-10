@@ -38,6 +38,8 @@ const STRIPE_LINKS = {
  "Laser Carbon + Hydro ansiktsbehandling + lugnande mask": "https://book.stripe.com/8x25kw7JF8C82GV5OE18c0z",
  "Laser – Bristningar (stretch marks)": "https://book.stripe.com/14AfZa0hdaKg2GVb8Y18c0A",
  "Laser – Borttagning av tatuering (läppar & ögonbryn)": "https://book.stripe.com/cNi9AM2pl7y4chv1yo18c0B",
+ "Plasma Pen – Ögonlyft": "https://book.stripe.com/cNibIU6FBg4A2GVgti18c1b",
+ "Plasma Pen – Ansikte & hals": "https://book.stripe.com/dRm6oA1lh8C8chvfpe18c1c",
  "Laser hårborttagning – Överläpp eller Haka": "https://book.stripe.com/00weV60hd4lS1CR2Cs18c0C",
  "Laser hårborttagning – Armhålor": "https://book.stripe.com/bJe00c5Bx05CftHb8Y18c0D",
  "Laser hårborttagning – Hela ansiktet": "https://book.stripe.com/fZu4gs9RN3hOepDfpe18c0E",
