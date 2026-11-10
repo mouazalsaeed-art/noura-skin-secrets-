@@ -60,9 +60,9 @@
     book: { sv: "Boka denna behandling →", en: "Book this treatment →", ar: "احجزي هذا العلاج ←" },
     bookConsult: { sv: "Boka konsultation →", en: "Book a consultation →", ar: "احجزي استشارة ←" },
     consult: {
-      sv: "💡 Osäker? Boka en <strong>Hudvårdskonsultation (20 min, 450 kr)</strong> så gör Nour en personlig hudanalys.",
-      en: "💡 Not sure? Book a <strong>skin consultation (20 min, 450 kr)</strong> and Nour will analyse your skin in person.",
-      ar: "💡 غير متأكدة؟ احجزي <strong>استشارة بشرة (20 دقيقة، 450 كرون)</strong> وستقوم نور بتحليل بشرتك شخصياً.",
+      sv: "💡 Osäker? Boka en <strong>Hudvårdskonsultation (20 min, 300 kr)</strong> så gör Nour en personlig hudanalys.",
+      en: "💡 Not sure? Book a <strong>skin consultation (20 min, 300 kr)</strong> and Nour will analyse your skin in person.",
+      ar: "💡 غير متأكدة؟ احجزي <strong>استشارة بشرة (20 دقيقة، 300 كرون)</strong> وستقوم نور بتحليل بشرتك شخصياً.",
     },
     disclaimer: {
       sv: "Detta är en vägledning och ersätter inte en professionell hudanalys på plats.",

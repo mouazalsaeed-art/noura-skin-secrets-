@@ -36,7 +36,7 @@
 
       "cats.eyebrow": "Our services",
       "cats.title": "Treatments for face, body & hair",
-      "cats.lede": "Browse our <span data-total-categories>14</span> categories and <span data-total-treatments>74</span> treatments — or view the full catalogue at once.",
+      "cats.lede": "Browse our <span data-total-categories>14</span> categories and <span data-total-treatments>73</span> treatments — or view the full catalogue at once.",
 
       "offers.eyebrow": "Right now",
       "offers.title": "Offers & packages",
@@ -74,7 +74,7 @@
       "faq.q4": "Is the salon really women only?",
       "faq.a4": "Yes. The salon is a safe, relaxed environment created exclusively for women.",
       "faq.q5": "How do I know which treatment suits me?",
-      "faq.a5": "Try our skin assistant (chat button bottom left) which guides you based on your skin type and needs. For a personal assessment we recommend a skin consultation (20 min, 450 kr).",
+      "faq.a5": "Try our skin assistant (chat button bottom left) which guides you based on your skin type and needs. For a personal assessment we recommend a skin consultation (20 min, 300 kr).",
       "faq.q6": "How do I prepare for a treatment?",
       "faq.a6": "Come without makeup if possible, and avoid sun as well as strong acids/retinol a few days before most treatments. Our skin assistant has detailed advice for each treatment type — and you always get personal instructions when booking.",
       "faq.q7": "Can I cancel or reschedule?",
@@ -146,7 +146,7 @@
 
       "cats.eyebrow": "خدماتنا",
       "cats.title": "علاجات للوجه والجسم والشعر",
-      "cats.lede": "تصفحي <span data-total-categories>14</span> فئة و<span data-total-treatments>74</span> علاجاً — أو شاهدي الكتالوج كاملاً.",
+      "cats.lede": "تصفحي <span data-total-categories>14</span> فئة و<span data-total-treatments>73</span> علاجاً — أو شاهدي الكتالوج كاملاً.",
 
       "offers.eyebrow": "حالياً",
       "offers.title": "العروض والباقات",
@@ -184,7 +184,7 @@
       "faq.q4": "هل الصالون فعلاً للنساء فقط؟",
       "faq.a4": "نعم. الصالون بيئة آمنة ومريحة مخصصة للنساء فقط.",
       "faq.q5": "كيف أعرف العلاج المناسب لي؟",
-      "faq.a5": "جربي مساعدة البشرة (زر الدردشة أسفل اليسار) التي ترشدك حسب نوع بشرتك واحتياجاتك. وللتقييم الشخصي ننصح بجلسة استشارة بشرة (20 دقيقة، 450 كرون).",
+      "faq.a5": "جربي مساعدة البشرة (زر الدردشة أسفل اليسار) التي ترشدك حسب نوع بشرتك واحتياجاتك. وللتقييم الشخصي ننصح بجلسة استشارة بشرة (20 دقيقة، 300 كرون).",
       "faq.q6": "كيف أستعد قبل الجلسة؟",
       "faq.a6": "يفضل الحضور بدون مكياج، وتجنب التعرض للشمس والأحماض القوية/الريتينول قبل أيام من معظم العلاجات. مساعدة البشرة لديها نصائح مفصلة قبل وبعد كل نوع علاج — وستحصلين دائماً على تعليمات شخصية عند الحجز.",
       "faq.q7": "هل يمكنني إلغاء أو تغيير موعدي؟",
