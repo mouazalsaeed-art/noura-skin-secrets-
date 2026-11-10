@@ -90,7 +90,15 @@ const ore = (price) => {
     const coupon = await stripe("POST", "coupons", {
       percent_off: String(p.percent_off), duration: "once", redeem_by: String(until), name: p.name || p.code,
     });
-    await stripe("POST", "promotion_codes", { coupon: coupon.id, code: p.code, expires_at: String(until) });
+    // newer Stripe API versions nest the coupon under "promotion"; older ones take "coupon" directly
+    try {
+      await stripe("POST", "promotion_codes", {
+        "promotion[type]": "coupon", "promotion[coupon]": coupon.id, code: p.code, expires_at: String(until),
+      });
+    } catch (e) {
+      if (!/unknown parameter: promotion/i.test(e.message)) throw e;
+      await stripe("POST", "promotion_codes", { coupon: coupon.id, code: p.code, expires_at: String(until) });
+    }
     console.log("promo", p.code, "created:", p.percent_off + "% until", p.until);
   }
 
