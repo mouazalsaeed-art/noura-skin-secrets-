@@ -1,0 +1,55 @@
+name: Fetch Bokadirekt services (temporary)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch and extract
+        run: |
+          set -x
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+          mkdir -p tmp-bd
+          curl -sSL -A "$UA" -H "Accept-Language: sv-SE,sv;q=0.9" -o tmp-bd/page.html -w "page http=%{http_code} size=%{size_download}\n" \
+            "https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600" || true
+          python3 - <<'PY'
+          import re, json
+          html = open('tmp-bd/page.html', encoding='utf-8', errors='replace').read()
+          anchors = sorted(set(re.findall(r'href="([^"]*boka-tjanst[^"]*)"', html)))
+          m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
+          nd = json.loads(m.group(1)) if m else None
+          if nd: json.dump(nd, open('tmp-bd/next_data.json', 'w', encoding='utf-8'), ensure_ascii=False)
+          # generic walk: dicts that look like services
+          found = {}
+          def walk(o):
+              if isinstance(o, dict):
+                  keys = set(o.keys())
+                  if 'id' in o and ('name' in o or 'title' in o) and (keys & {'price', 'priceFrom', 'duration', 'durationMinutes', 'prices'}):
+                      found[str(o['id'])] = o
+                  for v in o.values(): walk(v)
+              elif isinstance(o, list):
+                  for v in o: walk(v)
+          walk(nd)
+          out = {'anchors': anchors, 'has_next_data': bool(nd), 'services': list(found.values()), 'html_size': len(html)}
+          json.dump(out, open('js/bd-services.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+          print('anchors', len(anchors), 'services', len(found))
+          PY
+          # verify booking URL pattern with first anchor
+          A=$(python3 -c "import json;a=json.load(open('js/bd-services.json'))['anchors'];print(a[0] if a else '')")
+          echo "first anchor: $A"
+          case "$A" in http*) U="$A";; /*) U="https://www.bokadirekt.se$A";; *) U="";; esac
+          [ -n "$U" ] && curl -sSL -A "$UA" -o tmp-bd/booking.html -w "booking http=%{http_code} final=%{url_effective}\n" "$U" || true
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/bd-services.json tmp-bd
+          git commit -m "tmp: Bokadirekt services extract" || echo "nothing"
+          git pull --rebase origin main
+          git push origin HEAD:main
