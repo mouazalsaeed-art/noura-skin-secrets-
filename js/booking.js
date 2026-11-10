@@ -4,6 +4,9 @@
   "use strict";
   var L = (document.documentElement.lang || "sv").slice(0, 2);
   var FORMSPREE_ENDPOINT = "https://formspree.io/f/xwvdrrby";
+  /* Google Kalender: URL till Apps Script-webbappen (scripts/google-calendar/Code.gs). Tomt = av. */
+  var CALENDAR_ENDPOINT = "";
+  var CALENDAR_TOKEN = "nss-287hiiIunVdWa77RnAu8zkSh";
 
   var UI = {
     choose: { sv: "Välj en behandling", en: "Choose a treatment", ar: "اختاري علاجاً" },
@@ -107,6 +110,31 @@
     return "mailto:info@nouraskinsecrets.se?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
 
+  /* behandlingens längd i minuter (första talet i t.ex. "75–90 min") */
+  function durationFor(value) {
+    var name = String(value || "").replace(/\s*\([^()]*\)\s*$/, "");
+    if (typeof TREATMENT_CATEGORIES === "undefined") return "";
+    for (var i = 0; i < TREATMENT_CATEGORIES.length; i++) {
+      var list = TREATMENT_CATEGORIES[i].treatments;
+      for (var j = 0; j < list.length; j++) {
+        if (list[j].name === name) { var m = String(list[j].duration).match(/\d+/); return m ? m[0] : ""; }
+      }
+    }
+    return "";
+  }
+  function sendToCalendar(data) {
+    if (!CALENDAR_ENDPOINT) return;
+    try {
+      var body = new URLSearchParams();
+      ["name", "email", "phone", "treatment", "date", "time", "message", "betalning", "_gotcha"].forEach(function (k) {
+        if (data[k]) body.append(k, data[k]);
+      });
+      body.append("duration", durationFor(data.treatment));
+      body.append("token", CALENDAR_TOKEN);
+      fetch(CALENDAR_ENDPOINT, { method: "POST", mode: "no-cors", body: body }).catch(function () {});
+    } catch (e) {}
+  }
+
   var confirmBox = document.getElementById("confirm-box");
   var submitBtn = form.querySelector("button[type=submit]");
   form.addEventListener("submit", function (e) {
@@ -121,6 +149,7 @@
     fetch(FORMSPREE_ENDPOINT, { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form) })
       .then(function (res) { if (!res.ok) throw new Error("formspree"); return res; })
       .then(function () {
+        sendToCalendar(data);
         confirmBox.innerHTML = t("sent");
         confirmBox.classList.add("show");
         form.reset();
