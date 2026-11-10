@@ -427,6 +427,8 @@ def footer(lang, root):
 </footer>
 <a href="boka.html" class="btn btn-gold float-cta">{t['float_book']}</a>"""
 
+CF_ANALYTICS = '<!-- Cloudflare Web Analytics --><script defer src=\'https://static.cloudflareinsights.com/beacon.min.js\' data-cf-beacon=\'{"token": "1c8b73265f534e4a875b5908d6929aff"}\'></script><!-- End Cloudflare Web Analytics -->'
+
 def scripts(root, extra=""):
     base = (
         f'<script src="{root}js/treatments.js"></script>\n'
@@ -435,7 +437,8 @@ def scripts(root, extra=""):
     )
     return base + extra + (
         f'<script src="{root}js/livechat.js" defer></script>\n'
-        f'<script src="{root}js/hudassistent.js" defer></script>\n</body>\n</html>'
+        f'<script src="{root}js/hudassistent.js" defer></script>\n'
+        + CF_ANALYTICS + '\n</body>\n</html>'
     )
 
 def salon_schema(lang):
@@ -836,7 +839,7 @@ PRIV = {
 <h2>Kontroll av lediga tider</h2>
 <p>När du väljer ett datum i bokningsformuläret kan en förfrågan skickas till Google Kalender för att visa lediga och upptagna tider. Förfrågan innehåller endast det valda datumet — inga personuppgifter — men din IP-adress överförs till Google när anropet görs.</p>
 <h2>Cookies och lokal lagring</h2>
-<p>Webbplatsen använder inga spårnings- eller marknadsföringscookies. Vi sparar endast ditt språkval lokalt i din webbläsare (localStorage) — det är nödvändigt för funktionen och delas inte med någon. Typsnitt laddas från Google Fonts, varvid din IP-adress överförs till Google när filerna hämtas.</p>
+<p>Webbplatsen använder inga spårnings- eller marknadsföringscookies. Vi sparar endast ditt språkval lokalt i din webbläsare (localStorage) — det är nödvändigt för funktionen och delas inte med någon. Typsnitt laddas från Google Fonts, varvid din IP-adress överförs till Google när filerna hämtas. Vi använder Cloudflare Web Analytics för anonym besöksstatistik (t.ex. antal besök och vilka sidor som visas). Tjänsten sätter inga cookies och sparar inga uppgifter som kan identifiera dig.</p>
 <h2>Dina rättigheter (GDPR)</h2>
 <p>Du har rätt att begära tillgång till, rättelse av eller radering av dina personuppgifter, samt att invända mot eller begränsa behandlingen. Kontakta oss på <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>. Du har även rätt att lämna klagomål till Integritetsskyddsmyndigheten (IMY), <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
 """,
@@ -862,7 +865,7 @@ PRIV = {
 <h2>Availability check</h2>
 <p>When you pick a date in the booking form, a request may be sent to Google Calendar to show free and busy times. The request contains only the selected date — no personal data — but your IP address is transferred to Google when the call is made.</p>
 <h2>Cookies and local storage</h2>
-<p>This website uses no tracking or marketing cookies. We only store your language choice locally in your browser (localStorage) — this is necessary for the site to function and is not shared with anyone. Fonts are loaded from Google Fonts, which means your IP address is transferred to Google when the files are fetched.</p>
+<p>This website uses no tracking or marketing cookies. We only store your language choice locally in your browser (localStorage) — this is necessary for the site to function and is not shared with anyone. Fonts are loaded from Google Fonts, which means your IP address is transferred to Google when the files are fetched. We use Cloudflare Web Analytics for anonymous visitor statistics (e.g. number of visits and which pages are viewed). It sets no cookies and stores nothing that can identify you.</p>
 <h2>Your rights (GDPR)</h2>
 <p>You may request access to, correction of, or deletion of your personal data, and object to or restrict processing, at <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>. You also have the right to lodge a complaint with the Swedish Authority for Privacy Protection (IMY), <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
 """,
@@ -888,7 +891,7 @@ PRIV = {
 <h2>فحص الأوقات المتاحة</h2>
 <p>عند اختيار تاريخ في نموذج الحجز قد يُرسل طلب إلى تقويم Google لعرض الأوقات المتاحة والمشغولة. لا يحتوي الطلب إلا على التاريخ المختار — دون أي بيانات شخصية — لكن عنوان IP الخاص بك يُنقل إلى Google عند إجراء الطلب.</p>
 <h2>الكوكيز والتخزين المحلي</h2>
-<p>لا يستخدم الموقع أي كوكيز تتبع أو تسويق. نحفظ فقط اختيارك للغة محلياً في متصفحك (localStorage) — وهذا ضروري لعمل الموقع ولا يُشارك مع أحد. تُحمَّل الخطوط من Google Fonts، ما يعني نقل عنوان IP الخاص بك إلى Google عند جلب الملفات.</p>
+<p>لا يستخدم الموقع أي كوكيز تتبع أو تسويق. نحفظ فقط اختيارك للغة محلياً في متصفحك (localStorage) — وهذا ضروري لعمل الموقع ولا يُشارك مع أحد. تُحمَّل الخطوط من Google Fonts، ما يعني نقل عنوان IP الخاص بك إلى Google عند جلب الملفات. نستخدم Cloudflare Web Analytics لإحصاءات زيارات مجهولة الهوية (مثل عدد الزيارات والصفحات التي تُشاهد). لا تضع هذه الخدمة أي كوكيز ولا تحفظ أي بيانات تُعرّف بك.</p>
 <h2>حقوقك (GDPR)</h2>
 <p>يحق لك طلب الاطلاع على بياناتك الشخصية أو تصحيحها أو حذفها، والاعتراض على المعالجة أو تقييدها، عبر <a href="mailto:info@nouraskinsecrets.se">info@nouraskinsecrets.se</a>. كما يحق لك تقديم شكوى إلى هيئة حماية الخصوصية السويدية (IMY): <a href="https://www.imy.se" target="_blank" rel="noopener">www.imy.se</a>.</p>
 """,
