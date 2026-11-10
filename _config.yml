@@ -1,0 +1,26 @@
+# GitHub Pages: publish only the public website.
+# Everything below is source code / docs and must not be served.
+include:
+  - app/_expo
+exclude:
+  - .claude
+  - .github
+  - admin
+  - server
+  - worker
+  - src
+  - scripts
+  - web
+  - "*.md"
+  - "*.tsx"
+  - "*.ps1"
+  - build.py
+  - Procfile
+  - app.json
+  - package.json
+  - package-lock.json
+  - tsconfig.json
+  - babel.config.js
+  - .eslintrc.json
+  - .npmrc
+  - .env.example
