@@ -72,6 +72,30 @@
     }
   }
 
+  /* ---------- mobil: dölj header + filterfält vid scroll ned ---------- */
+  (function () {
+    var mq = window.matchMedia("(max-width:900px)");
+    var header = document.querySelector(".site-header");
+    var controls = document.getElementById("catalog-controls");
+    var lastY = window.pageYOffset, ticking = false;
+    function setHidden(h) {
+      if (header) header.classList.toggle("scroll-hide", h);
+      if (controls) controls.classList.toggle("scroll-hide", h);
+    }
+    function update() {
+      ticking = false;
+      var y = window.pageYOffset;
+      if (!mq.matches || y <= 120) setHidden(false);
+      else if (y > lastY + 4) setHidden(true);
+      else if (y < lastY - 4) setHidden(false);
+      lastY = y;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    if (controls) controls.addEventListener("focusin", function () { setHidden(false); });
+  })();
+
   /* ---------- hero-video: laddas sent, poster om filen saknas/är trasig ---------- */
   window.addEventListener("load", function () {
     var video = document.querySelector(".hero-media video");

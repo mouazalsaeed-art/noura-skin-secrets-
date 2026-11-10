@@ -45,6 +45,7 @@ html[lang="ar"]{
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 28px)}
+html,body{overflow-x:hidden;max-width:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 body{
@@ -750,3 +751,23 @@ html[lang="ar"] .bd-or{letter-spacing:.05em;font-size:.8rem}
   .nav-links,.nav-cta .btn,.nav-cta .lang-switch{display:none}
   .nav-toggle{display:block}
 }
+
+/* mobil: kompakta katalogkontroller + dölj vid scroll */
+@media (max-width:900px){
+  .site-header{transition:transform .35s var(--ease)}
+  .site-header.scroll-hide{transform:translateY(-130%)}
+  .catalog-controls{transition:transform .35s var(--ease),opacity .3s var(--ease)}
+  .catalog-controls.scroll-hide{transform:translateY(-26px);opacity:0;pointer-events:none}
+}
+@media (max-width:720px){
+  .catalog-controls{padding:9px;gap:7px}
+  .cc-row1{gap:7px}
+  .search-input{min-width:0;padding:9px 14px;font-size:.9rem}
+  .group-tabs{flex:1 1 100%;min-width:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .group-tabs::-webkit-scrollbar{display:none}
+  .group-tab{padding:8px 11px;flex:0 0 auto}
+}
+@media (max-width:520px){ .ha-fab{padding:14px} .ha-fab-label{display:none} }
+
+/* mobil: låt enkolumnsgrid krympa under innehållets min-bredd (hindrar sidled overflow) */
+@media (max-width:900px){ .booking-layout{grid-template-columns:minmax(0,1fr)} .catalog-controls{grid-template-columns:minmax(0,1fr)} }
