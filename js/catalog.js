@@ -4,6 +4,7 @@
   "use strict";
   var L = (document.documentElement.lang || "sv").slice(0, 2);
   var BOKA = document.body.getAttribute("data-boka") || "boka.html";
+  var BD_BASE = "https://www.bokadirekt.se/boka-tjanst/noura-skin-secrets-kvinnlig-behandling-129600/";
 
   var UI = {
     all: { sv: "Alla", en: "All", ar: "الكل" },
@@ -117,7 +118,10 @@
           '<p class="desc">' + esc(pick(tr, "desc")) + "</p>" +
           (trNote ? '<div class="note-line">' + esc(trNote) + "</div>" : "") +
           '<div class="footer-row"><span class="t-price">' + esc(typeof tPrice === "function" ? tPrice(tr) : tr.price) + "</span>" +
-          '<a class="book-link" href="' + BOKA + "?treatment=" + encodeURIComponent(tr.name) + '">' + t("book") + "</a></div>";
+          (tr.bd
+            ? '<a class="book-link" href="' + BD_BASE + esc(tr.bd) + '" target="_blank" rel="noopener">'
+            : '<a class="book-link" href="' + BOKA + "?treatment=" + encodeURIComponent(tr.name) + '">') +
+          t("book") + "</a></div>";
         grid.appendChild(card);
       });
       block.appendChild(grid);
