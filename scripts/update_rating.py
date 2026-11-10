@@ -17,7 +17,7 @@ FILES = [
     "en/index.html", "en/boka.html", "en/behandlingar.html", "en/integritet.html",
     "ar/index.html", "ar/boka.html", "ar/behandlingar.html", "ar/integritet.html",
     "microneedling-uppsala.html", "hifu-uppsala.html", "hydrafacial-uppsala.html",
-    "laser-uppsala.html", "peeling-uppsala.html",
+    "laser-uppsala.html", "laser-harborttagning-uppsala.html", "peeling-uppsala.html",
 ]
 
 

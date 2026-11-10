@@ -32,7 +32,7 @@
   var GROUPS = [
     { id: "all", label: t("allT"), cats: null },
     { id: "ansikte", label: t("face"), cats: ["ansikte", "hifu-ansikte", "ogon-lappar", "plasma", "laser", "arrbehandling", "ovrigt"] },
-    { id: "kropp", label: t("body"), cats: ["kroppsbehandlingar", "slim-firm", "bristningar", "hifu-kropp"] },
+    { id: "kropp", label: t("body"), cats: ["kroppsbehandlingar", "slim-firm", "bristningar", "hifu-kropp", "laser-harborttagning"] },
     { id: "massage", label: t("massage"), cats: ["massage-ansikte", "massage-kropp"] },
     { id: "har", label: t("hair"), cats: ["harvard"] },
   ];

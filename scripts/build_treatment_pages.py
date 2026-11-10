@@ -140,6 +140,7 @@ PAGES = [
         ],
         "fits": ["Pigmentfläckar och ojämn hudton", "Stora porer och fet hud", "Ytliga ärr",
                  "Tatueringar du vill bli av med – även på läppar och ögonbryn", "Bristningar på magen"],
+        "note_html": 'Letar du efter hårborttagning? Se <a href="laser-harborttagning-uppsala.html">laser hårborttagning i Uppsala</a>.',
         "steps": [("Bedömning", "Vi tittar på huden eller tatueringen och väljer rätt behandling."),
                   ("Förberedelse", "Huden rengörs – i ansiktsbehandlingarna ingår djuprengöring."),
                   ("Laserbehandling", "Lasern förs över området; det känns som snabba, små knäpp."),
@@ -151,6 +152,35 @@ PAGES = [
                 ("Hur många gånger behöver jag komma?", "Det varierar. Vid pigment och tatueringar krävs oftast flera behandlingar med uppehåll emellan. Vi ger dig en uppskattning vid första besöket."),
                 ("Kan jag sola efter laser?", "Undvik sol och solarium både före och efter behandlingen och använd hög solskyddsfaktor. Det minskar risken för pigmentförändringar."),
                 ("Vem ska inte göra laser?", "Vid graviditet, nyligen solbränd hud, ljuskänslighet eller vissa läkemedel – kontakta oss innan du bokar så går vi igenom vad som gäller för dig.")],
+    },
+    {
+        "slug": "laser-harborttagning-uppsala.html",
+        "short": "Laser hårborttagning",
+        "strip": "Laser hårborttagning – ",
+        "title": "Laser hårborttagning i Uppsala – 808 diodlaser | Noura Skin Secrets",
+        "desc": "Laser hårborttagning i Uppsala med 808 diodlaser och inbyggd kylning. Ansikte, armhålor, bikini, ben och helkropp – från 250 kr. Endast för kvinnor.",
+        "h1": "Laser hårborttagning <em>i Uppsala</em>",
+        "lede": "Hårborttagning med 808 diodlaser och inbyggd kylning – skonsamt, nästintill smärtfritt och för de flesta hud- och hårtyper. Från överläpp till helkropp, i en trygg miljö enbart för kvinnor.",
+        "main": "Laser hårborttagning – Helkropp",
+        "what_h2": "Hur fungerar 808 diodlaser?",
+        "what": [
+            "Diodlasern med våglängden 808 nm riktar ljusenergi mot pigmentet i hårsäcken. Energin omvandlas till värme som försvagar hårsäcken, så att hårväxten minskar för varje behandling. Den inbyggda kylningen skyddar huden och gör behandlingen bekväm.",
+            "Håret växer i olika faser och lasern påverkar bara de hårstrån som växer aktivt just då. Därför behövs en serie – för bästa resultat rekommenderas 6–8 behandlingar med några veckors mellanrum.",
+        ],
+        "fits": ["Oönskat hår i ansiktet, på överläpp eller haka", "Armhålor och bikini / Brazilian",
+                 "Ben och armar", "Dig som är trött på rakning och vaxning", "Hårväxt som ger irritation eller inåtväxande hår"],
+        "steps": [("Genomgång", "Vi går igenom hud, hår och vilka områden du vill behandla."),
+                  ("Förberedelse", "Området ska vara nyrakat – vi rengör huden innan start."),
+                  ("Laserbehandling", "Lasern förs över huden med kylning – det känns som lätt värme."),
+                  ("Eftervård", "Vi lugnar huden och ger råd om solskydd och nästa behandling.")],
+        "treatments": ["Laser hårborttagning – Överläpp eller Haka", "Laser hårborttagning – Armhålor",
+                       "Laser hårborttagning – Hela ansiktet", "Laser hårborttagning – Bikini / Brazilian",
+                       "Laser hårborttagning – Armar", "Laser hårborttagning – Halva ben",
+                       "Laser hårborttagning – Hela ben", "Laser hårborttagning – Helkropp"],
+        "faq": [("Gör laser hårborttagning ont?", "Tack vare den inbyggda kylningen upplever de flesta behandlingen som nästintill smärtfri – det känns som lätt värme eller små knäpp."),
+                ("Hur många behandlingar behöver jag?", "För bästa resultat rekommenderas 6–8 behandlingar med några veckors mellanrum, eftersom lasern bara påverkar hår som växer aktivt vid behandlingstillfället."),
+                ("Hur förbereder jag mig?", "Raka området dagen innan eller samma dag. Vaxa eller plocka inte de närmaste veckorna före, och undvik sol och brun utan sol på området."),
+                ("Fungerar det på alla?", "808 diodlaser passar de flesta hud- och hårtyper. Mycket ljust, grått eller rött hår svarar sämre eftersom lasern söker pigment. Vid graviditet eller ljuskänslighet – kontakta oss före bokning.")],
     },
     {
         "slug": "peeling-uppsala.html",
@@ -181,19 +211,21 @@ PAGES = [
 ]
 
 
-def treatment_cards(names, data):
+def treatment_cards(names, data, strip=""):
     cards = []
+    seen_desc = set()
     for n in names:
         t = data.get(n)
         if not t:
             raise SystemExit(f"treatment not found in js/treatments.js: {n}")
-        href = (BD_BASE + t["bd"]) if t["bd"] else ("boka.html?treatment=" + E(n))
-        ext = ' target="_blank" rel="noopener"' if t["bd"] else ""
+        href = (BD_BASE + t["bd"]) if t["bd"] else B.BOKADIREKT
+        ext = ' target="_blank" rel="noopener"'
         cards.append(
-            f'<div class="treatment-card"><div class="row"><h3>{E(n)}</h3><span class="duration">{E(t["duration"])}</span></div>'
-            f'<p class="desc">{E(t["desc"])}</p>'
+            f'<div class="treatment-card"><div class="row"><h3>{E(n[len(strip):] if strip and n.startswith(strip) else n)}</h3><span class="duration">{E(t["duration"])}</span></div>'
+            + ("" if t["desc"] in seen_desc else f'<p class="desc">{E(t["desc"])}</p>') +
             f'<div class="footer-row"><span class="t-price">{E(t["price"])}</span>'
             f'<a class="book-link" href="{href}"{ext}>Boka</a></div></div>')
+        seen_desc.add(t["desc"])
     return "\n        ".join(cards)
 
 
@@ -234,7 +266,7 @@ def related_links(current):
 def render(page, data):
     lang, root, slug = "sv", "", page["slug"]
     main = data[page["main"]]
-    main_href = BD_BASE + main["bd"]
+    main_href = (BD_BASE + main["bd"]) if main["bd"] else B.BOKADIREKT
     doc = B.head(lang, slug, page["title"], page["desc"], root, schema(page, data))
     # only a Swedish version exists: drop the en/ar hreflang alternates
     doc = re.sub(r'\n<link rel="alternate" hreflang="(en|ar)" href="[^"]*" />', "", doc)
@@ -282,8 +314,9 @@ def render(page, data):
       <h2>{E(page['short'])} i Uppsala – priser & behandlingar</h2>
     </div>
     <div class="treatment-grid">
-        {treatment_cards(page['treatments'], data)}
+        {treatment_cards(page['treatments'], data, page.get('strip', ''))}
     </div>
+    {('<p class="tp-note center">' + page['note_html'] + '</p>') if page.get('note_html') else ''}
     <p class="tp-note center">Osäker på vad som passar dig? Boka en <a href="{CONSULT}" target="_blank" rel="noopener">hudvårdskonsultation</a> – eller se <a href="behandlingar.html">alla behandlingar</a>.</p>
   </div>
 </section>
@@ -302,7 +335,7 @@ def render(page, data):
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow">Bra att veta</span>
-      <h2>Vanliga frågor om {E(page['short'].lower() if page['short'] != 'HIFU' and page['short'] != 'HydraFacial' else page['short'])}</h2>
+      <h2>Vanliga frågor om {E(page['short'] if page['short'] in ('HIFU', 'HydraFacial') else page['short'].lower())}</h2>
     </div>
     <div class="faq-cols">{faq}</div>
   </div>
