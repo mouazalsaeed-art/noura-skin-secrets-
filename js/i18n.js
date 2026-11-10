@@ -30,7 +30,7 @@
       "usp2.title": "Advanced equipment",
       "usp2.text": "Top-class HIFU, laser, plasma and microneedling.",
       "usp3.title": "Rated 4.9",
-      "usp3.text": "Based on 71 reviews from happy clients.",
+      "usp3.text": "Based on 91 reviews from happy clients.",
       "usp4.title": "Central Uppsala",
       "usp4.text": "Kungsängsgatan 5B — easy to reach, open every day.",
 
@@ -55,7 +55,7 @@
       "about.li4": "Open every day 10:00–20:00, by appointment",
       "about.cta": "Book an appointment",
 
-      "rating.meta": "71 reviews via Bokadirekt",
+      "rating.meta": "91 reviews via Bokadirekt",
       "rating.cta": "Read the reviews",
 
       "results.eyebrow": "Results",
@@ -140,7 +140,7 @@
       "usp2.title": "أجهزة متطورة",
       "usp2.text": "هايفو، ليزر، بلازما وميكرونيدلينغ من الطراز الأول.",
       "usp3.title": "تقييم 4.9",
-      "usp3.text": "بناءً على 71 تقييماً من عميلات سعيدات.",
+      "usp3.text": "بناءً على 91 تقييماً من عميلات سعيدات.",
       "usp4.title": "وسط أوبسالا",
       "usp4.text": "Kungsängsgatan 5B — موقع سهل الوصول، مفتوح يومياً.",
 
@@ -165,7 +165,7 @@
       "about.li4": "مفتوح يومياً 10:00–20:00، بالحجز المسبق",
       "about.cta": "احجزي موعداً",
 
-      "rating.meta": "71 تقييماً عبر Bokadirekt",
+      "rating.meta": "91 تقييماً عبر Bokadirekt",
       "rating.cta": "اقرئي التقييمات",
 
       "results.eyebrow": "النتائج",
