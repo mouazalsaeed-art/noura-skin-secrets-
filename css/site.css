@@ -876,3 +876,7 @@ html[dir="rtl"] .tp-list li::before{left:auto;right:4px}
     var(--marble) center/cover no-repeat,
     var(--plum-deep);
 }
+/* språkväxel i mobilmenyn */
+.mobile-menu .mm-lang{display:inline-flex;margin-bottom:26px;padding:4px}
+.mobile-menu .mm-lang a{padding:10px 20px;font-size:.9rem}
+@media (min-width:901px){.mobile-menu .mm-lang{display:none}}

@@ -386,6 +386,7 @@ def header(lang, page, root):
 </header>
 <div class="mobile-menu" id="mobile-menu">
   <button class="mm-close nav-toggle" aria-expanded="true" aria-label="{t['menu_close']}" style="display:block"><span style="transform:translateY(4.5px) rotate(45deg)"></span><span style="transform:translateY(-4.5px) rotate(-45deg)"></span></button>
+  <div class="lang-switch mm-lang">{switch}</div>
   {mobile_links}
   <div class="mm-meta">{ADDRESS} · <span dir="ltr">{PHONE_DISP}</span></div>
 </div>"""
