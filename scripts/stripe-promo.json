@@ -1,0 +1,6 @@
+{
+  "_comment": "Rabattkod på Stripe-betalsidan. Ändra/ta bort och kör workflowen 'Stripe payment links' för att uppdatera.",
+  "codes": [
+    { "code": "BLACKFRIDAY", "percent_off": 20, "until": "2026-11-30T23:59:59+01:00", "name": "Black Friday 2026" }
+  ]
+}

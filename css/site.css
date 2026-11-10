@@ -880,3 +880,25 @@ html[dir="rtl"] .tp-list li::before{left:auto;right:4px}
 .mobile-menu .mm-lang{display:inline-flex;margin-bottom:26px;padding:4px}
 .mobile-menu .mm-lang a{padding:10px 20px;font-size:.9rem}
 @media (min-width:901px){.mobile-menu .mm-lang{display:none}}
+/* ---------------------------------------------------------------- kampanjband (js/promo.js) */
+:root{--promo-h:34px}
+.promo-bar{
+  position:fixed;top:0;inset-inline:0;height:var(--promo-h);z-index:calc(var(--z-header) + 1);
+  display:flex;align-items:center;overflow:hidden;background:#0B0B0B;color:#fff;
+  font-family:'Jost',var(--sans);font-size:.74rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  transition:transform .35s var(--ease);
+}
+html[lang="ar"] .promo-bar{letter-spacing:.04em;font-family:'Tajawal',var(--sans);font-size:.85rem}
+.promo-track{display:flex;width:max-content;animation:promo-run 28s linear infinite}
+.promo-item{padding-inline:28px;white-space:nowrap;position:relative}
+.promo-item::after{content:"✦";position:absolute;inset-inline-end:-6px;color:#fff;opacity:.55;font-size:.7em;top:50%;transform:translateY(-50%)}
+.promo-bar:hover .promo-track{animation-play-state:paused}
+@keyframes promo-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+html[dir="rtl"] .promo-track{animation-name:promo-run-rtl}
+@keyframes promo-run-rtl{from{transform:translateX(0)}to{transform:translateX(50%)}}
+@media (prefers-reduced-motion:reduce){.promo-track{animation:none}}
+html.has-promo body{padding-top:var(--promo-h)}
+html.has-promo .site-header{top:var(--promo-h);transition:transform .35s var(--ease),top .35s var(--ease)}
+html.has-promo.promo-hidden .promo-bar{transform:translateY(-100%)}
+html.has-promo.promo-hidden .site-header{top:0}
+.pay-promo{background:#0B0B0B;color:#fff;padding:10px 14px;border-radius:12px;font-weight:500}

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [js/treatments.js]
+    paths: [js/treatments.js, scripts/stripe-promo.json, scripts/stripe-sync-links.js]
 
 permissions:
   contents: write

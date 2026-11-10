@@ -437,6 +437,7 @@ def scripts(root, extra=""):
     base = (
         f'<script src="{root}js/treatments.js?v={ASSET_V}"></script>\n'
         f'<script src="{root}js/icons.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/promo.js?v={ASSET_V}"></script>\n'
         f'<script src="{root}js/site.js?v={ASSET_V}"></script>\n'
     )
     return base + extra + (

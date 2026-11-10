@@ -58,13 +58,17 @@ const ore = (price) => {
     const key = slug(t.name);
     keep.add(key);
     const old = existing[key];
-    if (old && old.metadata.nss_amount === String(amount)) { out[t.name] = old.url; reused++; continue; }
+    if (old && old.metadata.nss_amount === String(amount)) {
+      if (!old.allow_promotion_codes) await stripe("POST", "payment_links/" + old.id, { allow_promotion_codes: "true" });
+      out[t.name] = old.url; reused++; continue;
+    }
     if (old) await stripe("POST", "payment_links/" + old.id, { active: "false" });
     const product = await stripe("POST", "products", { name: t.name, "metadata[nss_key]": key });
     const price = await stripe("POST", "prices", { product: product.id, currency: "sek", unit_amount: String(amount) });
     const link = await stripe("POST", "payment_links", {
       "line_items[0][price]": price.id, "line_items[0][quantity]": "1",
       submit_type: "book",
+      allow_promotion_codes: "true",
       "metadata[nss_key]": key, "metadata[nss_amount]": String(amount),
     });
     out[t.name] = link.url; created++;
@@ -74,6 +78,20 @@ const ore = (price) => {
   let deactivated = 0;
   for (const [key, l] of Object.entries(existing)) {
     if (!keep.has(key)) { await stripe("POST", "payment_links/" + l.id, { active: "false" }); deactivated++; }
+  }
+
+  const promoFile = path.join(root, "scripts/stripe-promo.json");
+  const promos = fs.existsSync(promoFile) ? (JSON.parse(fs.readFileSync(promoFile, "utf8")).codes || []) : [];
+  for (const p of promos) {
+    const until = Math.floor(Date.parse(p.until) / 1000);
+    if (!until || until * 1000 < Date.now()) { console.log("promo", p.code, "expired – skipped"); continue; }
+    const found = await stripe("GET", "promotion_codes?active=true&code=" + encodeURIComponent(p.code));
+    if (found.data.length) { console.log("promo", p.code, "already active"); continue; }
+    const coupon = await stripe("POST", "coupons", {
+      percent_off: String(p.percent_off), duration: "once", redeem_by: String(until), name: p.name || p.code,
+    });
+    await stripe("POST", "promotion_codes", { coupon: coupon.id, code: p.code, expires_at: String(until) });
+    console.log("promo", p.code, "created:", p.percent_off + "% until", p.until);
   }
 
   const js = "/* Noura Skin Secrets — Stripe-betallänkar per behandling (fast pris, kort/Klarna).\n" +

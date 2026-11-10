@@ -96,7 +96,9 @@
     }
     if (chosen === "kort") {
       const fixed = fixedLink();
+      const promoOn = typeof PROMO !== "undefined" && PROMO.active && PROMO.payHint && Date.now() <= Date.parse(PROMO.until);
       html += `<p class="pay-note">${tr(fixed ? T.cardMsgFixed : T.cardMsg)}</p>
+        ${promoOn ? `<p class="pay-note pay-promo">${tr(PROMO.payHint)}</p>` : ""}
         <div class="pay-line"><strong>${tr(T.amount)}:</strong> <span class="num">${amount ? amount + " kr" : "—"}</span></div>
         <a class="btn btn-gold" style="margin-top:8px;display:inline-flex;" href="${fixed || STRIPE_PAYMENT_LINK}" target="_blank" rel="noopener">${tr(T.cardBtn)}</a>`;
     }
