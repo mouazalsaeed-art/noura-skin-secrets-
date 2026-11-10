@@ -389,6 +389,8 @@ def header(lang, page, root):
   <div class="mm-meta">{ADDRESS} · <span dir="ltr">{PHONE_DISP}</span></div>
 </div>"""
 
+FOOTER_LOGO_ALT = {'sv': 'Noura Skin Secrets – Kundernas Bästa val 2026 på Bokadirekt', 'en': 'Noura Skin Secrets – Customers’ Best Choice 2026 on Bokadirekt', 'ar': 'نورا سكين سيكرتس – اختيار العملاء الأفضل 2026 على Bokadirekt'}
+
 def footer(lang, root):
     t = T[lang]
     fl = t["footer_links"]
@@ -396,7 +398,7 @@ def footer(lang, root):
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="f-brand">{LOGO} Noura Skin Secrets</div>
+        <div class="f-brand f-brand-img"><picture><source srcset="{root}images/logo-noura-2026.webp" type="image/webp"><img src="{root}images/logo-noura-2026.jpg" alt="{FOOTER_LOGO_ALT[lang]}" width="160" height="160" loading="lazy" decoding="async"></picture></div>
         <p>{t['footer_desc']}</p>
       </div>
       <div>
