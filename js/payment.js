@@ -2,7 +2,7 @@
    Kunden väljer att betala nu (Swish/kort) eller i salongen; valet följer med i bokningsmailet.
    SWISH_NUMBER / STRIPE_PAYMENT_LINK: lämna tomt ("") för att dölja metoden. */
 (function () {
-  const SWISH_NUMBER = "123-540 83 98";
+  const SWISH_NUMBER = "123-705 90 90";
   const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/8x2eV6e836u0dlzb8Y18c00";
 
   const swishOn = /\d/.test(SWISH_NUMBER);
