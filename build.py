@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Noura Skin Secrets — genererar sv/ (rot), en/ och ar/ ur samma mallar.
 Kör:  python3 build.py   (skriver index.html m.fl. + en/ + ar/)"""
-import json, os
+import json, os, time
+ASSET_V = time.strftime('%Y%m%d%H%M')  # cache-busting for css/js
 
 SITE = "https://nouraskinsecrets.se"
 BOKADIREKT = "https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600"
@@ -340,8 +341,8 @@ def head(lang, page, title, desc, root, extra_schema=None):
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{fonts}&display=swap" />
-<link rel="stylesheet" href="{root}css/site.css" />
-<link rel="stylesheet" href="{root}css/hudassistent.css" />
+<link rel="stylesheet" href="{root}css/site.css?v={ASSET_V}" />
+<link rel="stylesheet" href="{root}css/hudassistent.css?v={ASSET_V}" />
 {schema}</head>"""
 
 def header(lang, page, root):
@@ -433,13 +434,13 @@ CF_ANALYTICS = '<!-- Cloudflare Web Analytics --><script defer src=\'https://sta
 
 def scripts(root, extra=""):
     base = (
-        f'<script src="{root}js/treatments.js"></script>\n'
-        f'<script src="{root}js/icons.js"></script>\n'
-        f'<script src="{root}js/site.js"></script>\n'
+        f'<script src="{root}js/treatments.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/icons.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/site.js?v={ASSET_V}"></script>\n'
     )
     return base + extra + (
-        f'<script src="{root}js/livechat.js" defer></script>\n'
-        f'<script src="{root}js/hudassistent.js" defer></script>\n'
+        f'<script src="{root}js/livechat.js?v={ASSET_V}" defer></script>\n'
+        f'<script src="{root}js/hudassistent.js?v={ASSET_V}" defer></script>\n'
         + CF_ANALYTICS + '\n</body>\n</html>'
     )
 
@@ -682,10 +683,10 @@ def page_index(lang, root):
 """
     html += footer(lang, root)
     extra = (
-        f'<script src="{root}js/offers.js"></script>\n'
-        f'<script src="{root}js/klippkort.js"></script>\n'
-        f'<script src="{root}js/reviews.js"></script>\n'
-        f'<script src="{root}js/home.js"></script>\n'
+        f'<script src="{root}js/offers.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/klippkort.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/reviews.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/home.js?v={ASSET_V}"></script>\n'
     )
     html += scripts(root, extra)
     return html
@@ -730,7 +731,7 @@ def page_catalog(lang, root):
 </main>
 """
     html += footer(lang, root)
-    html += scripts(root, f'<script src="{root}js/catalog.js"></script>\n')
+    html += scripts(root, f'<script src="{root}js/catalog.js?v={ASSET_V}"></script>\n')
     return html
 
 # ---------------------------------------------------------------- boka
@@ -822,10 +823,10 @@ def page_booking(lang, root):
 """
     html += footer(lang, root)
     extra = (
-        f'<script src="{root}js/vendor-qrcode.js"></script>\n'
-        f'<script src="{root}js/booking.js"></script>\n'
-        f'<script src="{root}js/availability.js" defer></script>\n'
-        f'<script src="{root}js/payment.js" defer></script>\n'
+        f'<script src="{root}js/vendor-qrcode.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/booking.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/availability.js?v={ASSET_V}" defer></script>\n'
+        f'<script src="{root}js/payment.js?v={ASSET_V}" defer></script>\n'
     )
     html += scripts(root, extra)
     return html
