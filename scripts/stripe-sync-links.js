@@ -75,6 +75,37 @@ const ore = (price) => {
     console.log("created", t.name, amount / 100, "kr");
   }
 
+  // ---- erbjudanden (js/offers.js): egna priser, bara på webbplatsen, Boka → direkt till kassan
+  const offSrc = fs.readFileSync(path.join(root, "js/offers.js"), "utf8");
+  const OFFERS = new Function(offSrc + "\nreturn OFFERS;")();
+  for (const o of OFFERS) {
+    const amount = ore(o.price);
+    if (!o.active || !amount) continue;
+    if (o.until && Date.parse(o.until) < Date.now()) continue;
+    const key = "offer-" + slug(o.title);
+    keep.add(key);
+    const old = existing[key];
+    if (old && old.metadata.nss_amount === String(amount)) { out["offer:" + o.title] = old.url; reused++; continue; }
+    if (old) await stripe("POST", "payment_links/" + old.id, { active: "false" });
+    const product = await stripe("POST", "products", { name: "Erbjudande: " + o.title, "metadata[nss_key]": key });
+    const price = await stripe("POST", "prices", { product: product.id, currency: "sek", unit_amount: String(amount) });
+    const link = await stripe("POST", "payment_links", {
+      "line_items[0][price]": price.id, "line_items[0][quantity]": "1",
+      submit_type: "book",
+      "phone_number_collection[enabled]": "true",
+      "custom_fields[0][key]": "onskadtid",
+      "custom_fields[0][label][type]": "custom",
+      "custom_fields[0][label][custom]": "Önskad dag och tid",
+      "custom_fields[0][type]": "text",
+      "after_completion[type]": "hosted_confirmation",
+      "after_completion[hosted_confirmation][custom_message]":
+        "Tack för din bokning! Vi kontaktar dig inom kort för att bekräfta tiden. / Thank you! We will contact you shortly to confirm the time.",
+      "metadata[nss_key]": key, "metadata[nss_amount]": String(amount),
+    });
+    out["offer:" + o.title] = link.url; created++;
+    console.log("created offer", o.title, amount / 100, "kr");
+  }
+
   let deactivated = 0;
   for (const [key, l] of Object.entries(existing)) {
     if (!keep.has(key)) { await stripe("POST", "payment_links/" + l.id, { active: "false" }); deactivated++; }

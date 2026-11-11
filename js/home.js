@@ -40,7 +40,9 @@
 
   /* ---------- erbjudanden: zig-zag rader ---------- */
   var offersEl = document.getElementById("offer-list");
-  var activeOffers = typeof OFFERS !== "undefined" ? OFFERS.filter(function (o) { return o.active; }) : [];
+  var activeOffers = typeof OFFERS !== "undefined" ? OFFERS.filter(function (o) {
+    return o.active && (!o.until || Date.now() <= Date.parse(o.until));
+  }) : [];
   if (offersEl && !activeOffers.length) {
     var offersSec = document.getElementById("erbjudanden"); if (offersSec) offersSec.style.display = "none";
   }
@@ -54,7 +56,12 @@
         "<div><h3>" + esc(pick(o, "title")) + "</h3><p>" + esc(pick(o, "desc")) + "</p></div>" +
         '<div class="offer-price"><strong>' + esc(o.price) + "</strong>" +
         (o.oldPrice ? "<s>" + esc(o.oldPrice) + "</s>" : "") + "</div>" +
-        '<a class="btn btn-outline" href="' + BOKA + "?treatment=" + encodeURIComponent(o.treatment) + '">' + t("book") + "</a>";
+        (function () {
+          var pay = typeof STRIPE_LINKS !== "undefined" && STRIPE_LINKS["offer:" + o.title];
+          return pay
+            ? '<a class="btn btn-gold" href="' + pay + '" target="_blank" rel="noopener">' + t("book") + "</a>"
+            : '<a class="btn btn-outline" href="' + BOKA + "?treatment=" + encodeURIComponent(o.treatment || o.title) + '">' + t("book") + "</a>";
+        })();
       offersEl.appendChild(row);
     });
   }
