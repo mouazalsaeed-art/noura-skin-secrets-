@@ -2,6 +2,18 @@
    Redigera listan för att uppdatera startsidan. active:false döljer utan att radera. */
 const OFFERS = [
   {
+    active: true,
+    until: "2026-11-30T23:59:59+01:00",
+    badge: "−30%", badgeEn: "−30%", badgeAr: "خصم 30%",
+    title: "DNA Salmon Microneedling + Ice Mask & LED-terapi",
+    titleEn: "DNA Salmon microneedling + ice mask & LED therapy",
+    titleAr: "ميكرونيدلينغ DNA السلمون + قناع الثلج وعلاج LED",
+    price: "840 kr", oldPrice: "1 200 kr",
+    desc: "Microneedling med DNA Salmon för lyster och hudförnyelse, följt av en svalkande ice mask och LED-ljusterapi som lugnar huden.",
+    descEn: "Microneedling with DNA Salmon for glow and skin renewal, followed by a cooling ice mask and soothing LED light therapy.",
+    descAr: "ميكرونيدلينغ مع DNA السلمون لإشراقة البشرة وتجديدها، يليه قناع ثلج منعش وعلاج بضوء LED يهدّئ البشرة.",
+  },
+  {
     active: false,
     badge: "Populärast", badgeEn: "Most popular", badgeAr: "الأكثر طلباً",
     title: "VMAX HIFU & RF – Hela ansiktet",
