@@ -74,5 +74,6 @@ const STRIPE_LINKS = {
  "Head Massage – 30 minuter (friskvård)": "https://book.stripe.com/5kQ14g9RN9Gc1CR3Gw18c17",
  "Hårbotten Mesoterapi + High Frequency": "https://book.stripe.com/3cIcMY3tp9Gc2GV2Cs18c18",
  "Lyxig hårbottenbehandling": "https://book.stripe.com/7sY14g2plaKg0yNcd218c19",
- "Hudvårdskonsultation": "https://book.stripe.com/5kQ28kd3Z19Gdlz90Q18c1a"
+ "Hudvårdskonsultation": "https://book.stripe.com/5kQ28kd3Z19Gdlz90Q18c1a",
+ "offer:DNA Salmon Microneedling + Ice Mask & LED-terapi": "https://book.stripe.com/00wcMYaVR7y4epD6SI18c1d"
 };
