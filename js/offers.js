@@ -19,9 +19,9 @@ const OFFERS = [
     title: "VMAX HIFU & RF – Hela ansiktet",
     titleEn: "VMAX HIFU & RF – full face", titleAr: "VMAX هايفو و RF – الوجه كامل",
     price: "1 999 kr", oldPrice: "",
-    desc: "Senaste generationens hudföryngring: kollagenboost och lyft utan nålar. Resultat som håller 1–2 år.",
-    descEn: "Latest-generation rejuvenation: collagen boost and lift without needles. Results last 1–2 years.",
-    descAr: "أحدث جيل من تجديد البشرة: تعزيز للكولاجين ورفع بدون إبر. نتائج تدوم من سنة إلى سنتين.",
+    desc: "Senaste generationens hudföryngring: kollagenboost och lyft utan nålar. Resultatet byggs upp gradvis.",
+    descEn: "Latest-generation rejuvenation: collagen boost and lift without needles. Results build gradually.",
+    descAr: "أحدث جيل من تجديد البشرة: تعزيز للكولاجين ورفع بدون إبر. النتيجة تظهر تدريجياً.",
     treatment: "VMAX HIFU & RF – Hela ansiktet",
   },
   {

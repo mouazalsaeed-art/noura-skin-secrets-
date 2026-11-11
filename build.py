@@ -77,7 +77,7 @@ T = {
     ("Hur vet jag vilken behandling som passar mig?", "Prova vår hudassistent (chattknappen) som guidar dig utifrån din hudtyp. Vill du ha en personlig bedömning rekommenderar vi en hudvårdskonsultation (20 min, 300 kr)."),
     ("Hur förbereder jag mig inför en behandling?", "Kom gärna utan smink och undvik solning samt starka syror/retinol några dagar före de flesta behandlingar. Du får alltid personliga instruktioner vid bokning."),
     ("Kan jag avboka eller omboka min tid?", "Ja, kontakta oss så snart som möjligt via telefon eller e-post så hjälper vi dig att hitta en ny tid."),
-    ("Gör behandlingarna ont?", "De flesta behandlingar är skonsamma och smärtfria. Vid intensivare behandlingar som microneedling används bedövningskräm. Berätta gärna om du är känslig så anpassar vi behandlingen."),
+    ("Gör behandlingarna ont?", "De flesta behandlingar är skonsamma och upplevs som behagliga. Vid intensivare behandlingar som microneedling används bedövningskräm. Berätta gärna om du är känslig så anpassar vi behandlingen."),
   ],
   "contact_eyebrow": "Hitta hit", "contact_h2": "Besök oss i <em>Uppsala</em>",
   "contact_lede": "Boka enkelt online eller kontakta oss direkt via telefon, e-post eller Instagram.",
@@ -168,7 +168,7 @@ T = {
     ("How do I know which treatment suits me?", "Try our skin assistant (chat button) which guides you based on your skin type. For a personal assessment we recommend a skin consultation (20 min, 300 kr)."),
     ("How do I prepare for a treatment?", "Come without makeup if possible, and avoid sun as well as strong acids/retinol a few days before most treatments. You always get personal instructions when booking."),
     ("Can I cancel or reschedule?", "Yes, contact us as soon as possible by phone or email and we will help you find a new time."),
-    ("Do the treatments hurt?", "Most treatments are gentle and painless. For more intensive treatments such as microneedling, numbing cream is used. Let us know if you are sensitive and we will adapt the treatment."),
+    ("Do the treatments hurt?", "Most treatments are gentle and feel comfortable. For more intensive treatments such as microneedling, numbing cream is used. Let us know if you are sensitive and we will adapt the treatment."),
   ],
   "contact_eyebrow": "Find us", "contact_h2": "Visit us in <em>Uppsala</em>",
   "contact_lede": "Book easily online or contact us directly by phone, email or Instagram.",
@@ -256,7 +256,7 @@ T = {
     ("كيف أعرف العلاج المناسب لي؟", "جربي مساعدة البشرة (زر الدردشة) التي ترشدك حسب نوع بشرتك. وللتقييم الشخصي ننصح بجلسة استشارة بشرة (20 دقيقة، 300 كرون)."),
     ("كيف أستعد قبل الجلسة؟", "يفضل الحضور بدون مكياج، وتجنب التعرض للشمس والأحماض القوية/الريتينول قبل أيام من معظم العلاجات. ستحصلين دائماً على تعليمات شخصية عند الحجز."),
     ("هل يمكنني إلغاء أو تغيير موعدي؟", "نعم، تواصلي معنا بأسرع وقت عبر الهاتف أو الإيميل وسنساعدك في إيجاد موعد جديد."),
-    ("هل العلاجات مؤلمة؟", "معظم علاجاتنا لطيفة وغير مؤلمة. وفي العلاجات الأقوى مثل الميكرونيدلينغ نستخدم كريم تخدير لراحتك. أخبرينا إذا كانت بشرتك حساسة وسنكيّف العلاج."),
+    ("هل العلاجات مؤلمة؟", "معظم علاجاتنا لطيفة ومريحة. وفي العلاجات الأقوى مثل الميكرونيدلينغ نستخدم كريم تخدير لراحتك. أخبرينا إذا كانت بشرتك حساسة وسنكيّف العلاج."),
   ],
   "contact_eyebrow": "موقعنا", "contact_h2": "زورينا في <em>أوبسالا</em>",
   "contact_lede": "احجزي بسهولة أونلاين أو تواصلي معنا مباشرة عبر الهاتف أو الإيميل أو إنستغرام.",
@@ -333,9 +333,12 @@ def head(lang, page, title, desc, root, extra_schema=None):
 <meta property="og:title" content="{title}" />
 <meta property="og:description" content="{desc}" />
 <meta property="og:url" content="{urlfor(lang, page)}" />
-<meta property="og:image" content="{SITE}/images/logo.jpg" />
+<meta property="og:image" content="{SITE}/images/og-noura.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Noura Skin Secrets – hudvård i Uppsala" />
 <meta property="og:locale" content="{t['locale']}" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="{root}images/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{root}assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -489,6 +492,8 @@ def badge_pic(root, lang, w, lazy=True):
 # ---------------------------------------------------------------- index
 POPULAR_SV = '<p class="tp-pop">Populärt i Uppsala: <a href="microneedling-uppsala.html">Microneedling</a> <a href="hifu-uppsala.html">HIFU</a> <a href="hydrafacial-uppsala.html">Hydro facial</a> <a href="laser-uppsala.html">Laser</a> <a href="laser-harborttagning-uppsala.html">Laser hårborttagning</a> <a href="peeling-uppsala.html">Peeling</a></p>'
 
+HERO_ALT = {"sv": "Ansiktsbehandling hos Noura Skin Secrets i Uppsala", "en": "Facial treatment at Noura Skin Secrets in Uppsala", "ar": "علاج للوجه في نورا سكين سيكرتس في أوبسالا"}
+
 def page_index(lang, root):
     t = T[lang]
     stats = "".join(
@@ -528,7 +533,7 @@ def page_index(lang, root):
     <div class="hero-media reveal" data-d="1">
       <a class="media-badge" href="{BOKADIREKT}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><picture><source srcset="{root}images/basta-val-2026.webp" type="image/webp"><img src="{root}images/basta-val-2026.png" alt="" width="116" height="120" decoding="async"></picture></a>
       <div class="frame"><div class="frame-core">
-        <img src="{root}images/hero-poster.jpg" alt="" onerror="this.remove()" />
+        <img src="{root}images/hero-poster.jpg" alt="{HERO_ALT[lang]}" onerror="this.remove()" />
         <video data-src="{root}videos/hero.mp4" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
         <div class="hero-tag"><strong>{t['hero_tag'][0]}</strong><span>{t['hero_tag'][1]}</span></div>
       </div></div>

@@ -80,7 +80,7 @@
       "faq.q7": "Can I cancel or reschedule?",
       "faq.a7": "Yes, contact us as soon as possible by phone or email and we will help you find a new time.",
       "faq.q8": "Do the treatments hurt?",
-      "faq.a8": "Most of our treatments are gentle and painless. For more intensive treatments such as microneedling, numbing cream is used for your comfort. Let us know if you are sensitive and we will adapt the treatment.",
+      "faq.a8": "Most of our treatments are gentle and feel comfortable. For more intensive treatments such as microneedling, numbing cream is used for your comfort. Let us know if you are sensitive and we will adapt the treatment.",
 
       "contact.eyebrow": "Find us",
       "contact.title": "Visit us in Uppsala",
@@ -190,7 +190,7 @@
       "faq.q7": "هل يمكنني إلغاء أو تغيير موعدي؟",
       "faq.a7": "نعم، تواصلي معنا بأسرع وقت عبر الهاتف أو الإيميل وسنساعدك في إيجاد موعد جديد.",
       "faq.q8": "هل العلاجات مؤلمة؟",
-      "faq.a8": "معظم علاجاتنا لطيفة وغير مؤلمة. وفي العلاجات الأقوى مثل الميكرونيدلينغ نستخدم كريم تخدير لراحتك. أخبرينا إذا كانت بشرتك حساسة وسنكيّف العلاج.",
+      "faq.a8": "معظم علاجاتنا لطيفة ومريحة. وفي العلاجات الأقوى مثل الميكرونيدلينغ نستخدم كريم تخدير لراحتك. أخبرينا إذا كانت بشرتك حساسة وسنكيّف العلاج.",
 
       "contact.eyebrow": "موقعنا",
       "contact.title": "زورينا في أوبسالا",

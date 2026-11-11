@@ -461,7 +461,7 @@
       label: { sv: "📉 Rynkor & fina linjer", en: "📉 Wrinkles & fine lines", ar: "📉 تجاعيد وخطوط رفيعة" },
       intro: { sv: "För rynkor och fina linjer:", en: "For wrinkles and fine lines:", ar: "للتجاعيد والخطوط الرفيعة:" },
       recs: [
-        ["VMAX HIFU & RF – Hela ansiktet", { sv: "Lyfter och stramar upp — resultat som håller 1–2 år.", en: "Lifts and tightens — results lasting 1–2 years.", ar: "شد ورفع — نتائج تدوم سنة إلى سنتين." }],
+        ["VMAX HIFU & RF – Hela ansiktet", { sv: "Lyfter och stramar upp — resultatet byggs upp gradvis.", en: "Lifts and tightens — results build gradually.", ar: "شد ورفع — النتيجة تظهر تدريجياً." }],
         ["Microneedling – Anti-age & uppstramning", { sv: "Kollagenstimulerande serum som mjukar upp rynkor.", en: "Collagen-stimulating serums that soften wrinkles.", ar: "سيرومات محفزة للكولاجين تنعّم التجاعيد." }],
         ["Skinbooster – Ansikte", { sv: "Hyaluronsyra på djupet för fasthet och lyster.", en: "Deep hyaluronic acid for firmness and glow.", ar: "حمض الهيالورونيك في العمق للشد والإشراقة." }],
       ],
