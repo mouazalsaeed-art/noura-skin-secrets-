@@ -700,8 +700,92 @@ def page_index(lang, root):
     return html
 
 # ---------------------------------------------------------------- behandlingar
+def _js_literal_to_json(src):
+    """Convert the JS object literal in js/treatments.js to JSON text.
+    Handles double-quoted strings, unquoted keys and trailing commas."""
+    out, i, n = [], 0, len(src)
+    while i < n:
+        c = src[i]
+        if c == '"':
+            j = i + 1
+            while src[j] != '"':
+                j += 2 if src[j] == "\\" else 1
+            out.append(src[i:j + 1]); i = j + 1
+        elif c == "/" and src[i:i + 2] == "/*":
+            i = src.index("*/", i) + 2
+        elif c == "/" and src[i:i + 2] == "//":
+            i = src.index("\n", i)
+        elif c.isalpha() or c == "_":
+            j = i
+            while j < n and (src[j].isalnum() or src[j] == "_"):
+                j += 1
+            word = src[i:j]
+            k = j
+            while k < n and src[k] in " \t\r\n":
+                k += 1
+            if k < n and src[k] == ":":
+                out.append('"' + word + '"')
+            else:
+                out.append(word)
+            i = j
+        else:
+            out.append(c); i += 1
+    txt = "".join(out)
+    import re
+    return re.sub(r",(\s*[\]}])", r"\1", txt)
+
+def load_treatments():
+    base = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(base, "js", "treatments.js"), encoding="utf-8") as f:
+        src = f.read()
+    start = src.index("[", src.index("TREATMENT_CATEGORIES"))
+    end = src.index("\n];", start) + 2
+    return json.loads(_js_literal_to_json(src[start:end]))
+
+CAT_UI = {"book": {"sv": "Boka", "en": "Book", "ar": "احجزي"},
+          "many": {"sv": "behandlingar", "en": "treatments", "ar": "علاجاً"}}
+
+def _pick(o, key, lang):
+    if lang == "en" and o.get(key + "En"):
+        return o[key + "En"]
+    if lang == "ar" and o.get(key + "Ar"):
+        return o[key + "Ar"]
+    return o.get(key, "")
+
+def static_catalog(lang):
+    """Pre-render the catalogue so it is in the HTML without JavaScript.
+    js/catalog.js re-renders the same markup on load (search/filter)."""
+    from html import escape as e
+    from urllib.parse import quote
+    cats = load_treatments()
+    parts, total = [], 0
+    for cat in cats:
+        trs = cat.get("treatments", [])
+        if not trs:
+            continue
+        total += len(trs)
+        cards = []
+        for tr in trs:
+            note = _pick(tr, "note", lang)
+            cards.append(
+                '<div class="treatment-card"><div class="row"><h4>' + e(_pick(tr, "name", lang)) +
+                '</h4><span class="duration">' + e(tr.get("duration", "")) + '</span></div>' +
+                '<p class="desc">' + e(_pick(tr, "desc", lang)) + '</p>' +
+                ('<div class="note-line">' + e(note) + '</div>' if note else '') +
+                '<div class="footer-row"><span class="t-price">' + e(_pick(tr, "price", lang)) + '</span>' +
+                '<a class="book-link" href="boka.html?treatment=' + quote(tr["name"], safe="") + '">' +
+                CAT_UI["book"][lang] + '</a></div></div>')
+        cnote = _pick(cat, "note", lang)
+        parts.append(
+            '<div class="category-block" id="' + e(cat["id"]) + '"><h2>' + e(_pick(cat, "name", lang)) +
+            ' <span class="cat-count num">' + str(len(trs)) + '</span></h2>' +
+            ('<div class="cat-note">' + e(cnote) + '</div>' if cnote else '') +
+            '<div class="treatment-grid">' + "".join(cards) + '</div></div>')
+    return "\n".join(parts), total
+
 def page_catalog(lang, root):
     t = T[lang]
+    cat_html, cat_total = static_catalog(lang)
     html = head(lang, "behandlingar.html", t["cat_title"], t["cat_desc"], root, [salon_schema(lang)])
     html += header(lang, "behandlingar.html", root)
     html += f"""
@@ -723,8 +807,10 @@ def page_catalog(lang, root):
       </div>
       <div class="chip-row" id="chip-row"></div>
     </div>
-    <div class="catalog-count" id="catalog-count"></div>
-    <div id="catalog"></div>
+    <div class="catalog-count" id="catalog-count">{cat_total} {CAT_UI['many'][lang]}</div>
+    <div id="catalog">
+{cat_html}
+    </div>
     <div class="empty-state" id="empty-state" style="display:none">
       <h3>{t['cat_empty_h']}</h3><p>{t['cat_empty_p']}</p>
     </div>
