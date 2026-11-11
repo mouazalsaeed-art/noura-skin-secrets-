@@ -118,9 +118,7 @@
           '<p class="desc">' + esc(pick(tr, "desc")) + "</p>" +
           (trNote ? '<div class="note-line">' + esc(trNote) + "</div>" : "") +
           '<div class="footer-row"><span class="t-price">' + esc(typeof tPrice === "function" ? tPrice(tr) : tr.price) + "</span>" +
-          (tr.bd
-            ? '<a class="book-link" href="' + BD_BASE + esc(tr.bd) + '" target="_blank" rel="noopener">'
-            : '<a class="book-link" href="https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600" target="_blank" rel="noopener">') +
+          '<a class="book-link" href="' + BOKA + "?treatment=" + encodeURIComponent(tr.name) + '">' +
           t("book") + "</a></div>";
         grid.appendChild(card);
       });

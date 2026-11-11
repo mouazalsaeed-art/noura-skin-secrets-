@@ -75,7 +75,8 @@
   var params = new URLSearchParams(location.search);
   var pre = params.get("treatment");
   if (pre) {
-    var match = Array.prototype.find.call(select.options, function (o) { return o.value.indexOf(pre) === 0; });
+    var match = Array.prototype.find.call(select.options, function (o) { return o.value.indexOf(pre + " (") === 0; }) ||
+                Array.prototype.find.call(select.options, function (o) { return o.value.indexOf(pre) === 0; });
     if (match) match.selected = true;
   }
   var erbj = params.get("erbjudande");

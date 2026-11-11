@@ -13,6 +13,7 @@ import html
 import json
 import re
 import sys
+from urllib.parse import quote
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ sys.path.insert(0, str(ROOT))
 import build as B  # noqa: E402  (site templates: head/header/footer/scripts)
 
 BD_BASE = "https://www.bokadirekt.se/boka-tjanst/noura-skin-secrets-kvinnlig-behandling-129600/"
-CONSULT = BD_BASE + "hudvardskonsultation-3270204"
+CONSULT = "boka.html?treatment=Hudv%C3%A5rdskonsultation"
 
 
 def load_treatments():
@@ -207,8 +208,8 @@ def treatment_cards(names, data, strip=""):
         t = data.get(n)
         if not t:
             raise SystemExit(f"treatment not found in js/treatments.js: {n}")
-        href = (BD_BASE + t["bd"]) if t["bd"] else B.BOKADIREKT
-        ext = ' target="_blank" rel="noopener"'
+        href = "boka.html?treatment=" + quote(n)
+        ext = ""
         cards.append(
             f'<div class="treatment-card"><div class="row"><h3>{E(n[len(strip):] if strip and n.startswith(strip) else n)}</h3><span class="duration">{E(t["duration"])}</span></div>'
             + ("" if t["desc"] in seen_desc else f'<p class="desc">{E(t["desc"])}</p>') +
@@ -255,7 +256,7 @@ def related_links(current):
 def render(page, data):
     lang, root, slug = "sv", "", page["slug"]
     main = data[page["main"]]
-    main_href = (BD_BASE + main["bd"]) if main["bd"] else B.BOKADIREKT
+    main_href = "boka.html?treatment=" + quote(page["main"])
     doc = B.head(lang, slug, page["title"], page["desc"], root, schema(page, data))
     # only a Swedish version exists: drop the en/ar hreflang alternates
     doc = re.sub(r'\n<link rel="alternate" hreflang="(en|ar)" href="[^"]*" />', "", doc)
@@ -276,7 +277,7 @@ def render(page, data):
     <h1>{page['h1']}</h1>
     <p class="lede">{E(page['lede'])}</p>
     <div class="hero-actions">
-      <a href="{main_href}" class="btn btn-gold" target="_blank" rel="noopener">Boka {E(page['short'])}<span class="btn-ic">{B.IC['arrow']}</span></a>
+      <a href="{main_href}" class="btn btn-gold">Boka {E(page['short'])}<span class="btn-ic">{B.IC['arrow']}</span></a>
       <a href="#priser" class="btn btn-outline">Se priser</a>
     </div>
     <p class="tp-proof"><a href="{B.BOKADIREKT}" target="_blank" rel="noopener">★ 4,9 av 5 på Bokadirekt · Kundernas Bästa val 2026</a></p>
@@ -306,7 +307,7 @@ def render(page, data):
         {treatment_cards(page['treatments'], data, page.get('strip', ''))}
     </div>
     {('<p class="tp-note center">' + page['note_html'] + '</p>') if page.get('note_html') else ''}
-    <p class="tp-note center">Osäker på vad som passar dig? Boka en <a href="{CONSULT}" target="_blank" rel="noopener">hudvårdskonsultation</a> – eller se <a href="behandlingar.html">alla behandlingar</a>.</p>
+    <p class="tp-note center">Osäker på vad som passar dig? Boka en <a href="{CONSULT}">hudvårdskonsultation</a> – eller se <a href="behandlingar.html">alla behandlingar</a>.</p>
   </div>
 </section>
 
@@ -335,8 +336,8 @@ def render(page, data):
     <h2>Boka {E(page['short'])} i Uppsala</h2>
     <p class="lede">Kungsängsgatan 5B, Uppsala · Öppet mån–fre 16–20, lör–sön 13–19, efter bokning.</p>
     <div class="hero-actions" style="justify-content:center">
-      <a href="{main_href}" class="btn btn-gold" target="_blank" rel="noopener">Boka på Bokadirekt<span class="btn-ic">{B.IC['arrow']}</span></a>
-      <a href="boka.html" class="btn btn-outline">Skicka bokningsförfrågan</a>
+      <a href="{main_href}" class="btn btn-gold">Boka tid<span class="btn-ic">{B.IC['arrow']}</span></a>
+      <a href="behandlingar.html" class="btn btn-outline">Alla behandlingar</a>
     </div>
     <p class="tp-related">Andra populära behandlingar: {related_links(slug)}</p>
   </div>

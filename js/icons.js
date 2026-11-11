@@ -36,7 +36,7 @@
     harvard: "hair", "massage-ansikte": "flower", "massage-kropp": "flower", kroppsbehandlingar: "droplet",
     "slim-firm": "flame", "hifu-kropp": "waves", laser: "bolt", "laser-harborttagning": "bolt", plasma: "sparkle", ovrigt: "star",
   };
-  var PAY = { salon: "store", swish: "mobile", kort: "card" };
+  var PAY = { salon: "store", swish: "mobile", kort: "card", bokadirekt: "clock" };
   window.NSS_ICON = svg;
   window.catIcon = function (id, size) { return svg(CAT[id] || "sparkle", size); };
   window.payIcon = function (name, size) { return svg(PAY[name] || "store", size); };

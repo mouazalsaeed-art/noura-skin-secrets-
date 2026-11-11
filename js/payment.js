@@ -31,6 +31,13 @@
     },
     qrHint: { sv: "Eller skanna QR-koden med Swish-appen:", en: "Or scan the QR code with the Swish app:", ar: "أو امسحي رمز QR بتطبيق Swish:" },
     copy: { sv: "Kopiera", en: "Copy", ar: "نسخ" },
+    payBd: { sv: "Boka & betala via Bokadirekt", en: "Book & pay via Bokadirekt", ar: "الحجز والدفع عبر Bokadirekt" },
+    bdMsg: {
+      sv: "Välj en ledig tid direkt i Bokadirekts kalender och betala där. Du behöver inte skicka formuläret.",
+      en: "Pick a free time directly in Bokadirekt's calendar and pay there. You don't need to send this form.",
+      ar: "اختاري وقتاً متاحاً مباشرة في تقويم Bokadirekt وادفعي هناك. لا داعي لإرسال هذا النموذج.",
+    },
+    bdBtn: { sv: "Fortsätt till Bokadirekt →", en: "Continue to Bokadirekt →", ar: "← المتابعة إلى Bokadirekt" },
     copied: { sv: "Kopierat ✓", en: "Copied ✓", ar: "تم النسخ ✓" },
     cardBtn: { sv: "Öppna säker betalning (kort/Klarna) →", en: "Open secure payment (card/Klarna) →", ar: "← فتح صفحة الدفع الآمن (بطاقة/Klarna)" },
     cardMsgFixed: {
@@ -59,6 +66,13 @@
   const methods = [["salon", "paySalon", "Betalar i salongen"]];
   if (swishOn) methods.push(["swish", "paySwish", "Swish (betalar online)"]);
   if (stripeOn) methods.push(["kort", "payCard", "Kort/Klarna via Stripe (betalar online)"]);
+  const BD_BASE = "https://www.bokadirekt.se/boka-tjanst/noura-skin-secrets-kvinnlig-behandling-129600/";
+  function bdLink() {
+    const n = (treatmentSelect.value || "").replace(/\s*\([^()]*\)\s*$/, "");
+    if (!n || n.indexOf("Erbjudande: ") === 0 || typeof TREATMENT_CATEGORIES === "undefined") return "";
+    for (const c of TREATMENT_CATEGORIES) for (const t of c.treatments) if (t.name === n && t.bd) return BD_BASE + t.bd;
+    return "";
+  }
 
   let chosen = "salon";
 
@@ -78,9 +92,14 @@
 
   function render() {
     const amount = treatmentPrice();
+    const bd = bdLink();
+    if (chosen === "bokadirekt" && !bd) chosen = "salon";
+    const list = bd ? methods.concat([["bokadirekt", "payBd", "Bokar via Bokadirekt"]]) : methods;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.style.display = chosen === "bokadirekt" ? "none" : "";
     let html = `<label class="pay-title">${tr(T.title)}</label><div class="pay-options">`;
     const icon = (v) => (typeof window.payIcon === "function" ? `<span class="pay-ic">${window.payIcon(v)}</span>` : "");
-    methods.forEach(([val, key, emailValue]) => {
+    list.forEach(([val, key, emailValue]) => {
       html += `<label class="pay-opt${chosen === val ? " pay-opt--on" : ""}">
         <input type="radio" name="betalning" value="${emailValue}" data-val="${val}" ${chosen === val ? "checked" : ""} />
         ${icon(val)}<span>${tr(T[key])}</span></label>`;
@@ -105,6 +124,10 @@
         ${promoOn ? `<p class="pay-note pay-promo">${tr(PROMO.payHint)}</p>` : ""}
         <div class="pay-line"><strong>${tr(T.amount)}:</strong> <span class="num">${amount ? amount + " kr" : "—"}</span></div>
         <a class="btn btn-gold" style="margin-top:8px;display:inline-flex;" href="${fixed || STRIPE_PAYMENT_LINK}" target="_blank" rel="noopener">${tr(T.cardBtn)}</a>`;
+    }
+    if (chosen === "bokadirekt") {
+      html += `<p class="pay-note">${tr(T.bdMsg)}</p>
+        <a class="btn btn-gold" style="margin-top:8px;display:inline-flex;" href="${bd}" target="_blank" rel="noopener">${tr(T.bdBtn)}</a>`;
     }
     html += `</div>`;
     section.innerHTML = html;
