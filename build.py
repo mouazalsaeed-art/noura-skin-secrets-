@@ -303,6 +303,8 @@ T = {
 PAGES = ["index.html", "behandlingar.html", "boka.html", "integritet.html"]
 LANG_DIR = {"sv": "", "en": "en/", "ar": "ar/"}
 
+OG_ALT = {"sv": "Noura Skin Secrets – hudvård i Uppsala", "en": "Noura Skin Secrets – skin care in Uppsala", "ar": "نورا سكين سيكرتس – العناية بالبشرة في أوبسالا"}
+
 def urlfor(lang, page):
     base = SITE + "/" + LANG_DIR[lang]
     return base + ("" if page == "index.html" and lang != "sv" else page) if page != "index.html" else base
@@ -336,7 +338,7 @@ def head(lang, page, title, desc, root, extra_schema=None):
 <meta property="og:image" content="{SITE}/images/og-noura.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Noura Skin Secrets – hudvård i Uppsala" />
+<meta property="og:image:alt" content="{OG_ALT[lang]}" />
 <meta property="og:locale" content="{t['locale']}" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="{root}images/logo.svg" type="image/svg+xml">
@@ -490,6 +492,8 @@ def badge_pic(root, lang, w, lazy=True):
             f'<img src="{root}images/basta-val-2026.png" alt="{BADGE_ALT[lang]}" width="{w}" height="{h}"{ld} decoding="async"></picture>')
 
 # ---------------------------------------------------------------- index
+POPULAR_EN = '<p class="tp-pop">Popular in Uppsala: <a href="microneedling-uppsala.html">Microneedling</a> <a href="hifu-uppsala.html">HIFU</a></p>'
+POPULAR_AR = '<p class="tp-pop">الأكثر طلباً في أوبسالا: <a href="microneedling-uppsala.html">ميكرونيدلينغ</a> <a href="hifu-uppsala.html">هايفو</a></p>'
 POPULAR_SV = '<p class="tp-pop">Populärt i Uppsala: <a href="microneedling-uppsala.html">Microneedling</a> <a href="hifu-uppsala.html">HIFU</a> <a href="hydrafacial-uppsala.html">Hydro facial</a> <a href="laser-uppsala.html">Laser</a> <a href="laser-harborttagning-uppsala.html">Laser hårborttagning</a> <a href="peeling-uppsala.html">Peeling</a></p>'
 
 HERO_ALT = {"sv": "Ansiktsbehandling hos Noura Skin Secrets i Uppsala", "en": "Facial treatment at Noura Skin Secrets in Uppsala", "ar": "علاج للوجه في نورا سكين سيكرتس في أوبسالا"}
@@ -800,7 +804,7 @@ def page_catalog(lang, root):
     <span class="eyebrow">{t['cat_eyebrow']}</span>
     <h1>{t['cat_h1']}</h1>
     <p class="lede">{t['cat_lede']}</p>
-    {POPULAR_SV if lang == 'sv' else ''}
+    {POPULAR_SV if lang == 'sv' else (POPULAR_EN if lang == 'en' else POPULAR_AR)}
   </div>
 </section>
 <section class="section--tight section">
@@ -1039,6 +1043,8 @@ def page_privacy(lang, root):
     return html
 
 # ---------------------------------------------------------------- sitemap
+TP_TRANSLATED = {"microneedling-uppsala.html", "hifu-uppsala.html"}  # have en/ and ar/ versions
+
 def sitemap():
     urls = []
     prio = {"index.html": "1.0", "behandlingar.html": "0.9", "boka.html": "0.9", "integritet.html": "0.3"}
@@ -1053,8 +1059,13 @@ def sitemap():
     <priority>{prio[page]}</priority>
   </url>""")
     for slug in ["microneedling-uppsala.html", "hifu-uppsala.html", "hydrafacial-uppsala.html", "laser-uppsala.html", "laser-harborttagning-uppsala.html", "peeling-uppsala.html"]:
-        urls.append(f"""  <url>
-    <loc>{SITE}/{slug}</loc>
+        langs = ["sv", "en", "ar"] if slug in TP_TRANSLATED else ["sv"]
+        alts = "".join(
+            f'\n    <xhtml:link rel="alternate" hreflang="{l}" href="{urlfor(l, slug)}"/>' for l in langs
+        ) if len(langs) > 1 else ""
+        for lang in langs:
+            urls.append(f"""  <url>
+    <loc>{urlfor(lang, slug)}</loc>{alts}
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>""")

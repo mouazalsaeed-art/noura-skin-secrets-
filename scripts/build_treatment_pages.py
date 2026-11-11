@@ -19,6 +19,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 import build as B  # noqa: E402  (site templates: head/header/footer/scripts)
+sys.path.insert(0, str(ROOT / "scripts"))
+from tp_i18n import UI, I18N  # noqa: E402
+
+FULL = {}  # sv name -> full treatment object (nameEn/nameAr/descEn/...)
+for _c in B.load_treatments():
+    for _t in _c.get("treatments", []):
+        FULL.setdefault(_t["name"], _t)
 
 BD_BASE = "https://www.bokadirekt.se/boka-tjanst/noura-skin-secrets-kvinnlig-behandling-129600/"
 CONSULT = "boka.html?treatment=Hudv%C3%A5rdskonsultation"
@@ -201,7 +208,7 @@ PAGES = [
 ]
 
 
-def treatment_cards(names, data, strip=""):
+def treatment_cards(names, data, strip="", lang="sv"):
     cards = []
     seen_desc = set()
     for n in names:
@@ -210,12 +217,19 @@ def treatment_cards(names, data, strip=""):
             raise SystemExit(f"treatment not found in js/treatments.js: {n}")
         href = "boka.html?treatment=" + quote(n)
         ext = ""
+        if lang == "sv":
+            name, desc, price = (n[len(strip):] if strip and n.startswith(strip) else n), t["desc"], t["price"]
+        else:
+            f = FULL.get(n, {})
+            name = B._pick(f, "name", lang) or n
+            desc = B._pick(f, "desc", lang) or t["desc"]
+            price = B._pick(f, "price", lang) or t["price"]
         cards.append(
-            f'<div class="treatment-card"><div class="row"><h3>{E(n[len(strip):] if strip and n.startswith(strip) else n)}</h3><span class="duration">{E(t["duration"])}</span></div>'
-            + ("" if t["desc"] in seen_desc else f'<p class="desc">{E(t["desc"])}</p>') +
-            f'<div class="footer-row"><span class="t-price">{E(t["price"])}</span>'
-            f'<a class="book-link" href="{href}"{ext}>Boka</a></div></div>')
-        seen_desc.add(t["desc"])
+            f'<div class="treatment-card"><div class="row"><h3>{E(name)}</h3><span class="duration">{E(t["duration"])}</span></div>'
+            + ("" if desc in seen_desc else f'<p class="desc">{E(desc)}</p>') +
+            f'<div class="footer-row"><span class="t-price">{E(price)}</span>'
+            f'<a class="book-link" href="{href}"{ext}>{UI[lang]["book"]}</a></div></div>')
+        seen_desc.add(desc)
     return "\n        ".join(cards)
 
 
@@ -224,8 +238,8 @@ def price_num(p):
     return int(m.group(0).replace(" ", "")) if m else None
 
 
-def schema(page, data):
-    url = f"{B.SITE}/{page['slug']}"
+def schema(page, data, lang="sv"):
+    url = B.urlfor(lang, page['slug'])
     prices = [price_num(data[n]["price"]) for n in page["treatments"]]
     prices = [p for p in prices if p]
     plain_h1 = re.sub(r"<[^>]+>", "", page["h1"])
@@ -239,8 +253,8 @@ def schema(page, data):
          "offers": {"@type": "AggregateOffer", "priceCurrency": "SEK", "lowPrice": min(prices),
                     "highPrice": max(prices), "offerCount": len(page["treatments"])}},
         {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Hem", "item": B.SITE + "/"},
-            {"@type": "ListItem", "position": 2, "name": "Behandlingar", "item": B.SITE + "/behandlingar.html"},
+            {"@type": "ListItem", "position": 1, "name": UI[lang]["home"], "item": B.urlfor(lang, "index.html")},
+            {"@type": "ListItem", "position": 2, "name": UI[lang]["cat"], "item": B.urlfor(lang, "behandlingar.html")},
             {"@type": "ListItem", "position": 3, "name": plain_h1, "item": url}]},
         {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
@@ -248,21 +262,33 @@ def schema(page, data):
     ]
 
 
-def related_links(current):
-    return " · ".join(
-        f'<a href="{p["slug"]}">{p["short"]} i Uppsala</a>' for p in PAGES if p["slug"] != current)
+def related_links(current, lang="sv"):
+    out = []
+    for p in PAGES:
+        if p["slug"] == current:
+            continue
+        if lang == "sv":
+            out.append(f'<a href="{p["slug"]}">{p["short"]} i Uppsala</a>')
+        elif lang in I18N.get(p["slug"], {}):
+            out.append(f'<a href="{p["slug"]}">{UI[lang]["rel"].format(s=I18N[p["slug"]][lang]["short"])}</a>')
+    return " · ".join(out)
 
 
-def render(page, data):
-    lang, root, slug = "sv", "", page["slug"]
+def render(page, data, lang="sv"):
+    root, slug = ("" if lang == "sv" else "../"), page["slug"]
+    translated = bool(I18N.get(slug))
+    if lang != "sv":
+        page = {**page, **I18N[slug][lang]}
+    u = UI[lang]
     main = data[page["main"]]
     main_href = "boka.html?treatment=" + quote(page["main"])
-    doc = B.head(lang, slug, page["title"], page["desc"], root, schema(page, data))
-    # only a Swedish version exists: drop the en/ar hreflang alternates
-    doc = re.sub(r'\n<link rel="alternate" hreflang="(en|ar)" href="[^"]*" />', "", doc)
+    doc = B.head(lang, slug, page["title"], page["desc"], root, schema(page, data, lang))
     hdr = B.header(lang, slug, root)
-    # language switch: send EN/AR visitors to their treatment catalogue
-    hdr = hdr.replace(f'href="en/{slug}"', 'href="en/behandlingar.html"').replace(f'href="ar/{slug}"', 'href="ar/behandlingar.html"')
+    if not translated:
+        # only a Swedish version exists: drop the en/ar hreflang alternates
+        doc = re.sub(r'\n<link rel="alternate" hreflang="(en|ar)" href="[^"]*" />', "", doc)
+        # language switch: send EN/AR visitors to their treatment catalogue
+        hdr = hdr.replace(f'href="en/{slug}"', 'href="en/behandlingar.html"').replace(f'href="ar/{slug}"', 'href="ar/behandlingar.html"')
     hdr = hdr.replace('<li><a href="behandlingar.html">', '<li><a href="behandlingar.html" class="active">')
     what = "".join(f"<p>{E(p)}</p>" for p in page["what"])
     fits = "".join(f"<li>{E(f)}</li>" for f in page["fits"])
@@ -272,15 +298,15 @@ def render(page, data):
 <main id="main">
 <section class="page-hero tp-hero">
   <div class="container">
-    <nav class="tp-crumbs" aria-label="Brödsmulor"><a href="index.html">Hem</a> › <a href="behandlingar.html">Behandlingar</a> › <span>{E(page['short'])}</span></nav>
-    <span class="eyebrow">Behandling i Uppsala · Endast för kvinnor</span>
+    <nav class="tp-crumbs" aria-label="{u['crumbs']}"><a href="index.html">{u['home']}</a> › <a href="behandlingar.html">{u['cat']}</a> › <span>{E(page['short'])}</span></nav>
+    <span class="eyebrow">{u['eyebrow']}</span>
     <h1>{page['h1']}</h1>
     <p class="lede">{E(page['lede'])}</p>
     <div class="hero-actions">
-      <a href="{main_href}" class="btn btn-gold">Boka {E(page['short'])}<span class="btn-ic">{B.IC['arrow']}</span></a>
-      <a href="#priser" class="btn btn-outline">Se priser</a>
+      <a href="{main_href}" class="btn btn-gold">{u['book']} {E(page['short'])}<span class="btn-ic">{B.IC['arrow']}</span></a>
+      <a href="#priser" class="btn btn-outline">{u['see_prices']}</a>
     </div>
-    <p class="tp-proof"><a href="{B.BOKADIREKT}" target="_blank" rel="noopener">★ 4,9 av 5 på Bokadirekt · Kundernas Bästa val 2026</a></p>
+    <p class="tp-proof"><a href="{B.BOKADIREKT}" target="_blank" rel="noopener">{u['proof']}</a></p>
   </div>
 </section>
 
@@ -291,7 +317,7 @@ def render(page, data):
       {what}
     </div>
     <div class="tp-box reveal" data-d="1">
-      <h3>Passar dig som har</h3>
+      <h3>{u['fits_h']}</h3>
       <ul class="tp-list">{fits}</ul>
     </div>
   </div>
@@ -300,22 +326,22 @@ def render(page, data):
 <section class="section section--tone" id="priser">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow">Priser</span>
-      <h2>{E(page['short'])} i Uppsala – priser & behandlingar</h2>
+      <span class="eyebrow">{u['prices_eb']}</span>
+      <h2>{u['prices_h'].format(s=E(page['short']))}</h2>
     </div>
     <div class="treatment-grid">
-        {treatment_cards(page['treatments'], data, page.get('strip', ''))}
+        {treatment_cards(page['treatments'], data, page.get('strip', ''), lang)}
     </div>
     {('<p class="tp-note center">' + page['note_html'] + '</p>') if page.get('note_html') else ''}
-    <p class="tp-note center">Osäker på vad som passar dig? Boka en <a href="{CONSULT}">hudvårdskonsultation</a> – eller se <a href="behandlingar.html">alla behandlingar</a>.</p>
+    <p class="tp-note center">{u['note'].format(c=CONSULT)}</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow">Steg för steg</span>
-      <h2>Så går behandlingen till</h2>
+      <span class="eyebrow">{u['steps_eb']}</span>
+      <h2>{u['steps_h']}</h2>
     </div>
     <ol class="tp-steps reveal">{steps}</ol>
   </div>
@@ -324,8 +350,8 @@ def render(page, data):
 <section class="section section--tone" id="faq">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow">Bra att veta</span>
-      <h2>Vanliga frågor om {E(page['short'] if page['short'] in ('HIFU', 'Hydro facial') else page['short'].lower())}</h2>
+      <span class="eyebrow">{u['faq_eb']}</span>
+      <h2>{u['faq_h'].format(s=E(page['short'] if (lang != 'sv' or page['short'] in ('HIFU', 'Hydro facial')) else page['short'].lower()))}</h2>
     </div>
     <div class="faq-cols">{faq}</div>
   </div>
@@ -333,13 +359,13 @@ def render(page, data):
 
 <section class="section">
   <div class="container center tp-cta reveal">
-    <h2>Boka {E(page['short'])} i Uppsala</h2>
-    <p class="lede">Kungsängsgatan 5B, Uppsala · Öppet mån–fre 16–20, lör–sön 13–19, efter bokning.</p>
+    <h2>{u['cta_h'].format(s=E(page['short']))}</h2>
+    <p class="lede">{u['cta_p']}</p>
     <div class="hero-actions" style="justify-content:center">
-      <a href="{main_href}" class="btn btn-gold">Boka tid<span class="btn-ic">{B.IC['arrow']}</span></a>
-      <a href="behandlingar.html" class="btn btn-outline">Alla behandlingar</a>
+      <a href="{main_href}" class="btn btn-gold">{u['book_time']}<span class="btn-ic">{B.IC['arrow']}</span></a>
+      <a href="behandlingar.html" class="btn btn-outline">{u['all']}</a>
     </div>
-    <p class="tp-related">Andra populära behandlingar: {related_links(slug)}</p>
+    <p class="tp-related">{u['related']} {related_links(slug, lang)}</p>
   </div>
 </section>
 </main>
@@ -352,6 +378,10 @@ def main():
     for page in PAGES:
         (ROOT / page["slug"]).write_text(render(page, data), encoding="utf-8")
         print("wrote", page["slug"])
+        for lang in I18N.get(page["slug"], {}):
+            out = ROOT / lang / page["slug"]
+            out.write_text(render(page, data, lang), encoding="utf-8")
+            print("wrote", f"{lang}/{page['slug']}")
 
 
 if __name__ == "__main__":

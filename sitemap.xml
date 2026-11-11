@@ -98,11 +98,49 @@
   </url>
   <url>
     <loc>https://nouraskinsecrets.se/microneedling-uppsala.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/microneedling-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/microneedling-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/microneedling-uppsala.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/en/microneedling-uppsala.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/microneedling-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/microneedling-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/microneedling-uppsala.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/ar/microneedling-uppsala.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/microneedling-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/microneedling-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/microneedling-uppsala.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nouraskinsecrets.se/hifu-uppsala.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/hifu-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/hifu-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/hifu-uppsala.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/en/hifu-uppsala.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/hifu-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/hifu-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/hifu-uppsala.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nouraskinsecrets.se/ar/hifu-uppsala.html</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://nouraskinsecrets.se/hifu-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nouraskinsecrets.se/en/hifu-uppsala.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nouraskinsecrets.se/ar/hifu-uppsala.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
