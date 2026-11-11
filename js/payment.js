@@ -69,7 +69,10 @@
   }
   function treatmentName() { return (treatmentSelect.value || "").replace(/\s*\([^()]*\)\s*$/, ""); }
   function fixedLink() {
-    return (typeof STRIPE_LINKS !== "undefined" && STRIPE_LINKS[treatmentName()]) || "";
+    if (typeof STRIPE_LINKS === "undefined") return "";
+    const n = treatmentName();
+    if (n.indexOf("Erbjudande: ") === 0) return STRIPE_LINKS["offer:" + n.slice(12)] || "";
+    return STRIPE_LINKS[n] || "";
   }
   function swishDigits() { return SWISH_NUMBER.replace(/\D/g, ""); }
 
@@ -135,6 +138,10 @@
     } catch (e) { box.innerHTML = ""; }
   }
 
-  treatmentSelect.addEventListener("change", render);
+  function preferCardForOffer() {
+    if (stripeOn && treatmentName().indexOf("Erbjudande: ") === 0 && fixedLink()) chosen = "kort";
+  }
+  treatmentSelect.addEventListener("change", () => { preferCardForOffer(); render(); });
+  preferCardForOffer();
   render();
 })();

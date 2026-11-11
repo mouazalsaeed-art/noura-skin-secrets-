@@ -833,6 +833,7 @@ def page_booking(lang, root):
     html += footer(lang, root)
     extra = (
         f'<script src="{root}js/vendor-qrcode.js?v={ASSET_V}"></script>\n'
+        f'<script src="{root}js/offers.js?v={ASSET_V}"></script>\n'
         f'<script src="{root}js/booking.js?v={ASSET_V}"></script>\n'
         f'<script src="{root}js/availability.js?v={ASSET_V}" defer></script>\n'
         f'<script src="{root}js/stripe-links.js?v={ASSET_V}" defer></script>\n'

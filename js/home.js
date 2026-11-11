@@ -56,12 +56,7 @@
         "<div><h3>" + esc(pick(o, "title")) + "</h3><p>" + esc(pick(o, "desc")) + "</p></div>" +
         '<div class="offer-price"><strong>' + esc(o.price) + "</strong>" +
         (o.oldPrice ? "<s>" + esc(o.oldPrice) + "</s>" : "") + "</div>" +
-        (function () {
-          var pay = typeof STRIPE_LINKS !== "undefined" && STRIPE_LINKS["offer:" + o.title];
-          return pay
-            ? '<a class="btn btn-gold" href="' + pay + '" target="_blank" rel="noopener">' + t("book") + "</a>"
-            : '<a class="btn btn-outline" href="' + BOKA + "?treatment=" + encodeURIComponent(o.treatment || o.title) + '">' + t("book") + "</a>";
-        })();
+        '<a class="btn btn-gold" href="' + BOKA + "?erbjudande=" + encodeURIComponent(o.title) + '">' + t("book") + "</a>";
       offersEl.appendChild(row);
     });
   }

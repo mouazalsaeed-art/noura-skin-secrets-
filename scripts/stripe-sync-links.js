@@ -85,7 +85,13 @@ const ore = (price) => {
     const key = "offer-" + slug(o.title);
     keep.add(key);
     const old = existing[key];
-    if (old && old.metadata.nss_amount === String(amount)) { out["offer:" + o.title] = old.url; reused++; continue; }
+    if (old && old.metadata.nss_amount === String(amount)) {
+      if (old.custom_fields && old.custom_fields.length) {
+        try { await stripe("POST", "payment_links/" + old.id, { custom_fields: "" }); console.log("removed custom field on", o.title); }
+        catch (e) { console.log("could not remove custom field:", e.message); }
+      }
+      out["offer:" + o.title] = old.url; reused++; continue;
+    }
     if (old) await stripe("POST", "payment_links/" + old.id, { active: "false" });
     const product = await stripe("POST", "products", { name: "Erbjudande: " + o.title, "metadata[nss_key]": key });
     const price = await stripe("POST", "prices", { product: product.id, currency: "sek", unit_amount: String(amount) });
@@ -93,10 +99,6 @@ const ore = (price) => {
       "line_items[0][price]": price.id, "line_items[0][quantity]": "1",
       submit_type: "book",
       "phone_number_collection[enabled]": "true",
-      "custom_fields[0][key]": "onskadtid",
-      "custom_fields[0][label][type]": "custom",
-      "custom_fields[0][label][custom]": "Önskad dag och tid",
-      "custom_fields[0][type]": "text",
       "after_completion[type]": "hosted_confirmation",
       "after_completion[hosted_confirmation][custom_message]":
         "Tack för din bokning! Vi kontaktar dig inom kort för att bekräfta tiden. / Thank you! We will contact you shortly to confirm the time.",

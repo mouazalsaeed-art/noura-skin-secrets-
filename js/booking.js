@@ -54,12 +54,34 @@
     });
   }
 
-  /* förval via ?treatment= eller ?paket= */
+  /* erbjudanden (js/offers.js) överst i listan */
+  UI.offersGroup = { sv: "Erbjudanden", en: "Offers", ar: "العروض" };
+  var liveOffers = typeof OFFERS !== "undefined" ? OFFERS.filter(function (o) {
+    return o.active && (!o.until || Date.now() <= Date.parse(o.until));
+  }) : [];
+  if (liveOffers.length) {
+    var og = document.createElement("optgroup");
+    og.label = t("offersGroup");
+    liveOffers.forEach(function (o) {
+      var op = document.createElement("option");
+      op.value = "Erbjudande: " + o.title + " (" + o.price + ")";
+      op.textContent = pick(o, "title") + " — " + o.price + (o.oldPrice ? " (" + o.oldPrice + ")" : "");
+      og.appendChild(op);
+    });
+    select.insertBefore(og, select.children[1] || null);
+  }
+
+  /* förval via ?treatment=, ?erbjudande= eller ?paket= */
   var params = new URLSearchParams(location.search);
   var pre = params.get("treatment");
   if (pre) {
     var match = Array.prototype.find.call(select.options, function (o) { return o.value.indexOf(pre) === 0; });
     if (match) match.selected = true;
+  }
+  var erbj = params.get("erbjudande");
+  if (erbj) {
+    var om = Array.prototype.find.call(select.options, function (o) { return o.value.indexOf("Erbjudande: " + erbj + " (") === 0; });
+    if (om) om.selected = true;
   }
   var paket = params.get("paket");
   if (paket) {
