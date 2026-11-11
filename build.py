@@ -104,7 +104,7 @@ T = {
   "boka_title": "Boka tid — Noura Skin Secrets Uppsala",
   "boka_desc": "Boka din behandling hos Noura Skin Secrets i Uppsala — direkt via Bokadirekt eller med vårt formulär.",
   "boka_eyebrow": "Bokning", "boka_h1": "Boka tid för hudvård <em>i Uppsala</em>",
-  "boka_lede": "Boka direkt med realtidskalender via Bokadirekt — eller skicka en förfrågan så bekräftar vi inom 24 timmar.",
+  "boka_lede": "Välj behandling, dag och tid — vi bekräftar din bokning inom 24 timmar.",
   "bd_h3": "Boka direkt — se lediga tider",
   "bd_p": "Välj behandling och tid i realtid via Bokadirekt. Snabbast och enklast.",
   "bd_cta": "Öppna Bokadirekt",
@@ -193,7 +193,7 @@ T = {
   "boka_title": "Book an appointment — Noura Skin Secrets Uppsala",
   "boka_desc": "Book your treatment at Noura Skin Secrets in Uppsala — instantly via Bokadirekt or with our request form.",
   "boka_eyebrow": "Booking", "boka_h1": "Book skin care <em>in Uppsala</em>",
-  "boka_lede": "Book instantly with a live calendar via Bokadirekt — or send a request and we confirm within 24 hours.",
+  "boka_lede": "Choose treatment, day and time — we confirm your booking within 24 hours.",
   "bd_h3": "Book instantly — see available times",
   "bd_p": "Choose treatment and time in real time via Bokadirekt. The fastest way.",
   "bd_cta": "Open Bokadirekt",
@@ -281,7 +281,7 @@ T = {
   "boka_title": "حجز موعد — نورا سكين سيكرتس أوبسالا",
   "boka_desc": "احجزي علاجك لدى نورا سكين سيكرتس في أوبسالا — فوراً عبر Bokadirekt أو عبر نموذج الطلب.",
   "boka_eyebrow": "الحجز", "boka_h1": "احجزي موعدك للعناية بالبشرة <em>في أوبسالا</em>",
-  "boka_lede": "احجزي فوراً عبر تقويم مباشر على Bokadirekt — أو أرسلي طلباً وسنؤكده خلال 24 ساعة.",
+  "boka_lede": "اختاري العلاج واليوم والوقت — وسنؤكد حجزك خلال 24 ساعة.",
   "bd_h3": "احجزي فوراً — شاهدي الأوقات المتاحة",
   "bd_p": "اختاري العلاج والوقت مباشرة عبر Bokadirekt. الطريقة الأسرع والأسهل.",
   "bd_cta": "افتحي Bokadirekt",
@@ -760,12 +760,6 @@ def page_booking(lang, root):
 </section>
 <section class="section--tight section">
   <div class="container">
-    <div class="bd-card reveal">
-      <h3>{t['bd_h3']}</h3>
-      <p>{t['bd_p']}</p>
-      <a class="btn btn-gold" href="{BOKADIREKT}" target="_blank" rel="noopener">{t['bd_cta']}<span class="btn-ic">{IC['arrow']}</span></a>
-    </div>
-    <div class="bd-or">{t['bd_or']}</div>
     <div class="booking-layout">
       <form class="booking-form reveal" id="booking-form" novalidate>
         <input type="hidden" name="_subject" value="Ny bokningsförfrågan — Noura Skin Secrets" />
