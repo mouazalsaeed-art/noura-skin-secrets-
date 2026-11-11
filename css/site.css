@@ -919,3 +919,8 @@ html.has-promo.promo-hidden .site-header{top:0}
 .mq.dragging{cursor:grabbing}
 .mq-track{will-change:transform}
 .mq img,.mq video{pointer-events:none;-webkit-user-drag:none}
+/* nästa lediga tid (bokningsformuläret) */
+.next-free{margin:-6px 0 18px;font-size:.88rem;color:var(--taupe);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.next-free strong{color:var(--plum)}
+.next-free-btn{border:1px solid var(--gold-soft);background:var(--paper);color:var(--gold-ink);border-radius:999px;padding:5px 14px;font-size:.8rem;cursor:pointer}
+.next-free-btn:hover{background:var(--gold-ink);color:#fff}

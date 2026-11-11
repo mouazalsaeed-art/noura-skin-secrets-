@@ -123,30 +123,85 @@
     var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
     dateEl.min = today.toISOString().slice(0, 10);
   }
-  function fillTimes() {
-    if (!timeEl) return;
-    var prev = timeEl.value;
-    timeEl.innerHTML = "";
-    var v = dateEl && dateEl.value;
-    if (!v) { timeEl.innerHTML = '<option value="">' + t("pickDate") + "</option>"; timeEl.disabled = true; return; }
+  /* ---------- lediga tider från Google Kalender (scripts/google-calendar/Code.gs) ---------- */
+  UI.loadingTimes = { sv: "Hämtar lediga tider…", en: "Loading free times…", ar: "جارٍ تحميل الأوقات المتاحة…" };
+  UI.nextFree = { sv: "Nästa lediga tid:", en: "Next free time:", ar: "أقرب وقت متاح:" };
+  UI.pickThis = { sv: "Välj", en: "Choose", ar: "اختيار" };
+  UI.noneSoon = { sv: "Inga lediga tider de närmaste veckorna – ring eller skriv till oss.", en: "No free times in the coming weeks – call or message us.", ar: "لا أوقات متاحة في الأسابيع القادمة – اتصلي بنا أو راسلينا." };
+  var BUSY_DAYS = 21;
+  var busyMap = null;                      // null = inte hämtat (än); {} = inga upptagna
+  var busyLoading = false;
+  function loadBusy() {
+    if (!CALENDAR_ENDPOINT || busyLoading) return;
+    busyLoading = true;
+    fetch(CALENDAR_ENDPOINT + "?action=busy&days=" + BUSY_DAYS)
+      .then(function (r) { return r.json(); })
+      .then(function (j) { busyMap = (j && j.busy) || {}; })
+      .catch(function () { busyMap = {}; })          // fel → visa alla tider inom öppettiderna
+      .then(function () { busyLoading = false; fillTimes(); showNextFree(); });
+  }
+  function ymd(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function slotsFor(v) {
     var d = new Date(v + "T12:00:00");
     var hours = OPENING_HOURS[d.getDay()];
     var dur = parseInt(durationFor(select.value), 10) || 60;
     var start = toMin(hours[0]), last = toMin(hours[1]) - dur;
-    var now = new Date(), isToday = v === dateEl.min;
+    var now = new Date(), isToday = v === ymd(now);
     var nowMin = now.getHours() * 60 + now.getMinutes() + 60;   // minst en timme fram
-    var html = '<option value="">' + t("pickTime") + "</option>", n = 0;
+    var busy = (busyMap && busyMap[v]) || [];
+    var out = [];
     for (var m = start; m <= last; m += SLOT_MIN) {
       if (isToday && m < nowMin) continue;
-      html += '<option value="' + toHHMM(m) + '">' + toHHMM(m) + "</option>"; n++;
+      var clash = busy.some(function (b) { return m < b[1] && m + dur > b[0]; });
+      if (!clash) out.push(m);
     }
-    if (!n) html = '<option value="">' + t("noSlots") + "</option>";
+    return out;
+  }
+  function fillTimes() {
+    if (!timeEl) return;
+    var prev = timeEl.value;
+    var v = dateEl && dateEl.value;
+    if (!v) { timeEl.innerHTML = '<option value="">' + t("pickDate") + "</option>"; timeEl.disabled = true; return; }
+    if (CALENDAR_ENDPOINT && busyMap === null) {
+      timeEl.innerHTML = '<option value="">' + t("loadingTimes") + "</option>"; timeEl.disabled = true; loadBusy(); return;
+    }
+    var list = slotsFor(v);
+    var html = '<option value="">' + t("pickTime") + "</option>";
+    list.forEach(function (m) { html += '<option value="' + toHHMM(m) + '">' + toHHMM(m) + "</option>"; });
+    if (!list.length) html = '<option value="">' + t("noSlots") + "</option>";
     timeEl.innerHTML = html;
-    timeEl.disabled = !n;
+    timeEl.disabled = !list.length;
     if (prev && timeEl.querySelector('option[value="' + prev + '"]')) timeEl.value = prev;
   }
+  /* "Nästa lediga tid" under datum/tid – ett klick fyller i båda */
+  var hintEl = null;
+  function showNextFree() {
+    if (!CALENDAR_ENDPOINT || busyMap === null || !dateEl) return;
+    if (!hintEl) {
+      hintEl = document.createElement("p");
+      hintEl.className = "next-free";
+      var row = dateEl.closest(".two-col") || dateEl.closest(".form-row");
+      row.parentNode.insertBefore(hintEl, row.nextSibling);
+    }
+    var d = new Date();
+    for (var i = 0; i < BUSY_DAYS; i++, d.setDate(d.getDate() + 1)) {
+      var v = ymd(d), list = slotsFor(v);
+      if (list.length) {
+        var label = d.toLocaleDateString(L === "ar" ? "ar" : L === "en" ? "en-GB" : "sv-SE", { weekday: "short", day: "numeric", month: "short" });
+        hintEl.innerHTML = t("nextFree") + ' <strong>' + label + " " + toHHMM(list[0]) + '</strong> <button type="button" class="next-free-btn">' + t("pickThis") + "</button>";
+        var when = { v: v, m: toHHMM(list[0]) };
+        hintEl.querySelector("button").onclick = function () {
+          dateEl.value = when.v; fillTimes(); timeEl.value = when.m;
+          timeEl.dispatchEvent(new Event("change"));
+        };
+        return;
+      }
+    }
+    hintEl.textContent = t("noneSoon");
+  }
+  if (CALENDAR_ENDPOINT) loadBusy();
   if (dateEl) dateEl.addEventListener("change", fillTimes);
-  select.addEventListener("change", fillTimes);
+  select.addEventListener("change", function () { fillTimes(); showNextFree(); });
 
   /* klientvalidering */
   var checks = [
@@ -225,6 +280,10 @@
       .then(function (res) { if (!res.ok) throw new Error("formspree"); return res; })
       .then(function () {
         sendToCalendar(data);
+        if (busyMap && data.date && data.time) {
+          var dm = parseInt(durationFor(data.treatment), 10) || 60, sm = toMin(data.time);
+          (busyMap[data.date] = busyMap[data.date] || []).push([sm, sm + dm]);
+        }
         confirmBox.innerHTML = t("sent");
         confirmBox.classList.add("show");
         form.reset();

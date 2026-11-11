@@ -43,7 +43,65 @@ function doPost(e) {
   const event = CalendarApp.getDefaultCalendar().createEvent(title, start, end, { description: description });
   event.setColor(CalendarApp.EventColor.YELLOW);
   event.addPopupReminder(60);
+  cache.removeAll(['busy-21', 'busy-14', 'busy-30']);   // nya förfrågan syns direkt som upptagen
   return json_({ ok: true });
+}
+
+/**
+ * Upptagna tider → webbplatsens bokningsformulär visar bara lediga tider.
+ * GET ?action=busy&days=21  →  { ok, busy: { "2026-11-12": [[960, 1020], …] } }
+ * Minuter från midnatt (svensk tid). Bara tider skickas – inga namn eller detaljer.
+ * Alla händelser i kalendern räknas som upptagna (även gula förfrågningar).
+ * Heldagshändelse (t.ex. "Stängt" eller semester) = hela dagen upptagen.
+ */
+const EXTRA_CALENDARS = [];   // t.ex. ['Bokadirekt'] om du prenumererar på Bokadirekts kalender i Google
+
+function doGet(e) {
+  const p = (e && e.parameter) || {};
+  if (p.action !== 'busy') return json_({ ok: true });
+  const days = Math.min(Math.max(parseInt(p.days, 10) || 21, 1), 60);
+  const cache = CacheService.getScriptCache();
+  const key = 'busy-' + days;
+  const hit = cache.get(key);
+  if (hit) return ContentService.createTextOutput(hit).setMimeType(ContentService.MimeType.JSON);
+
+  const today = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd');
+  const start = Utilities.parseDate(today + ' 00:00', TZ, 'yyyy-MM-dd HH:mm');
+  const end = new Date(start.getTime() + days * 86400000);
+
+  const cals = [CalendarApp.getDefaultCalendar()];
+  EXTRA_CALENDARS.forEach(function (name) {
+    CalendarApp.getCalendarsByName(name).forEach(function (c) { cals.push(c); });
+  });
+
+  const busy = {};
+  function add(day, a, b) { (busy[day] = busy[day] || []).push([a, b]); }
+  cals.forEach(function (cal) {
+    cal.getEvents(start, end).forEach(function (ev) {
+      let s = ev.getStartTime(), t = ev.getEndTime();
+      if (ev.isAllDayEvent()) {
+        for (let d = new Date(s.getTime()); d < t; d = new Date(d.getTime() + 86400000)) {
+          add(Utilities.formatDate(d, TZ, 'yyyy-MM-dd'), 0, 1440);
+        }
+        return;
+      }
+      if (s < start) s = start;
+      // dela upp över midnatt
+      while (s < t) {
+        const day = Utilities.formatDate(s, TZ, 'yyyy-MM-dd');
+        const dayEnd = Utilities.parseDate(day + ' 23:59', TZ, 'yyyy-MM-dd HH:mm');
+        const e2 = t < dayEnd ? t : new Date(dayEnd.getTime() + 60000);
+        const a = Number(Utilities.formatDate(s, TZ, 'H')) * 60 + Number(Utilities.formatDate(s, TZ, 'm'));
+        const b = e2.getTime() >= dayEnd.getTime() ? 1440
+          : Number(Utilities.formatDate(e2, TZ, 'H')) * 60 + Number(Utilities.formatDate(e2, TZ, 'm'));
+        add(day, a, b);
+        s = e2;
+      }
+    });
+  });
+  const out = JSON.stringify({ ok: true, busy: busy });
+  cache.put(key, out, 60);   // 1 minut
+  return ContentService.createTextOutput(out).setMimeType(ContentService.MimeType.JSON);
 }
 
 function json_(obj) {
