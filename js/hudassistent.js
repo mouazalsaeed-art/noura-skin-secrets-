@@ -91,9 +91,9 @@
       ar: "عندك أسئلة قبل الجلسة؟ اتصلي بنا على <a href=\"tel:+46793333476\">079-333 34 76</a>.",
     },
     hoursA: {
-      sv: "Vi har öppet <strong>alla dagar 10:00–20:00</strong>, endast efter bokning. 🌸",
-      en: "We are open <strong>every day 10:00–20:00</strong>, by appointment only. 🌸",
-      ar: "نعمل <strong>يومياً من 10:00 حتى 20:00</strong>، بالحجز المسبق فقط. 🌸",
+      sv: "Vi har öppet <strong>mån–fre 16–20 och lör–sön 13–19</strong>, endast efter bokning. 🌸",
+      en: "We are open <strong>Mon–Fri 16–20 and Sat–Sun 13–19</strong>, by appointment only. 🌸",
+      ar: "نعمل <strong>الاثنين–الجمعة 16–20، والسبت–الأحد 13–19</strong>، بالحجز المسبق فقط. 🌸",
     },
     locationA: {
       sv: "Du hittar oss på <strong>Kungsängsgatan 5B, 753 22 Uppsala</strong> — mitt i centrala Uppsala. 📍",

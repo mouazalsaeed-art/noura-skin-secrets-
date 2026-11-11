@@ -333,7 +333,7 @@ def render(page, data):
 <section class="section">
   <div class="container center tp-cta reveal">
     <h2>Boka {E(page['short'])} i Uppsala</h2>
-    <p class="lede">Kungsängsgatan 5B, Uppsala · Öppet alla dagar 10–20, efter bokning.</p>
+    <p class="lede">Kungsängsgatan 5B, Uppsala · Öppet mån–fre 16–20, lör–sön 13–19, efter bokning.</p>
     <div class="hero-actions" style="justify-content:center">
       <a href="{main_href}" class="btn btn-gold" target="_blank" rel="noopener">Boka på Bokadirekt<span class="btn-ic">{B.IC['arrow']}</span></a>
       <a href="boka.html" class="btn btn-outline">Skicka bokningsförfrågan</a>

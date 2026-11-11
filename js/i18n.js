@@ -52,7 +52,7 @@
       "about.li1": "Tailored treatment plans based on skin analysis",
       "about.li2": "Modern equipment: HIFU, laser, plasma, microneedling",
       "about.li3": "Calm, exclusive environment — women only",
-      "about.li4": "Open every day 10:00–20:00, by appointment",
+      "about.li4": "Open Mon–Fri 16–20, Sat–Sun 13–19, by appointment",
       "about.cta": "Book an appointment",
 
       "rating.meta": "91 reviews via Bokadirekt",
@@ -70,7 +70,7 @@
       "faq.q2": "Where is the salon located?",
       "faq.a2": "In central Uppsala at Kungsängsgatan 5B, 753 22 Uppsala — close to buses, trains and parking.",
       "faq.q3": "What are your opening hours?",
-      "faq.a3": "We are open every day 10:00–20:00, by appointment only.",
+      "faq.a3": "We are open Monday–Friday 16:00–20:00 and Saturday–Sunday 13:00–19:00, by appointment only.",
       "faq.q4": "Is the salon really women only?",
       "faq.a4": "Yes. The salon is a safe, relaxed environment created exclusively for women.",
       "faq.q5": "How do I know which treatment suits me?",
@@ -89,7 +89,7 @@
       "contact.phone": "Phone",
       "contact.email": "Email",
       "contact.hours": "Opening hours",
-      "contact.hoursText": "Every day 10:00–20:00<br />By appointment only",
+      "contact.hoursText": "Mon–Fri 16:00–20:00<br />Sat–Sun 13:00–19:00 · by appointment",
       "contact.cta": "Book your appointment now",
 
       "footer.desc": "Advanced skin and body care in Uppsala, in a safe environment created exclusively for women.",
@@ -162,7 +162,7 @@
       "about.li1": "خطط علاج مخصصة بعد تحليل البشرة",
       "about.li2": "أجهزة حديثة: هايفو، ليزر، بلازما، ميكرونيدلينغ",
       "about.li3": "أجواء هادئة وراقية — للنساء فقط",
-      "about.li4": "مفتوح يومياً 10:00–20:00، بالحجز المسبق",
+      "about.li4": "مفتوح الاثنين–الجمعة 16–20، والسبت–الأحد 13–19، بالحجز المسبق",
       "about.cta": "احجزي موعداً",
 
       "rating.meta": "91 تقييماً عبر Bokadirekt",
@@ -180,7 +180,7 @@
       "faq.q2": "أين يقع الصالون؟",
       "faq.a2": "في وسط أوبسالا: Kungsängsgatan 5B, 753 22 Uppsala — قريب من الباصات والقطار والمواقف.",
       "faq.q3": "ما هي أوقات العمل؟",
-      "faq.a3": "مفتوح يومياً من 10:00 حتى 20:00، بالحجز المسبق فقط.",
+      "faq.a3": "مفتوح من الاثنين إلى الجمعة 16:00–20:00، والسبت والأحد 13:00–19:00، بالحجز المسبق فقط.",
       "faq.q4": "هل الصالون فعلاً للنساء فقط؟",
       "faq.a4": "نعم. الصالون بيئة آمنة ومريحة مخصصة للنساء فقط.",
       "faq.q5": "كيف أعرف العلاج المناسب لي؟",
@@ -199,7 +199,7 @@
       "contact.phone": "الهاتف",
       "contact.email": "الإيميل",
       "contact.hours": "أوقات العمل",
-      "contact.hoursText": "يومياً 10:00–20:00<br />بالحجز المسبق فقط",
+      "contact.hoursText": "الاثنين–الجمعة 16:00–20:00<br />السبت–الأحد 13:00–19:00 · بالحجز المسبق",
       "contact.cta": "احجزي موعدك الآن",
 
       "footer.desc": "عناية متقدمة بالبشرة والجسم في أوبسالا، في بيئة آمنة مخصصة للنساء فقط.",

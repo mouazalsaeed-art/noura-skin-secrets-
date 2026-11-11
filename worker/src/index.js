@@ -85,7 +85,7 @@ function chatSystemPrompt(lang) {
 Salon facts:
 - Address: Kungsängsgatan 5B, 753 22 Uppsala (city centre).
 - Phone / WhatsApp: +46 79 333 34 76.
-- Open every day 10:00-20:00.
+- Open Mon–Fri 16:00–20:00, Sat–Sun 13:00–19:00, by appointment.
 - Booking: the "Boka tid" page on the website, or by phone/WhatsApp.
 - Women only. Instagram: @noura_skin_secrets.
 - The chatbot also offers an AI photo skin analysis — suggest it when someone wonders what treatment suits her skin.

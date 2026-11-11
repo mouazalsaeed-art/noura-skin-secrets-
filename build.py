@@ -44,7 +44,7 @@ T = {
   "hero_cta1": "Boka tid", "hero_cta2": "Se alla behandlingar",
   "hero_stat1": ("4.9 ★", "på Bokadirekt · 91 recensioner"),
   "hero_stat2": ("76", "behandlingar i 15 kategorier"),
-  "hero_stat3": ("10–20", "öppet alla dagar, efter bokning"),
+  "hero_stat3": ("7/7", "öppet alla dagar, efter bokning"),
   "hero_tag": ("Nour", "Certifierad hudterapeut & grundare"),
   "trust": ["Endast för kvinnor", "HIFU · Laser · Plasma · Microneedling", "Centrala Uppsala — Kungsängsgatan 5B"],
   "cats_eyebrow": "Vårt utbud", "cats_h2": "Ansiktsbehandling, <em>HIFU & microneedling</em> i Uppsala",
@@ -57,7 +57,7 @@ T = {
   "klipp_lede": "Köp flera tillfällen av din favoritbehandling till ett lägre pris. Alla klippkort gäller i 12 månader.",
   "about_eyebrow": "Om Noura Skin Secrets", "about_h2": "Personlig hudvård i Uppsala, grundad på <em>expertis</em>",
   "about_p": "Noura Skin Secrets drivs av Nour, certifierad hudterapeut i Uppsala. Salongen är skapad som en trygg plats enbart för kvinnor, där varje behandling anpassas efter din hud och dina mål — från klassisk ansiktsrengöring till avancerad HIFU- och laserbehandling.",
-  "about_list": ["Skräddarsydda behandlingsplaner efter hudanalys", "Modern utrustning: HIFU, laser, plasma, microneedling", "Lugn, exklusiv miljö — endast för kvinnor", "Öppet alla dagar 10:00–20:00, efter bokning"],
+  "about_list": ["Skräddarsydda behandlingsplaner efter hudanalys", "Modern utrustning: HIFU, laser, plasma, microneedling", "Lugn, exklusiv miljö — endast för kvinnor", "Öppet mån–fre 16–20, lör–sön 13–19, efter bokning"],
   "about_cta": "Boka en tid", "about_alt": "Nour, certifierad hudterapeut — Noura Skin Secrets",
   "rating_bokadirekt": ("4,9", "91 recensioner på Bokadirekt", "Läs omdömen"),
   "rating_google": ("5,0", "Vårt betyg på Google", "Läs & lämna omdöme"),
@@ -72,7 +72,7 @@ T = {
   "faq": [
     ("Hur bokar jag en tid?", f'Boka direkt med realtidskalender på <a href="{BOKADIREKT}" target="_blank" rel="noopener">Bokadirekt</a>, via vårt bokningsformulär, på telefon <a href="tel:{PHONE_TEL}">{PHONE_DISP}</a> eller mejl <a href="mailto:{EMAIL}">{EMAIL}</a>.'),
     ("Var ligger salongen?", "Mitt i centrala Uppsala på Kungsängsgatan 5B, 753 22 Uppsala — nära bussar, tåg och parkering."),
-    ("Vilka öppettider har ni?", "Vi har öppet alla dagar 10:00–20:00, endast efter bokning."),
+    ("Vilka öppettider har ni?", "Vi har öppet måndag–fredag 16:00–20:00 och lördag–söndag 13:00–19:00, endast efter bokning."),
     ("Är salongen verkligen endast för kvinnor?", "Ja. Salongen är skapad som en trygg och avslappnad miljö enbart för kvinnor."),
     ("Hur vet jag vilken behandling som passar mig?", "Prova vår hudassistent (chattknappen) som guidar dig utifrån din hudtyp. Vill du ha en personlig bedömning rekommenderar vi en hudvårdskonsultation (20 min, 300 kr)."),
     ("Hur förbereder jag mig inför en behandling?", "Kom gärna utan smink och undvik solning samt starka syror/retinol några dagar före de flesta behandlingar. Du får alltid personliga instruktioner vid bokning."),
@@ -81,7 +81,7 @@ T = {
   ],
   "contact_eyebrow": "Hitta hit", "contact_h2": "Besök oss i <em>Uppsala</em>",
   "contact_lede": "Boka enkelt online eller kontakta oss direkt via telefon, e-post eller Instagram.",
-  "contact_hours": "Alla dagar 10:00–20:00 · endast efter bokning",
+  "contact_hours": "Mån–fre 16–20 · lör–sön 13–19 · endast efter bokning",
   "contact_cta": "Boka din tid nu",
   "footer_desc": "Avancerad hud- och kroppsvård i Uppsala, i en trygg miljö skapad enbart för kvinnor.",
   "footer_shortcuts": "Genvägar", "footer_contact": "Kontakt",
@@ -135,7 +135,7 @@ T = {
   "hero_cta1": "Book now", "hero_cta2": "See all treatments",
   "hero_stat1": ("4.9 ★", "on Bokadirekt · 91 reviews"),
   "hero_stat2": ("76", "treatments across 15 categories"),
-  "hero_stat3": ("10–20", "open daily, by appointment"),
+  "hero_stat3": ("7/7", "open daily, by appointment"),
   "hero_tag": ("Nour", "Certified skin therapist & founder"),
   "trust": ["Women only", "HIFU · Laser · Plasma · Microneedling", "Central Uppsala — Kungsängsgatan 5B"],
   "cats_eyebrow": "Our services", "cats_h2": "Facials, <em>HIFU & microneedling</em> in Uppsala",
@@ -148,7 +148,7 @@ T = {
   "klipp_lede": "Buy several sessions of your favourite treatment at a lower price. All packages are valid for 12 months.",
   "about_eyebrow": "About Noura Skin Secrets", "about_h2": "Personal skin care in Uppsala, built on <em>expertise</em>",
   "about_p": "Noura Skin Secrets is run by Nour, a certified skin therapist in Uppsala. The salon is a safe space for women only, where every treatment is tailored to your skin and goals — from classic facials to advanced HIFU and laser treatments.",
-  "about_list": ["Tailored treatment plans based on skin analysis", "Modern equipment: HIFU, laser, plasma, microneedling", "Calm, exclusive environment — women only", "Open every day 10:00–20:00, by appointment"],
+  "about_list": ["Tailored treatment plans based on skin analysis", "Modern equipment: HIFU, laser, plasma, microneedling", "Calm, exclusive environment — women only", "Open Mon–Fri 16–20, Sat–Sun 13–19, by appointment"],
   "about_cta": "Book an appointment", "about_alt": "Nour, certified skin therapist — Noura Skin Secrets",
   "rating_bokadirekt": ("4.9", "91 reviews on Bokadirekt", "Read reviews"),
   "rating_google": ("5.0", "Our rating on Google", "Read & leave a review"),
@@ -163,7 +163,7 @@ T = {
   "faq": [
     ("How do I book an appointment?", f'Book instantly with a live calendar on <a href="{BOKADIREKT}" target="_blank" rel="noopener">Bokadirekt</a>, via our booking form, by phone <a href="tel:{PHONE_TEL}">{PHONE_DISP}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.'),
     ("Where is the salon located?", "In central Uppsala at Kungsängsgatan 5B, 753 22 Uppsala — close to buses, trains and parking."),
-    ("What are your opening hours?", "We are open every day 10:00–20:00, by appointment only."),
+    ("What are your opening hours?", "We are open Monday–Friday 16:00–20:00 and Saturday–Sunday 13:00–19:00, by appointment only."),
     ("Is the salon really women only?", "Yes. The salon is a safe, relaxed environment created exclusively for women."),
     ("How do I know which treatment suits me?", "Try our skin assistant (chat button) which guides you based on your skin type. For a personal assessment we recommend a skin consultation (20 min, 300 kr)."),
     ("How do I prepare for a treatment?", "Come without makeup if possible, and avoid sun as well as strong acids/retinol a few days before most treatments. You always get personal instructions when booking."),
@@ -172,7 +172,7 @@ T = {
   ],
   "contact_eyebrow": "Find us", "contact_h2": "Visit us in <em>Uppsala</em>",
   "contact_lede": "Book easily online or contact us directly by phone, email or Instagram.",
-  "contact_hours": "Every day 10:00–20:00 · by appointment only",
+  "contact_hours": "Mon–Fri 16–20 · Sat–Sun 13–19 · by appointment only",
   "contact_cta": "Book your appointment now",
   "footer_desc": "Advanced skin and body care in Uppsala, in a safe environment created exclusively for women.",
   "footer_shortcuts": "Shortcuts", "footer_contact": "Contact",
@@ -223,7 +223,7 @@ T = {
   "hero_cta1": "احجزي موعد", "hero_cta2": "جميع العلاجات",
   "hero_stat1": ("★ 4.9", "على Bokadirekt · 91 تقييماً"),
   "hero_stat2": ("76", "علاجاً في 15 فئة"),
-  "hero_stat3": ("10–20", "مفتوح يومياً، بالحجز المسبق"),
+  "hero_stat3": ("7/7", "مفتوح يومياً، بالحجز المسبق"),
   "hero_tag": ("نور", "أخصائية بشرة معتمدة والمؤسِّسة"),
   "trust": ["للنساء فقط", "هايفو · ليزر · بلازما · ميكرونيدلينغ", "وسط أوبسالا — Kungsängsgatan 5B"],
   "cats_eyebrow": "خدماتنا", "cats_h2": "علاجات الوجه، <em>الهايفو والميكرونيدلينغ</em> في أوبسالا",
@@ -236,7 +236,7 @@ T = {
   "klipp_lede": "اشتري عدة جلسات من علاجك المفضل بسعر أقل. كل الباقات صالحة لمدة 12 شهراً.",
   "about_eyebrow": "عن نورا سكين سيكرتس", "about_h2": "عناية شخصية بالبشرة في أوبسالا، مبنية على <em>الخبرة</em>",
   "about_p": "تدير نورا سكين سيكرتس الأخصائية نور، أخصائية بشرة معتمدة في أوبسالا. الصالون مساحة آمنة للنساء فقط، حيث يُصمم كل علاج حسب بشرتك وأهدافك — من تنظيف البشرة الكلاسيكي إلى علاجات الهايفو والليزر المتقدمة.",
-  "about_list": ["خطط علاج مخصصة بعد تحليل البشرة", "أجهزة حديثة: هايفو، ليزر، بلازما، ميكرونيدلينغ", "أجواء هادئة وراقية — للنساء فقط", "مفتوح يومياً 10:00–20:00، بالحجز المسبق"],
+  "about_list": ["خطط علاج مخصصة بعد تحليل البشرة", "أجهزة حديثة: هايفو، ليزر، بلازما، ميكرونيدلينغ", "أجواء هادئة وراقية — للنساء فقط", "مفتوح الاثنين–الجمعة 16–20، والسبت–الأحد 13–19، بالحجز المسبق"],
   "about_cta": "احجزي موعداً", "about_alt": "نور، أخصائية بشرة معتمدة — نورا سكين سيكرتس",
   "rating_bokadirekt": ("4.9", "91 تقييماً على Bokadirekt", "اقرئي التقييمات"),
   "rating_google": ("5.0", "تقييمنا على غوغل", "اقرئي أو اتركي تقييماً"),
@@ -251,7 +251,7 @@ T = {
   "faq": [
     ("كيف أحجز موعداً؟", f'احجزي فوراً عبر تقويم مباشر على <a href="{BOKADIREKT}" target="_blank" rel="noopener">Bokadirekt</a>، أو عبر نموذج الحجز، أو هاتفياً <a href="tel:{PHONE_TEL}"><span dir="ltr">{PHONE_DISP}</span></a> أو بالبريد <a href="mailto:{EMAIL}">{EMAIL}</a>.'),
     ("أين يقع الصالون؟", "في وسط أوبسالا: Kungsängsgatan 5B, 753 22 Uppsala — قريب من الباصات والقطار والمواقف."),
-    ("ما هي أوقات العمل؟", "مفتوح يومياً من 10:00 حتى 20:00، بالحجز المسبق فقط."),
+    ("ما هي أوقات العمل؟", "مفتوح من الاثنين إلى الجمعة 16:00–20:00، والسبت والأحد 13:00–19:00، بالحجز المسبق فقط."),
     ("هل الصالون فعلاً للنساء فقط؟", "نعم. الصالون بيئة آمنة ومريحة مخصصة للنساء فقط."),
     ("كيف أعرف العلاج المناسب لي؟", "جربي مساعدة البشرة (زر الدردشة) التي ترشدك حسب نوع بشرتك. وللتقييم الشخصي ننصح بجلسة استشارة بشرة (20 دقيقة، 300 كرون)."),
     ("كيف أستعد قبل الجلسة؟", "يفضل الحضور بدون مكياج، وتجنب التعرض للشمس والأحماض القوية/الريتينول قبل أيام من معظم العلاجات. ستحصلين دائماً على تعليمات شخصية عند الحجز."),
@@ -260,7 +260,7 @@ T = {
   ],
   "contact_eyebrow": "موقعنا", "contact_h2": "زورينا في <em>أوبسالا</em>",
   "contact_lede": "احجزي بسهولة أونلاين أو تواصلي معنا مباشرة عبر الهاتف أو الإيميل أو إنستغرام.",
-  "contact_hours": "يومياً 10:00–20:00 · بالحجز المسبق فقط",
+  "contact_hours": "الاثنين–الجمعة 16–20 · السبت–الأحد 13–19 · بالحجز المسبق فقط",
   "contact_cta": "احجزي موعدك الآن",
   "footer_desc": "عناية متقدمة بالبشرة والجسم في أوبسالا، في بيئة آمنة مخصصة للنساء فقط.",
   "footer_shortcuts": "روابط سريعة", "footer_contact": "التواصل",
@@ -455,9 +455,11 @@ def salon_schema(lang):
         "address": {"@type": "PostalAddress", "streetAddress": "Kungsängsgatan 5B",
                     "postalCode": "753 22", "addressLocality": "Uppsala", "addressCountry": "SE"},
         "geo": {"@type": "GeoCoordinates", "latitude": 59.8556, "longitude": 17.6431},
-        "openingHoursSpecification": {"@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-            "opens": "10:00", "closes": "20:00"},
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification",
+             "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "16:00", "closes": "20:00"},
+            {"@type": "OpeningHoursSpecification",
+             "dayOfWeek": ["Saturday","Sunday"], "opens": "13:00", "closes": "19:00"}],
         "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "91"},
         "identifier": {"@type": "PropertyValue", "propertyID": "org.nr", "value": ORGNR},
         "sameAs": [IG, BOKADIREKT],
@@ -797,7 +799,7 @@ def page_booking(lang, root):
           </div>
           <div class="form-row">
             <label for="time">{t['boka_time']}</label>
-            <input type="time" id="time" name="time" min="10:00" max="20:00" />
+            <input type="time" id="time" name="time" min="13:00" max="20:00" />
           </div>
         </div>
         <div class="form-row">

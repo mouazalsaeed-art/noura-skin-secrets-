@@ -75,6 +75,56 @@
     if (msg && !msg.value) msg.value = t("wantPaket") + paket + ".";
   }
 
+  /* ---------- öppettider: tidsval per dag ----------
+     Ändra här om öppettiderna ändras. 0 = söndag … 6 = lördag. */
+  var OPENING_HOURS = {
+    0: ["13:00", "19:00"], 6: ["13:00", "19:00"],                       // lör–sön
+    1: ["16:00", "20:00"], 2: ["16:00", "20:00"], 3: ["16:00", "20:00"], // mån–ons
+    4: ["16:00", "20:00"], 5: ["16:00", "20:00"],                       // tor–fre
+  };
+  var SLOT_MIN = 30;
+  UI.pickDate = { sv: "Välj datum först", en: "Choose a date first", ar: "اختاري التاريخ أولاً" };
+  UI.pickTime = { sv: "Välj tid", en: "Choose a time", ar: "اختاري الوقت" };
+  UI.noSlots = { sv: "Inga tider kvar denna dag", en: "No times left this day", ar: "لا أوقات متاحة في هذا اليوم" };
+  function toMin(hhmm) { var p = hhmm.split(":"); return +p[0] * 60 + +p[1]; }
+  function toHHMM(m) { return ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + (m % 60)).slice(-2); }
+  var dateEl = document.getElementById("date");
+  var oldTime = document.getElementById("time");
+  var timeEl = oldTime;
+  if (oldTime && oldTime.tagName === "INPUT") {
+    timeEl = document.createElement("select");
+    timeEl.id = "time"; timeEl.name = "time";
+    oldTime.parentNode.replaceChild(timeEl, oldTime);
+  }
+  if (dateEl) {
+    var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    dateEl.min = today.toISOString().slice(0, 10);
+  }
+  function fillTimes() {
+    if (!timeEl) return;
+    var prev = timeEl.value;
+    timeEl.innerHTML = "";
+    var v = dateEl && dateEl.value;
+    if (!v) { timeEl.innerHTML = '<option value="">' + t("pickDate") + "</option>"; timeEl.disabled = true; return; }
+    var d = new Date(v + "T12:00:00");
+    var hours = OPENING_HOURS[d.getDay()];
+    var dur = parseInt(durationFor(select.value), 10) || 60;
+    var start = toMin(hours[0]), last = toMin(hours[1]) - dur;
+    var now = new Date(), isToday = v === dateEl.min;
+    var nowMin = now.getHours() * 60 + now.getMinutes() + 60;   // minst en timme fram
+    var html = '<option value="">' + t("pickTime") + "</option>", n = 0;
+    for (var m = start; m <= last; m += SLOT_MIN) {
+      if (isToday && m < nowMin) continue;
+      html += '<option value="' + toHHMM(m) + '">' + toHHMM(m) + "</option>"; n++;
+    }
+    if (!n) html = '<option value="">' + t("noSlots") + "</option>";
+    timeEl.innerHTML = html;
+    timeEl.disabled = !n;
+    if (prev && timeEl.querySelector('option[value="' + prev + '"]')) timeEl.value = prev;
+  }
+  if (dateEl) dateEl.addEventListener("change", fillTimes);
+  select.addEventListener("change", fillTimes);
+
   /* klientvalidering */
   var checks = [
     ["name", function (v) { return v.trim().length > 1; }, "reqName"],
@@ -135,6 +185,8 @@
     } catch (e) {}
   }
 
+  fillTimes();
+
   var confirmBox = document.getElementById("confirm-box");
   var submitBtn = form.querySelector("button[type=submit]");
   form.addEventListener("submit", function (e) {
@@ -153,6 +205,7 @@
         confirmBox.innerHTML = t("sent");
         confirmBox.classList.add("show");
         form.reset();
+        fillTimes();
         confirmBox.scrollIntoView({ behavior: "smooth", block: "center" });
       })
       .catch(function () {
