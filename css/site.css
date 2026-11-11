@@ -902,3 +902,4 @@ html.has-promo .site-header{top:var(--promo-h);transition:transform .35s var(--e
 html.has-promo.promo-hidden .promo-bar{transform:translateY(-100%)}
 html.has-promo.promo-hidden .site-header{top:0}
 .pay-promo{background:#0B0B0B;color:#fff;padding:10px 14px;border-radius:12px;font-weight:500}
+.offer-price strong,.offer-price s{direction:ltr;unicode-bidi:isolate}
