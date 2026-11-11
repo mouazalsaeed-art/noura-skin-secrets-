@@ -67,6 +67,19 @@
   if (swishOn) methods.push(["swish", "paySwish", "Swish (betalar online)"]);
   if (stripeOn) methods.push(["kort", "payCard", "Kort/Klarna via Stripe (betalar online)"]);
   const BD_BASE = "https://www.bokadirekt.se/boka-tjanst/noura-skin-secrets-kvinnlig-behandling-129600/";
+  /* Mörka rutan "Boka direkt — se lediga tider" = valet att boka via Bokadirekt.
+     Knappen öppnar vald behandling direkt på Bokadirekt; rutan döljs för erbjudanden. */
+  const bdCard = document.querySelector(".bd-card");
+  const bdOr = document.querySelector(".bd-or");
+  const BD_PLACE = "https://www.bokadirekt.se/places/noura-skin-secrets-kvinnlig-behandling-129600";
+  function syncBdCard(link) {
+    if (!bdCard) return;
+    const isOffer = (treatmentSelect.value || "").indexOf("Erbjudande: ") === 0;
+    bdCard.style.display = isOffer ? "none" : "";
+    if (bdOr) bdOr.style.display = isOffer ? "none" : "";
+    const a = bdCard.querySelector("a.btn");
+    if (a) a.href = link || BD_PLACE;
+  }
   function bdLink() {
     const n = (treatmentSelect.value || "").replace(/\s*\([^()]*\)\s*$/, "");
     if (!n || n.indexOf("Erbjudande: ") === 0 || typeof TREATMENT_CATEGORIES === "undefined") return "";
@@ -93,8 +106,9 @@
   function render() {
     const amount = treatmentPrice();
     const bd = bdLink();
-    if (chosen === "bokadirekt" && !bd) chosen = "salon";
-    const list = bd ? methods.concat([["bokadirekt", "payBd", "Bokar via Bokadirekt"]]) : methods;
+    if (chosen === "bokadirekt") chosen = "salon";
+    syncBdCard(bd);
+    const list = methods;
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) submitBtn.style.display = chosen === "bokadirekt" ? "none" : "";
     let html = `<label class="pay-title">${tr(T.title)}</label><div class="pay-options">`;
