@@ -147,4 +147,46 @@
       });
     }
   }
+
+  /* ---------- långsamt rullande band (Före & efter + Instagram) ---------- */
+  function marquee(el, pxPerSec) {
+    if (!el || el.classList.contains("mq")) return;
+    var items = Array.prototype.slice.call(el.children);
+    if (items.length < 2) return;
+    items.forEach(function (it) { it.classList.remove("reveal"); it.removeAttribute("data-d"); });
+    el.classList.add("mq");
+    var track = document.createElement("div");
+    track.className = "mq-track";
+    items.forEach(function (it) { track.appendChild(it); });
+    el.appendChild(track);
+    function cloneSet() {
+      items.forEach(function (it) {
+        var c = it.cloneNode(true);
+        c.setAttribute("aria-hidden", "true");
+        if (c.tagName === "A") c.tabIndex = -1;
+        c.querySelectorAll("a").forEach(function (a) { a.tabIndex = -1; });
+        c.querySelectorAll("video").forEach(function (v) { v.muted = true; v.play && v.play().catch(function () {}); });
+        track.appendChild(c);
+      });
+    }
+    function setup() {
+      var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+      // fyll bandet tills en uppsättning är minst lika bred som rutan, dubbla sedan för sömlös loop
+      var guard = 0;
+      while (track.scrollWidth < el.clientWidth && guard++ < 6) cloneSet();
+      var n = track.children.length;   // en hel uppsättning (minst lika bred som rutan)
+      for (var r = 0; r * items.length < n; r++) cloneSet();   // + exakt samma längd igen för sömlös loop
+      var shift = 0;
+      for (var i = 0; i < n; i++) shift += track.children[i].getBoundingClientRect().width + gap;
+      track.style.setProperty("--mq-shift", shift + "px");
+      track.style.setProperty("--mq-dur", Math.max(20, shift / pxPerSec) + "s");
+      el.classList.add("mq-on");
+    }
+    var timer;
+    el.addEventListener("touchstart", function () { el.classList.add("paused"); clearTimeout(timer); }, { passive: true });
+    el.addEventListener("touchend", function () { timer = setTimeout(function () { el.classList.remove("paused"); }, 2500); }, { passive: true });
+    if (document.readyState === "complete") setup(); else window.addEventListener("load", setup);
+  }
+  marquee(document.querySelector("#resultat .ba-grid"), 28);
+  marquee(document.getElementById("ig-strip"), 32);
 })();

@@ -903,3 +903,19 @@ html.has-promo.promo-hidden .promo-bar{transform:translateY(-100%)}
 html.has-promo.promo-hidden .site-header{top:0}
 .pay-promo{background:#0B0B0B;color:#fff;padding:10px 14px;border-radius:12px;font-weight:500}
 .offer-price strong,.offer-price s{direction:ltr;unicode-bidi:isolate}
+/* ---------------------------------------------------------------- rullande band (js/home.js marquee) */
+.mq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.ba-grid.mq,.ig-strip.mq{display:block;max-width:none;padding-bottom:0;overflow:hidden;scroll-snap-type:none}
+.mq-track{display:flex;gap:16px;width:max-content}
+.mq-on .mq-track{animation:mq-run var(--mq-dur,50s) linear infinite}
+.mq:hover .mq-track,.mq.paused .mq-track{animation-play-state:paused}
+@keyframes mq-run{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--mq-shift,0px)))}}
+html[dir="rtl"] .mq-on .mq-track{animation-name:mq-run-rtl}
+@keyframes mq-run-rtl{from{transform:translateX(0)}to{transform:translateX(var(--mq-shift,0px))}}
+.ba-grid.mq .ba-item{flex:0 0 clamp(210px,58vw,290px)}
+.ig-strip.mq .ig-tile{flex:0 0 clamp(170px,46vw,240px)}
+.ig-strip.mq .ig-tile:hover{transform:none}
+@media (prefers-reduced-motion:reduce){
+  .mq-on .mq-track{animation:none}
+  .ba-grid.mq,.ig-strip.mq{overflow-x:auto}
+}
