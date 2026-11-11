@@ -31,7 +31,9 @@ var LIVECHAT = {
       wa_sub: "Skriv till oss direkt",
       live: "Livechatt",
       live_sub: "Chatta med Noura",
-      wa_msg: "Hej! Jag har en fråga om era behandlingar."
+      wa_msg: "Hej! Jag har en fråga om era behandlingar.",
+      ha: "Hudassistent",
+      ha_sub: "Hitta rätt behandling"
     },
     en: {
       launcher: "Contact",
@@ -40,7 +42,9 @@ var LIVECHAT = {
       wa_sub: "Message us directly",
       live: "Live chat",
       live_sub: "Chat with Noura",
-      wa_msg: "Hi! I have a question about your treatments."
+      wa_msg: "Hi! I have a question about your treatments.",
+      ha: "Skin assistant",
+      ha_sub: "Find the right treatment"
     },
     ar: {
       launcher: "تواصلي معنا",
@@ -49,7 +53,9 @@ var LIVECHAT = {
       wa_sub: "راسلينا مباشرة",
       live: "دردشة مباشرة",
       live_sub: "تحدثي مع نورا",
-      wa_msg: "مرحباً! عندي سؤال عن علاجاتكم."
+      wa_msg: "مرحباً! عندي سؤال عن علاجاتكم.",
+      ha: "مساعدة البشرة",
+      ha_sub: "اعرفي العلاج المناسب"
     }
   };
   var t = TXT[lang] || TXT.sv;
@@ -57,7 +63,7 @@ var LIVECHAT = {
   /* ---------- CSS ---------- */
   var side = rtl ? "right" : "left";
   var css =
-    ".lc-root{position:fixed;bottom:86px;" + side + ":16px;z-index:1200;font-family:'Jost',sans-serif}" +
+    ".lc-root{position:fixed;bottom:24px;" + side + ":16px;z-index:1200;font-family:'Jost',sans-serif}" +
     ".lc-btn{display:flex;align-items:center;gap:8px;border:none;cursor:pointer;background:#25D366;color:#fff;" +
     "border-radius:999px;padding:11px 18px 11px 14px;font-size:.92rem;font-weight:500;letter-spacing:.02em;" +
     "box-shadow:0 6px 22px rgba(0,0,0,.18);transition:transform .18s ease,box-shadow .18s ease}" +
@@ -73,8 +79,9 @@ var LIVECHAT = {
     ".lc-ic{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#fff}" +
     ".lc-ic.wa{background:#25D366}.lc-ic.tk{background:#B98A44}" +
     ".lc-opt strong{display:block;font-size:.92rem;font-weight:500}" +
-    ".lc-opt span{display:block;font-size:.78rem;color:#8a7a6a}" +
-    "@media (max-width:640px){.lc-root{bottom:78px}.lc-btn span.lbl{display:none}.lc-btn{padding:12px}}";
+    ".lc-opt span:not(.lc-ic){display:block;font-size:.78rem;color:#8a7a6a}" +
+    "@media (max-width:640px){.lc-root{bottom:16px}.lc-btn span.lbl{display:none}.lc-btn{padding:13px}}" +
+    ".ha-fab{display:none!important}.lc-ic.ha{background:#392430}";
   var st = document.createElement("style");
   st.textContent = css;
   document.head.appendChild(st);
@@ -92,6 +99,10 @@ var LIVECHAT = {
     '<a class="lc-opt" href="' + waHref + '" target="_blank" rel="noopener">' +
     '<span class="lc-ic wa">' + IC_WA + "</span>" +
     "<span><strong>" + t.wa + "</strong><span>" + t.wa_sub + "</span></span></a>";
+  menuItems +=
+    '<button class="lc-opt" id="lc-ha" type="button">' +
+    '<span class="lc-ic ha">' + IC_CHAT + "</span>" +
+    "<span><strong>" + t.ha + "</strong><span>" + t.ha_sub + "</span></span></button>";
   if (LIVECHAT.TAWK_ID) {
     menuItems +=
       '<button class="lc-opt" id="lc-tawk" type="button">' +
@@ -108,7 +119,6 @@ var LIVECHAT = {
   var menu = document.getElementById("lc-menu");
   launch.addEventListener("click", function () {
     /* واتساب فقط؟ افتحه مباشرة بدون قائمة */
-    if (!LIVECHAT.TAWK_ID) { window.open(waHref, "_blank", "noopener"); return; }
     var open = menu.classList.toggle("open");
     launch.setAttribute("aria-expanded", open ? "true" : "false");
   });
@@ -134,6 +144,18 @@ var LIVECHAT = {
     s.setAttribute("crossorigin", "*");
     document.body.appendChild(s);
   }
+  var haBtn = document.getElementById("lc-ha");
+  haBtn.addEventListener("click", function () {
+    var fab = document.querySelector(".ha-fab");
+    menu.classList.remove("open");
+    if (!fab) return;
+    fab.click();
+    root.style.display = "none";
+    new MutationObserver(function (m, obs) {
+      if (!fab.classList.contains("hidden")) { root.style.display = ""; obs.disconnect(); }
+    }).observe(fab, { attributes: true, attributeFilter: ["class"] });
+  });
+
   var tawkBtn = document.getElementById("lc-tawk");
   if (tawkBtn) tawkBtn.addEventListener("click", openTawk);
 })();
