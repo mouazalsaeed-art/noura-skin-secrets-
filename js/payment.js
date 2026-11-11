@@ -99,7 +99,8 @@
     }
     if (chosen === "kort") {
       const fixed = fixedLink();
-      const promoOn = typeof PROMO !== "undefined" && PROMO.active && PROMO.payHint && Date.now() <= Date.parse(PROMO.until);
+      const isOffer = treatmentName().indexOf("Erbjudande: ") === 0;   // erbjudanden har redan rabatt – ingen kampanjkod
+      const promoOn = !isOffer && typeof PROMO !== "undefined" && PROMO.active && PROMO.payHint && Date.now() <= Date.parse(PROMO.until);
       html += `<p class="pay-note">${tr(fixed ? T.cardMsgFixed : T.cardMsg)}</p>
         ${promoOn ? `<p class="pay-note pay-promo">${tr(PROMO.payHint)}</p>` : ""}
         <div class="pay-line"><strong>${tr(T.amount)}:</strong> <span class="num">${amount ? amount + " kr" : "—"}</span></div>
