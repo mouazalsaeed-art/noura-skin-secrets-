@@ -148,7 +148,8 @@
     }
   }
 
-  /* ---------- långsamt rullande band (Före & efter + Instagram) ---------- */
+  /* ---------- långsamt rullande band (Före & efter + Instagram) ----------
+     Rullar av sig själv, och går att dra/svepa med fingret eller musen. */
   function marquee(el, pxPerSec) {
     if (!el || el.classList.contains("mq")) return;
     var items = Array.prototype.slice.call(el.children);
@@ -159,32 +160,83 @@
     track.className = "mq-track";
     items.forEach(function (it) { track.appendChild(it); });
     el.appendChild(track);
+    track.querySelectorAll("img, a").forEach(function (i) { i.draggable = false; });
+    if (el.tagName === "A") el.draggable = false;
+    items.forEach(function (it) { if (it.tagName === "A") it.draggable = false; });
+    el.addEventListener("dragstart", function (e) { e.preventDefault(); });
     function cloneSet() {
       items.forEach(function (it) {
         var c = it.cloneNode(true);
         c.setAttribute("aria-hidden", "true");
         if (c.tagName === "A") c.tabIndex = -1;
-        c.querySelectorAll("a").forEach(function (a) { a.tabIndex = -1; });
-        c.querySelectorAll("video").forEach(function (v) { v.muted = true; v.play && v.play().catch(function () {}); });
+        c.querySelectorAll("a").forEach(function (x) { x.tabIndex = -1; });
+        c.querySelectorAll("img, a").forEach(function (i) { i.draggable = false; });
+        if (c.tagName === "A") c.draggable = false;
+        c.querySelectorAll("video").forEach(function (v) { v.muted = true; if (v.play) v.play().catch(function () {}); });
         track.appendChild(c);
       });
     }
+
+    var rtl = document.documentElement.dir === "rtl";
+    var sign = rtl ? 1 : -1;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var shift = 0, pos = 0, last = 0, vel = 0;
+    var dragging = false, hover = false, resumeAt = 0, moved = 0, startX = 0, lastX = 0, lastT = 0;
+
+    function wrap() { if (shift) { pos = pos % shift; if (pos < 0) pos += shift; } }
+    function paint() { track.style.transform = "translate3d(" + (sign * pos) + "px,0,0)"; }
+    function frame(t) {
+      var dt = last ? Math.min((t - last) / 1000, 0.05) : 0;
+      last = t;
+      if (!dragging) {
+        if (Math.abs(vel) > 5) { pos += vel * dt; vel *= Math.pow(0.04, dt); }   // utrullning efter svep
+        else if (!reduce && !hover && t > resumeAt) pos += pxPerSec * dt;
+        wrap(); paint();
+      }
+      requestAnimationFrame(frame);
+    }
     function setup() {
       var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
-      // fyll bandet tills en uppsättning är minst lika bred som rutan, dubbla sedan för sömlös loop
       var guard = 0;
       while (track.scrollWidth < el.clientWidth && guard++ < 6) cloneSet();
-      var n = track.children.length;   // en hel uppsättning (minst lika bred som rutan)
-      for (var r = 0; r * items.length < n; r++) cloneSet();   // + exakt samma längd igen för sömlös loop
-      var shift = 0;
+      var n = track.children.length;
+      for (var r = 0; r * items.length < n; r++) cloneSet();
+      shift = 0;
       for (var i = 0; i < n; i++) shift += track.children[i].getBoundingClientRect().width + gap;
-      track.style.setProperty("--mq-shift", shift + "px");
-      track.style.setProperty("--mq-dur", Math.max(20, shift / pxPerSec) + "s");
       el.classList.add("mq-on");
+      requestAnimationFrame(frame);
     }
-    var timer;
-    el.addEventListener("touchstart", function () { el.classList.add("paused"); clearTimeout(timer); }, { passive: true });
-    el.addEventListener("touchend", function () { timer = setTimeout(function () { el.classList.remove("paused"); }, 2500); }, { passive: true });
+
+    el.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      dragging = true; moved = 0; vel = 0;
+      startX = lastX = e.clientX; lastT = performance.now();
+      el.classList.add("dragging");
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - lastX, now = performance.now();
+      moved += Math.abs(dx);
+      pos -= dx * -sign;
+      if (now > lastT) vel = (-dx * -sign) / ((now - lastT) / 1000) * 0.6 + vel * 0.4;
+      lastX = e.clientX; lastT = now;
+      wrap(); paint();
+    }, { passive: true });
+    function end() {
+      if (!dragging) return;
+      dragging = false;
+      el.classList.remove("dragging");
+      if (performance.now() - lastT > 80) vel = 0;
+      vel = Math.max(-2500, Math.min(2500, vel));
+      resumeAt = performance.now() + 2500;
+    }
+    window.addEventListener("pointerup", end);
+    window.addEventListener("pointercancel", end);
+    // ett svep ska inte öppna länken (Instagram-rutorna)
+    el.addEventListener("click", function (e) { if (moved > 8) { e.preventDefault(); e.stopPropagation(); } }, true);
+    el.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") hover = true; });
+    el.addEventListener("pointerleave", function () { hover = false; });
+
     if (document.readyState === "complete") setup(); else window.addEventListener("load", setup);
   }
   marquee(document.querySelector("#resultat .ba-grid"), 28);
