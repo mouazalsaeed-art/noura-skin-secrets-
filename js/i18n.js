@@ -17,7 +17,7 @@
 
       "hero.eyebrow": "Uppsala · Women only",
       "hero.title": "Where expertise and <em>comfort</em> meet",
-      "hero.lede": "Advanced skin and body care in a warm, personal setting. From HydraFacial and HIFU to microneedling and massage — tailored to your skin.",
+      "hero.lede": "Advanced skin and body care in a warm, personal setting. From Hydro facial and HIFU to microneedling and massage — tailored to your skin.",
       "hero.cta1": "Book now",
       "hero.cta2": "See all treatments",
       "hero.stat1": "reviews on Bokadirekt",
@@ -127,7 +127,7 @@
 
       "hero.eyebrow": "أوبسالا · للنساء فقط",
       "hero.title": "حيث تلتقي الخبرة <em>بالأمان</em>",
-      "hero.lede": "عناية متقدمة بالبشرة والجسم في أجواء دافئة وشخصية. من الهيدرافيشل والهايفو إلى الميكرونيدلينغ والمساج — كل شيء مصمم خصيصاً لبشرتك.",
+      "hero.lede": "عناية متقدمة بالبشرة والجسم في أجواء دافئة وشخصية. من الهيدرو فيشل والهايفو إلى الميكرونيدلينغ والمساج — كل شيء مصمم خصيصاً لبشرتك.",
       "hero.cta1": "احجزي موعد",
       "hero.cta2": "جميع العلاجات",
       "hero.stat1": "تقييم على Bokadirekt",

@@ -2,7 +2,7 @@
    ═══════════ HOW TO ADD YOUR PHOTOS ═══════════
    1. Put your image files in the folder  images/gallery/
    2. List them in the GALLERY array below, e.g.
-        { img: "images/gallery/1.jpg", alt: "HydraFacial hos oss" },
+        { img: "images/gallery/1.jpg", alt: "Hydro facial hos oss" },
    The slider updates automatically. Until photos are added, a branded
    teaser is shown so the section still looks intentional. */
 (function () {
@@ -11,7 +11,7 @@
   const GALLERY = [
     { video: "videos/gallery-1.mp4", alt: "Behandling hos Noura Skin Secrets" },
     // Lägg till dina bilder så här (dra in filerna i images/gallery/):
-    // { img: "images/gallery/1.jpg", alt: "HydraFacial hos oss" },
+    // { img: "images/gallery/1.jpg", alt: "Hydro facial hos oss" },
   ];
 
   // Branded placeholder tiles shown until real photos are added.

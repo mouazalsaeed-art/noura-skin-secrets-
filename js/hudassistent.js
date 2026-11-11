@@ -136,9 +136,9 @@
       ar: "أهلاً وسهلاً! 👋 كيف أقدر أساعدك اليوم؟",
     },
     fallbackA: {
-      sv: "Hmm, jag är inte säker på att jag förstod. 🤔 Prova att skriva t.ex. <em>\"akne\"</em>, <em>\"pigmentfläckar\"</em>, <em>\"HydraFacial\"</em>, <em>\"öppettider\"</em> — eller välj nedan:",
-      en: "Hmm, I'm not sure I understood. 🤔 Try typing e.g. <em>\"acne\"</em>, <em>\"pigmentation\"</em>, <em>\"HydraFacial\"</em>, <em>\"opening hours\"</em> — or choose below:",
-      ar: "همم، لم أفهم تماماً. 🤔 جربي كتابة مثلاً <em>\"حبوب\"</em>، <em>\"تصبغات\"</em>، <em>\"هيدرافيشل\"</em>، <em>\"الدوام\"</em> — أو اختاري من الأسفل:",
+      sv: "Hmm, jag är inte säker på att jag förstod. 🤔 Prova att skriva t.ex. <em>\"akne\"</em>, <em>\"pigmentfläckar\"</em>, <em>\"Hydro facial\"</em>, <em>\"öppettider\"</em> — eller välj nedan:",
+      en: "Hmm, I'm not sure I understood. 🤔 Try typing e.g. <em>\"acne\"</em>, <em>\"pigmentation\"</em>, <em>\"Hydro facial\"</em>, <em>\"opening hours\"</em> — or choose below:",
+      ar: "همم، لم أفهم تماماً. 🤔 جربي كتابة مثلاً <em>\"حبوب\"</em>، <em>\"تصبغات\"</em>، <em>\"هيدرو فيشل\"</em>، <em>\"الدوام\"</em> — أو اختاري من الأسفل:",
     },
     aiThinking: {
       sv: "Skriver …",
@@ -293,7 +293,7 @@
       },
     },
     hydrafacial: {
-      label: { sv: "HydraFacial / Ansiktsbehandling", en: "HydraFacial / Facial", ar: "هيدرافيشل / تنظيف بشرة" },
+      label: { sv: "Hydro facial / Ansiktsbehandling", en: "Hydro facial / Facial", ar: "هيدرو فيشل / تنظيف بشرة" },
       before: {
         sv: ["Inga särskilda förberedelser krävs", "Undvik peeling hemma 2–3 dagar före", "Kom gärna utan smink"],
         en: ["No special preparation needed", "Avoid at-home peeling 2–3 days before", "Preferably come without makeup"],

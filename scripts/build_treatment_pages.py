@@ -325,7 +325,7 @@ def render(page, data):
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow">Bra att veta</span>
-      <h2>Vanliga frågor om {E(page['short'] if page['short'] in ('HIFU', 'HydraFacial') else page['short'].lower())}</h2>
+      <h2>Vanliga frågor om {E(page['short'] if page['short'] in ('HIFU', 'Hydro facial') else page['short'].lower())}</h2>
     </div>
     <div class="faq-cols">{faq}</div>
   </div>
